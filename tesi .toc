@@ -1,0 +1,6 @@
+\select@language {italian}
+\contentsline {chapter}{Elenco delle figure}{2}
+\contentsline {chapter}{Abstract}{3}
+\contentsline {chapter}{\numberline {1}I primi concetti sulla spazializzazione}{4}
+\contentsline {section}{\numberline {1.1}supporti fisici di riproduzione}{4}
+\contentsline {section}{\numberline {1.2}Metodi classici di riproduzione}{5}

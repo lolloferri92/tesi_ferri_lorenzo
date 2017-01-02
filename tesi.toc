@@ -5,5 +5,7 @@
 \contentsline {section}{\numberline {1.1}supporti fisici di riproduzione}{4}
 \contentsline {section}{\numberline {1.2}Metodi classici di riproduzione}{5}
 \contentsline {chapter}{\numberline {2}Metodo Binaurale}{6}
-\contentsline {chapter}{\numberline {3}Metodo Cross Talk Cancellation}{7}
+\contentsline {chapter}{\numberline {3}Metodo Ambiophonic}{7}
 \contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{8}
+\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{8}
+\contentsline {chapter}{Bibliografia}{10}

@@ -15,7 +15,7 @@
 % qui comincia il titolo
 \begin{titlepage}
 \begin{center}
-{\Large{\textsc{Università degli studi di Roma  $\cdot$ Tor Vergata}}} 
+{\Large{\textsc{Università degli studi di Roma $\cdot$ Tor Vergata}}} 
 \rule[0.1cm]{15.8cm}{0.1mm}
 \rule[0.5cm]{15.8cm}{0.6mm}
 \\\vspace{3mm}
@@ -97,8 +97,8 @@ In questo capitolo inizieremo a parlare dei primi concetti riguardanti la spazia
 Partiamo con il fare una distinzione che ci servirà per sviluppare il ragionamento generale su due fronti distinti, infatti al momento i due principali metodi di riproduzione e di ascolto di materiale audio sono:
 
 \begin{itemize}
-\item ascolto in cassa: è un tipo di ascolto in cui l'informazione sonora viene tradotta da segnale elettrico ad acustico mediante uno o più altoparlanti posti a una certa distanza dall'ascoltatore e il fronte d'onda sono generato per arrivare alla persona deve percorrere un certo tratto in aria quindi diciamo che il sono generato vive nello spazio in cui sono collocati i diffusori e lo spazio stesso modifica l'informazione sonora
-\item ascolto in cuffia: il concetto parte esattamente come quello esposto sopra in quanto anche qui ci sono la presenza di altoparlanti (uno per orecchio) l'unica differenza è che il segnale sonoro non vive nell'ambiente come succede per il caso sopra in quanto l'altoparlante è idealmente isolato dall'esterno e collocato relativamente molto vicino all'orecchio.
+\item \textbf{ascolto in cassa}: è un tipo di ascolto in cui l'informazione sonora viene tradotta da segnale elettrico ad acustico mediante uno o più altoparlanti posti a una certa distanza dall'ascoltatore e il fronte d'onda sono generato per arrivare alla persona deve percorrere un certo tratto in aria quindi diciamo che il sono generato vive nello spazio in cui sono collocati i diffusori e lo spazio stesso modifica l'informazione sonora
+\item \textbf{ascolto in cuffia}: il concetto parte esattamente come quello esposto sopra in quanto anche qui ci sono la presenza di altoparlanti (uno per orecchio) l'unica differenza è che il segnale sonoro non vive nell'ambiente come succede per il caso sopra in quanto l'altoparlante è idealmente isolato dall'esterno e collocato relativamente molto vicino all'orecchio.
 
 
 
@@ -129,12 +129,64 @@ Questi descritti sono i metodi principali di riproduzione in cui si comincia ad 
 
 \chapter{Metodo Binaurale}
 
-\chapter{Metodo Cross Talk Cancellation}
+\chapter{Metodo Ambiophonic}
 
 \chapter{Metodo Wave Field Syntesis}
 
+Il metodo Wave Field Syntesis è un metodo diverso dai precedenti illustrati in quanto non si avvale della psicoacustica per "ingannare" la nostra mente e farci credere che stiamo ascoltando qualcosa che realmente non c'è, ma questa tecnica permette di ricreare fisicamente il fronte d'onda e quindi l'informazione sonora distribuita nello spazio acustico come se la sorgente che si vuole creare sia realmente collocata nel punto che vogliamo, per questo, forse anche impropriamente, catalogherò questo metodo come \textbf{AUDIO 3D}.\\
+
+\section{Principio fisico alla base e algoritmo di implementazione}
+
+Per riuscire a capire in fondo cosa sta alla base di questa tecnica bisognerà spiegare due semplici principi di meccanica ondulatoria: 
+
+\begin{itemize}
+
+\item \textbf{Principio di Huygens-Fresnel}: consideriamo una qualsiasi onda che abbia un fronte d'onda arbitrario, questa legge afferma che ogni punto del fronte d'onda in questione può essere visto come un'infinità di sorgenti secondarie puntiformi che generano un'infinità di fronti d'onda secondari in accordo in fase e in ampiezza e che sommando la totalità di questi ultimi si può ricostruire il fronte d'onda originale.
+
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.35]{figures/huygens.jpg}
+	\caption {Principio di Huygens-Fresnel} 
+	\label{fig:huygens}
+	\end{figure}
+
+\item \textbf{Principio di Rayleigh}: questo principio riguarda la diffrazione in quanto se un fronte d'onda colpisce una fenditura di dimensioni paragonabili alla sua lunghezza d'onda, esso verrà ritrasmesso al di la della fenditura come se fosse una sorgente puntiforme.
+
+\end{itemize}
+
+Il salto concettuale ora è breve in quanto se una sorgente acustica reale emette un fronte d'onda ed esso impatta in una serie di fenditure disposte spazialmente in un modo preciso, il fronte d'onda passerà al di ognuna delle fenditure (principio di Rayleigh) e la somma della totalità dei fronti d'onda secondari ricreerà esattamente il fronte d'onda originale.
+
+Ora l'unica cosa che è rimasta da fare è sostituire ogni fenditura con un altoparlante e far riprodurre ad esso un  segnale preciso che combinato con i segnali degli altri altoparlanti ricreerà fedelmente (almeno a livello concettuale) lo spazio sonoro che vogliamo ottenere
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.55]{figures/wfs.png}
+	\caption {Salti concettuali della WFS} 
+	\label{fig:wfs}
+	\end{figure}
+	
+
+Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare ogni altoparlante; le risposte possono essere molteplici ma tutte devono tener conto della geometria di progettazione del nostro sistema WFS, prendiamo uno dei casi più semplici.\\
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{}
+
+
+\end{thebibliography}
+\addcontentsline{toc} {chapter}{Bibliografia}
 
 
 
 
 \end{document}
+

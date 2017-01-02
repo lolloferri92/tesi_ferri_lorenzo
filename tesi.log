@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  27 DEC 2016 17:17
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  2 JAN 2017 18:48
 entering extended mode
  %&-line parsing enabled.
-**"tesi .tex"
-(./tesi .tex
+**tesi.tex
+(./tesi.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, italian, loaded.
@@ -371,8 +371,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
 
 Package: `setspace' 6.7 <2000/12/01>
-) (./tesi .aux)
-\openout1 = `"tesi .aux"'.
+) (./tesi.aux)
+\openout1 = `tesi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
@@ -431,16 +431,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--44
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./tesi .toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./tesi.toc)
 \tf@toc=\write3
-\openout3 = `"tesi .toc"'.
+\openout3 = `tesi.toc'.
 
 
 [1
 
-] (./tesi .lof)
+] (./tesi.lof)
 \tf@lof=\write4
-\openout4 = `"tesi .lof"'.
+\openout4 = `tesi.lof'.
 
  [2
 
@@ -492,29 +492,51 @@ Capitolo 3.
 
 ]
 Capitolo 4.
-[8
 
-] (./tesi .aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+<figures/huygens.jpg, id=40, 746.01291pt x 559.50967pt>
+File: figures/huygens.jpg Graphic file (type jpg)
+
+<use figures/huygens.jpg> [8
+
+]
+<figures/wfs.png, id=44, 427.8384pt x 213.9192pt>
+File: figures/wfs.png Graphic file (type png)
+ <use figures/wfs.png>
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+[9 <./figures/huygens.jpg> <./figures/wfs.png>]
+
+LaTeX Warning: Empty `thebibliography' environment on input line 175.
+
+[10
+
+] (./tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 2579 strings out of 495052
- 31538 string characters out of 1182205
- 84785 words of memory out of 3000000
- 5706 multiletter control sequences out of 15000+50000
+ 2603 strings out of 495052
+ 31822 string characters out of 1182205
+ 84837 words of memory out of 3000000
+ 5725 multiletter control sequences out of 15000+50000
  15612 words of font info for 64 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,8n,24p,538b,202s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
-0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msam10.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "tesi .pdf" (10 pages, 116977 bytes).
+ 27i,8n,24p,565b,284s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msam10.pfb></us
+r/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on tesi.pdf (12 pages, 359279 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
+ 85 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

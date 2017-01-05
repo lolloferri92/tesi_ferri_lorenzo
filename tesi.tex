@@ -31,7 +31,12 @@
 \textcolor{black}{
 \linespread{5}
 {\LARGE{\bf 
-METODI DI RIPRODUZIONE MULTICANALE PER SPAZIALIZZAZIONE E AUDIO 3D}}}
+FORMAT PER RIPRODUZIONE MULTICANALE:
+}}\\ 
+{\LARGE{\bf 
+DALLO STEREO ALL'AUDIO 3D
+}}}
+
 \end{spacing}
 \end{center}
 
@@ -85,6 +90,8 @@ Anno Accademico \textcolor{black}{2016/17}}}
 
 \chapter*{Abstract}
 
+
+
 \addcontentsline{toc}{chapter}{Abstract}
 
 
@@ -106,7 +113,7 @@ Partiamo con il fare una distinzione che ci servirà per sviluppare il ragioname
 Entrambi i supporti fisici di riproduzione hanno il loro pregi e loro difetti che porta alla scelta di un supporto rispetto all'altro in base alle esigenze e alle necessità.
 
 
-\section{Metodi classici di riproduzione}
+\section{Metodi classici di riproduzione}\label{metodi}
 
 Ora passiamo a come possiamo sfruttare questi due supporti descritti.\\
 
@@ -127,9 +134,9 @@ Questo avviene sia per casse in aria libera che per cuffie. \\
 
 Questi descritti sono i metodi principali di riproduzione in cui si comincia ad intravedere un primo approccio di spazializzazione	 sonora.
 
-\chapter{Metodo Binaurale}
 
-\chapter{Metodo Ambiophonic}
+
+
 
 \chapter{Metodo Wave Field Syntesis}
 
@@ -170,10 +177,19 @@ Ora l'unica cosa che è rimasta da fare è sostituire ogni fenditura con un alto
 
 Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare ogni altoparlante; le risposte possono essere molteplici ma tutte devono tener conto della geometria di progettazione del nostro sistema WFS, prendiamo uno dei casi più semplici.\\
 
+\chapter{Algoritmo identificazione sorgenti}
 
+In questo capitolo capiremo secondo quale logica riusciamo ad estrarre ed a capire in quale punto del piano sonoro è collocata ogni sorgente formante il contenuto che vogliamo esaminare, in secondo momento invece implementerò questo concetto in un basilare algoritmo capace di raggiungere lo scopo prefissato.
 
+\section{Algoritmo Azimuth Discimination and Resyntesis ADRess} 
 
+Nel capitolo \ref{metodi} abbiamo visto quali sono le differenze tra una riproduzione stereo, mono e dualmono, ora concentriamoci su come riuscire concettualmente ad isolare una sola sorgente in entrambi i casi.\\
 
+Per quanto riguarda la riproduzione mono isolare risulta abbastanza difficile in quanto intuitivamente devo conoscere il contenuto del segnale o in alternativa il contenuto spettrale del segnale da estrapolare, questo è all'incirca quello che fa il nostro cervello quando sente qualcosa cioè cercà di ricosnoscere un'oggetto sonoro mediante certe regole quali la durata del suono, il contenuto armonico, il timbro ecc... e stessa cosa dobbiamo fare nell'algoritmo, cioè riconoscere tramite delle elaborazioni le ste stesse regole descritte prima.\\
+
+Nel caso invece avessimo una riproduzione stereo in partenza una cosa ci viene in nostro aiuto, infatti la peculiarità della collocazione spaziale classica in un mix stereo è il fatto che una sorgente è collocata attraverso il panpot cioè una funzione basata sulla IID \footnote{La Interaural Intencity Difference è una funzione matematica che simula la differenza di intensità sonora percepita dalle nostre orecchie di una sorgente sonora posta ad un angolo $\theta$ dalla normale uscente di fronte alla testa dell'ascoltatore} che da l'illusione di sentire un suono in un punto della linea congiungente i due altoparlanti, in parole povere se uno stesso segnale è riprodotto con maggiore intensità in una cassa rispetto all'altra l'immagine virtuale di tale sorgente sarà avvertita più vicina alla casa con maggiore intensità di riproduzione; questo panpottaggio quindi sdoppia l'oggetto sonoro e lo ridistribuisce con intensità diverse sulle due casse ed è queso sdoppimento che ci viene in aiuto  infatti prima come ora non conoscevamo il contenuto da estrapolare ma in questo caso sappiamo che in divers misura il contenuto esiste in entrambi i canali e può essere in qualche maniera "matchato"; qua sta la difficoltà dell'algoritmo e per spiegarlo sarà comodo usare un'esempio.\\
+
+Supponiamo di avere un file stereo in cui è stato registrato  
 
 
 
@@ -181,11 +197,14 @@ Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare 
 
 \begin{thebibliography}{}
 
+\bibitem{wikihuygens} \textit{https://en.wikipedia.org/wiki/Huygens-Fresnel\_principle}
+\bibitem{adress} \textit{https://riunet.upv.es/bitstream/handle/10251/12515/TesinaCobos.pdf}
+
+
+
 
 \end{thebibliography}
 \addcontentsline{toc} {chapter}{Bibliografia}
-
-
 
 
 \end{document}

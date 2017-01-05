@@ -1,0 +1,13 @@
+@article{art:rif.1,
+  author={R. Tizio and E. Caio},
+    title={Using \LaTeX},
+   year={1991},
+    journal={JAm Stat Soc},
+}
+
+@book{book:rif.2,
+    author={F.Sempronio},
+   title={S-{P}lus is better than {SAS}},
+  year={1990}
+ editor={Wiley},
+}

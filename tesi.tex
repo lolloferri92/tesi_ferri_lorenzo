@@ -4,7 +4,7 @@
 \usepackage{color}
 \textwidth=450pt\oddsidemargin=0pt
 
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -20,7 +20,7 @@
 \rule[0.5cm]{15.8cm}{0.6mm}
 \\\vspace{3mm}
 
-{\small{\bf Macroarea di Lettere e Filosofia \\ master in Sonic Arts}}
+{\small{\bf Macroarea di Lettere e Filosofia \\ Master in Sonic Arts}}
 
 \end{center}
 
@@ -31,10 +31,7 @@
 \textcolor{black}{
 \linespread{5}
 {\LARGE{\bf 
-FORMAT PER RIPRODUZIONE MULTICANALE:
-}}\\ 
-{\LARGE{\bf 
-DALLO STEREO ALL'AUDIO 3D
+TITOLO
 }}}
 
 \end{spacing}
@@ -95,28 +92,35 @@ Anno Accademico \textcolor{black}{2016/17}}}
 \addcontentsline{toc}{chapter}{Abstract}
 
 
-\chapter{I primi concetti sulla spazializzazione}
+\chapter{Dai canali audio agli Oggetti sonori}
 
-In questo capitolo inizieremo a parlare dei primi concetti riguardanti la spazializzazione audio partendo dai metodi classici di riproduzione fino ad elaborare i presupposti che portano alla necessità di dare un modo diverso di ricostruire uno spazio sonoro per le diverse esigenze.
+Siamo all'inizio dello sviluppo di questa tesi, l'abstract ci ha permesso di capire qual'è il nostro scopo e i passaggi che percorrerà questa stesura, ora non rimane che cominciare.\\
 
-\section{supporti fisici di riproduzione}
+Nel mondo odierno l'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto, basti pensare a chi ha un hifi in casa, chi un'impianto per home theater o chi direttamente va al cinema; in tutte queste situazioni l'ascoltatore medio ha accesso a questi contenuti diciamo in modo "smart" cioè senza preoccuparsi tanto di tutto il lavoro e la progettazione che sta dietro alla realizzazione del contenuto e sulla sua successiva riproduzione, questo è possibile grazie a delle "regole" che stanno alla base di tutta questa catena; un esempio chiarirà meglio l'uso improprio della parola regola.\\
 
-Partiamo con il fare una distinzione che ci servirà per sviluppare il ragionamento generale su due fronti distinti, infatti al momento i due principali metodi di riproduzione e di ascolto di materiale audio sono:
+Consideriamo per esempio un cinema, sappiamo dall'acustica che il modo in cui sono progettati i diffusori e la sala di proiezione coloreranno \footnote{con il termine colorare nell'audio e in acustica si intende la tendenza di un sistema a modificare lo spettro in frequenza di un segnale audio che vive al suo interno} in qualche maniera il suono e quindi non faranno ascoltare lo stesso contenuto sonoro che è stato creato per quel film, è quindi obbligo per il cinema (almeno lo spero) tarare l'ascolto in modo che non ci sia questa colorazione, qui per esempio il fatto   di rendere non colorato il suono costituisce una regola, uno standard che è necessario affinchè si abbia un giusto ascolto del contenuto.\\
 
-\begin{itemize}
-\item \textbf{ascolto in cassa}: è un tipo di ascolto in cui l'informazione sonora viene tradotta da segnale elettrico ad acustico mediante uno o più altoparlanti posti a una certa distanza dall'ascoltatore e il fronte d'onda sono generato per arrivare alla persona deve percorrere un certo tratto in aria quindi diciamo che il sono generato vive nello spazio in cui sono collocati i diffusori e lo spazio stesso modifica l'informazione sonora
-\item \textbf{ascolto in cuffia}: il concetto parte esattamente come quello esposto sopra in quanto anche qui ci sono la presenza di altoparlanti (uno per orecchio) l'unica differenza è che il segnale sonoro non vive nell'ambiente come succede per il caso sopra in quanto l'altoparlante è idealmente isolato dall'esterno e collocato relativamente molto vicino all'orecchio.
+Come quest'ultima ci sono diverse regole, diversi standard da rispettare affinché sia garantito che il produttore di contenuti sonori e l'ascoltatore abbiano accesso alla stessa informazione, nel nostro caso siccome la tesi è mirata ad un'aspetto dell'audio faremo riferimento solo a quelle regole che stanno a base della spazializzazione quindi quegli standard che hanno a che fare in qualche modo con la geometria e sui supporti di riproduzione.\\
+
+Ora è d'obbligo fermarsi un attimo e ripercorrergli brevemente (per quanto riguarda la spazializzazione) in modo da capire in che punto vogliamo intraprendere una strada concettualmente diversa, anche perchè alla fine del ragionamento dovremo ricollegarci ad essi.
+
+%\section{supporti fisici di riproduzione}
+
+%Partiamo con il fare una distinzione che ci servirà per sviluppare il ragionamento generale su due fronti distinti, infatti al momento i due metodi di riproduzione e di ascolto di materiale audio sono:
+
+%\begin{itemize}
+%\item \textbf{ascolto in cassa}: è un tipo di ascolto in cui l'informazione sonora viene tradotta da segnale elettrico ad acustico mediante uno o più altoparlanti posti a una certa distanza dall'ascoltatore e il fronte d'onda sono generato per arrivare alla persona deve percorrere un certo tratto in aria quindi diciamo che il sono generato vive nello spazio in cui sono collocati i diffusori e lo spazio stesso modifica l'informazione sonora
+%\item \textbf{ascolto in cuffia}: il concetto parte esattamente come quello esposto sopra in quanto anche qui ci sono la presenza di altoparlanti (uno per orecchio) l'unica differenza è che il segnale sonoro non vive nell'ambiente come succede per il caso sopra in quanto l'altoparlante è idealmente isolato dall'esterno e collocato relativamente molto vicino all'orecchio.
 
 
 
-\end{itemize}
-Entrambi i supporti fisici di riproduzione hanno il loro pregi e loro difetti che porta alla scelta di un supporto rispetto all'altro in base alle esigenze e alle necessità.
+%\end{itemize}
+%Entrambi i supporti fisici di riproduzione hanno il loro pregi e loro difetti che porta alla scelta di un supporto rispetto all'altro in base alle esigenze e alle necessità.
 
 
-\section{Metodi classici di riproduzione}\label{metodi}
+\section{Standard di riproduzione}\label{metodi}
 
-Ora passiamo a come possiamo sfruttare questi due supporti descritti.\\
-
+\subsection{audio in una dimensione}
 Il modo più semplice e basilare con cui riusciamo a riprodurre del materiale audio è la \textbf{MONOFONIA}; essa è una tecnica attuabile solo con l'ausilio di una cassa acustica e sfrutta un solo canale audio \footnote{per canale audio si intende un supporto in cui "scorre" solo un'informazione sonora}
 quindi di conseguenza nello spazio sonoro \footnote{per spazio sonoro si intende lo spazio acustico dove si generano e si propagano le onde sonore, nei nostri casi sarà sempre uno spazio chiuso quindi di conseguenza le leggi fisiche vigenti sono quelle degli spazi chiusi} vive una sola informazione sonora.
 
@@ -126,13 +130,67 @@ Molto simile a questo metodo è il \textbf{DUALMONO} che utilizza sempre un solo
 
 In questo caso non ho utilizzato la parola "casse acustiche" in quanto possiamo utilizzare questo metodo sia in queste ultime che in cuffia avendo lo stesso risultato di percezione.\\
 
-Ultimo metodo descritto è l'usuale \textbf{STEREO} in cui avendo a disposizione due speaker la sensazione di spazialità viene data dalla differenza di potenza del segnale inviata alle casse infatti se il segnale risulta più forte in una delle due sorgenti acustiche, la sorgente fantasma risulterà più spostata verso quest'ultima.
+Il prossimo metodo descritto è lo \textbf{STEREO}\footnote{qui c'è da fare una precisazione: utilizzato la parola stereo perchè e comune utilizzarlo in questo caso, in verità formalmente lo stereo è una modalità di riproduzione e di registrazione che oltre ad usare la IID utilizza anche la ITD ed è come se i due canali componenti questo standard sentissero esattamente quello che sentirebbero le nostre orecchie}(configurazione 2.0) in cui avendo a disposizione due speaker la sensazione di spazialità viene data dalla differenza di potenza del segnale inviata alle casse infatti se il segnale risulta più forte in una delle due sorgenti acustiche, la sorgente fantasma risulterà più spostata verso quest'ultima.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.30]{figures/stereo.jpg}
+	\caption {Configurazione stereo} 
+	\label{fig:stereo}
+	\end{figure}
 
 Questo avviene sia per casse in aria libera che per cuffie. \\
 
-\[ \thicksim \blacklozenge \thicksim \]\\
+Parlando dello stereo cominciamo a parlare di standard in quanto la configurazione prevede di creare un triangolo equilatero con ai vertici i due altoparlanti e l'ascoltatore, se non si segue questa direttiva non si avrà la giusta spazialità e collocazione spaziale dei suoni.\\
 
-Questi descritti sono i metodi principali di riproduzione in cui si comincia ad intravedere un primo approccio di spazializzazione	 sonora.
+Questi descritti sono i metodi principali di riproduzione in cui si comincia ad intravedere un primo approccio di spazializzazione	 sonora, ora l'ascolto di musica si ferma generalmente qui alla riproduzione in una dimensione ma l'avvento dei film e dei cinema ha portato al concetto di audio in due dimensioni in particolare al surround.
+
+\subsection{Audio in due dimensioni}
+
+Per audio in due dimensioni si intende una riproduzione che pone l'ascoltatore al centro di un piano di diffusione in modo che si possano sentire suoni provenienti anche dai lati e da dietro; diverse sono le configurazioni possibili ma quelle che interessano a noi sono principalmente tre.\\
+
+La più diffusa configurazione surround è sicuramente la \textbf{5.1} \footnote{dove la prima cifra sta per il numero di diffusori nel piano e la seconda cifra sta per il numero di LFE (canale audio dedicato al subwoofer)} usata principalmente dalla Dolby e dalla DTS per riproduzione di audio per film.
+
+
+Questa configurazione, come spiega da specifica \cite{5.1}, è composta da un canale LFE per il subwoofer e di 5 canali distribuiti in 5 satelliti disposti rispettivamente a 0°, $\pm$30° e $\pm$110/120°\\
+
+Una successiva configurazione è la \textbf{7.1} che riporta angoli di 0°, $\pm$30°, $\pm$90/110° e $\pm$135/150°
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.18]{figures/5-1.png}\includegraphics[scale=0.34]{figures/7-1.png}
+	\caption {Configurazione 5.1 e 7.1} 
+	\label{fig:5.1}
+	\end{figure}
+  
+
+\section{Stream audio object-oriented}
+
+Ora capito quali sono i principali standard di riproduzione andremo a spiegare come come queste configurazioni andranno pilotate, non ci interessa tanto il contenuto di ogni canale ma il fatto che: 
+
+\begin{itemize}
+\item nel più semplice dei casi ad ogni speaker sarà assegnato un canale audio differente (esempio Dolby Digital 5.1 dove ad ogni altoparlante è pilotato da un segnale discreto indipendente), si veda \cite{digital}.
+\item nei casi più complessi ad ogni altoparlante sarà assegnato un mix di canali dato da una matrice di decodifica proprietaria (esempio si guardi il funzionamento del decoder Dolby Pro Logic), si veda \cite{prologic}.
+\end{itemize}
+
+Un'altra importante considerazione è il fatto che lo stesso stream che utilizzo in un sistema "di grado maggiore" per esempio un 5.1 posso "scalarlo in un sistema "di grado minore" esempio uno stereo, questo perchè essendo tutti questi degli standard è possibile fare un downgrade dello stream oppure un upgrade (solo però solto alcuni artifici" per essere adattato al sistema di riproduzione; allora viene da chiedersi perchè cambiare concenzione e approdare in uno stream object-oriented?\\
+
+La domanda trova facile risposta nel fatto che questi giochi di upgrade o downgrade si possono fare solo su sistemi che hanno una certo grado di compatibilità (ad esempio i sistemi Dolby) e se questo avvenisse dovrei comunque prendere uno stream, codificarlo in uno stream diciamo "generale" e riadattarlo decodificandolo nello stream che piloterà la mia riproduzione.\\
+
+Allora la domanda sorge spontanea, perchè non creare uno stream diciamo generale?
+
+La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello stream di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione ma spenderemo tempo a parlare di come Dolby é riuscita incanalare l'oggetto e l'informazione spaziale dentro questo stream.\\
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -177,19 +235,6 @@ Ora l'unica cosa che è rimasta da fare è sostituire ogni fenditura con un alto
 
 Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare ogni altoparlante; le risposte possono essere molteplici ma tutte devono tener conto della geometria di progettazione del nostro sistema WFS, prendiamo uno dei casi più semplici.\\
 
-\chapter{Algoritmo identificazione sorgenti}
-
-In questo capitolo capiremo secondo quale logica riusciamo ad estrarre ed a capire in quale punto del piano sonoro è collocata ogni sorgente formante il contenuto che vogliamo esaminare, in secondo momento invece implementerò questo concetto in un basilare algoritmo capace di raggiungere lo scopo prefissato.
-
-\section{Algoritmo Azimuth Discimination and Resyntesis ADRess} 
-
-Nel capitolo \ref{metodi} abbiamo visto quali sono le differenze tra una riproduzione stereo, mono e dualmono, ora concentriamoci su come riuscire concettualmente ad isolare una sola sorgente in entrambi i casi.\\
-
-Per quanto riguarda la riproduzione mono isolare risulta abbastanza difficile in quanto intuitivamente devo conoscere il contenuto del segnale o in alternativa il contenuto spettrale del segnale da estrapolare, questo è all'incirca quello che fa il nostro cervello quando sente qualcosa cioè cercà di ricosnoscere un'oggetto sonoro mediante certe regole quali la durata del suono, il contenuto armonico, il timbro ecc... e stessa cosa dobbiamo fare nell'algoritmo, cioè riconoscere tramite delle elaborazioni le ste stesse regole descritte prima.\\
-
-Nel caso invece avessimo una riproduzione stereo in partenza una cosa ci viene in nostro aiuto, infatti la peculiarità della collocazione spaziale classica in un mix stereo è il fatto che una sorgente è collocata attraverso il panpot cioè una funzione basata sulla IID \footnote{La Interaural Intencity Difference è una funzione matematica che simula la differenza di intensità sonora percepita dalle nostre orecchie di una sorgente sonora posta ad un angolo $\theta$ dalla normale uscente di fronte alla testa dell'ascoltatore} che da l'illusione di sentire un suono in un punto della linea congiungente i due altoparlanti, in parole povere se uno stesso segnale è riprodotto con maggiore intensità in una cassa rispetto all'altra l'immagine virtuale di tale sorgente sarà avvertita più vicina alla casa con maggiore intensità di riproduzione; questo panpottaggio quindi sdoppia l'oggetto sonoro e lo ridistribuisce con intensità diverse sulle due casse ed è queso sdoppimento che ci viene in aiuto  infatti prima come ora non conoscevamo il contenuto da estrapolare ma in questo caso sappiamo che in divers misura il contenuto esiste in entrambi i canali e può essere in qualche maniera "matchato"; qua sta la difficoltà dell'algoritmo e per spiegarlo sarà comodo usare un'esempio.\\
-
-Supponiamo di avere un file stereo in cui è stato registrato  
 
 
 
@@ -198,11 +243,10 @@ Supponiamo di avere un file stereo in cui è stato registrato
 \begin{thebibliography}{}
 
 \bibitem{wikihuygens} \textit{https://en.wikipedia.org/wiki/Huygens-Fresnel\_principle}
-\bibitem{adress} \textit{https://riunet.upv.es/bitstream/handle/10251/12515/TesinaCobos.pdf}
-
-
-
-
+\bibitem{5.1} \textit{https://www.itu.int/dms\_pubrec/itu-r/rec/bs/R-REC-BS.775-3-201208-I!!PDF-E.pdf}
+\bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_ Digital}
+\bibitem{prologic} \textit{https://it.wikipedia.org/wiki/Dolby\_ Surround\_ Pro\_ Logic}
+\bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
 \end{thebibliography}
 \addcontentsline{toc} {chapter}{Bibliografia}
 

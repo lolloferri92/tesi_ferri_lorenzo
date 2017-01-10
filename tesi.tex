@@ -179,20 +179,103 @@ La domanda trova facile risposta nel fatto che questi giochi di upgrade o downgr
 
 Allora la domanda sorge spontanea, perchè non creare uno stream diciamo generale?
 
-La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello stream di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione ma spenderemo tempo a parlare di come Dolby é riuscita incanalare l'oggetto e l'informazione spaziale dentro questo stream.\\
+La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello stream di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a parlare di come Dolby é riuscita incanalare gli oggetti e la relativa informazione spaziale dentro questo stream.\\
 
+Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix del prodotto per passare dal contenuto dei singoli canali allo stream di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello stream audio stereo con peso costituito dalla funzione di panpot deciso per ogni canale, questo succede anche in configurazioni più complicate come il 5.1 l'unica differenza è che panpot non sarà più in una dimensione ma in due\footnote{esiste una funzione di panpot standard per ogni configurazione di riproduzione}.\\
 
+L'idea della Dolby invece è stata quella di fermarsi prima della fase di downmix (almeno per quanto riguarda il contenuto degli oggetti sonori) e di intraprendere una strada diversa:\\
 
+Prima di tutto si devono preparare gli oggetti sonori esattamente come si vuole siano riprodotti, in secondo luogo si dispongono questi oggetti in uno spazio di riproduzione virtuale creato appositamente da un qualche software o plugin nel quale a ogni oggetto verrà assegnato un punto preciso nello spazio attraverso delle coordinate spaziali.
 
+Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come concretamente implementare questo nuovo procedimento.
 
+\chapter{Spazilizzatore 3D e Format MDA}
 
+In questo capitolo andremo a spiegare concretamente come possiamo creare questo stream audio ad oggetti e come in fase di post produzione posso spazializzare il mio contenuto sonoro.\\
 
+Come accennato prima in fase di post-produzione non usiamo più il solito panner installato in banchi mixer o in sofware DAW in quanto essi sia che siano stereo o 5.1 o quello che vogliamo, non hanno una spazializzazione a oggetti quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri paramentri come grandezza, volume ecc...).\\
 
+Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come format\footnote{per format intendo lo stesso concetto che in procedenza ho usato con la parola stream} quello proprietario di Dolby Atmos ma il fatto è che essendo questa tecnica di spazializzazione soggetta a brevetto, essa é diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto format proprietari simili ma sempre vincolati al brevetto, format quali Auro3D per citarne uno.\\
 
+Noi invece ricerchiamo qualcosa che sia un format open e libero in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un format open che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.\\
 
+\section{Format MDA}
 
+Si veda \cite{mda} per la documentazione riguardante questo paragrafo.\\
 
+Il gioco che sta alla base di questo format è la scrittura di \textbf{metadati} contenenti gli attributi dell'oggetto sonoro da spazializzare, questo format essendo principalmente stato creato per il cinema avrà attributi che per la sola riproduzione musicale sono non necessari ma di questo ne parleremo dopo.\\
 
+Questi attributi sono:
+\begin{itemize}
+\item \textbf{Coordinate Spaziali}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).\\
+
+Come coordinate abbiamo l'asse $X$ posto di fianco all'ascoltatore, l'asse $Y$ posto di fronte e l'asse $Z$ posto verso l'alto, quindi definito un angolo di azimut $\theta$, un'angolo di elavazione $\phi$ e un raggio $\rho$
+posso definire le coordinate polari come:
+
+\begin{equation}
+	\left\{\begin{matrix}
+x=\rho sin(\theta) cos(\phi) \\
+y=\rho cos(\theta) cos(\phi)\\
+z=\rho sin(\phi)\\
+\end{matrix}\right.
+	\label{eq:coordinatepolari}
+\end{equation}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.35]{figures/azimut.png}
+	\caption {Coordinate spaziali} 
+	\label{fig:coordinate}
+	\end{figure}
+	
+\item \textbf{Identificativo oggetto sonoro}: scritto come URI é un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
+\item \textbf{Gain}: è un valore che indica la quantità di segnale che deve avere l'oggetto sonoro.
+\item \textbf{apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare(più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore è 180° allora si attiverebbero tutti i diffusori)
+\item \textbf{divergenza}: anch'essa indicata in gradi quantifica la grandezza che deve avere l'oggetto sonoro ma solo sul piano orizzontale, un esempio più esplicativo si ha in figura \ref{fig:apertura}.
+	
+	\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.35]{figures/apertura.png}
+	\caption {parametri di apertura e divergenza} 
+	\label{fig:apertura}
+	\end{figure}
+	
+	
+\end{itemize}
+
+queste sono i principali parametri scritti nei metadati che ci servono per la spazializzazione, abbiamo quindi un  oggetto sonoro e i suoi metadati ma è facile pensare che se l'oggetto si muove nello spazio o cambia dimensioni il contenuto dei suoi matadati cambia nel tempo, quindi il format racchiude in un nuovo oggetto chiamato "\textbf{Object-Fragment}" dove saranno segnati tutti metadati descritti sopra (che per tutto lo svolgimento temporale dell'object fragment rimarranno inalterati) con più l'aggiunta di alcuni parametri come l'\textbf{ID} (identificativo oggeto), e i sample dell'oggetto sonoro da riprodurre.\\
+
+Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di richiamare gli object-fragment quando servono, essa è suddivisa in segmenti temporali che sono dati da $\dfrac{1}{f_c}$ dove $f_c$ è la frequenza di campionamento impostata per la totalità degli oggetti sonori, e dove a ogni segmento è associato una lista di ID che richiama oggetti da riprodurre, un'esempio esplicativo è dato dallo schema \ref{fig:object}.\\
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.50]{figures/timeline.png}\\
+	\includegraphics[scale=0.50]{figures/object1.png}\\
+	\includegraphics[scale=0.50]{figures/object2.png}\\
+	\includegraphics[scale=0.50]{figures/object3.png}
+	\caption {Schema esplicativo funzionamento format MDA} 
+	\label{fig:object}
+	\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.50]{figures/timeline2.png}
+	
+	\caption {azione di richiamo di un object-fragment} 
+	\label{fig:time}
+	\end{figure}
+
+Da notare che è presente anche un LFE-Object in cui non è segnata la posizione, questo perchè data la natura omnidirezionale delle basse frequenze non avrebbe senso collocarle spazialmente e anche perchè solo il/i subwoofer sono in grado di riprodurre tali frequenze.
+
+\subsection{format MDA per riproduzione audio}
+
+Qui faccio una piccola annotazione personale che mi tornerà utile più avanti, nella maggior parte dei casi quando si fa musica in studio di registrazione è abbastanza difficile che abbiamo oggetti sonori in movimento e di dimensioni che variano nel tempo, quindi si potrebbe fare una piccola modifica al format in modo da alleggerire il succesivo rendering per creare fisicamente lo spazio sonoro.\\
+
+Sostanzialmente abbiamo tre tipi di oggetti sonori in musica: oggetti fermi, oggetti che "balzano" tra due punti spaziali ed oggetti costituiti da effetti vari (il più importante per la spazializzazione è il riverbero e per questo ci occuperemo solo di questo).
+
+tutti questi oggetti possono essere pensati come oggetti statici quindi che hanno coordinate spaziali e dimensioni fisse, in questo caso si potrebbe alleggerire il format in quanto non avrebbe più senso parlare di object-fragment (ricordiamo che gli attributi di spazializzazione cambiano allora si avranno diversi object-fragment, uno per ogni configurazione spaziale) in quanto per l'intera esecuzione del brano si avrebbe solo un object-fragment che fissa la posizione e la grandezza dell'oggetto, quindi si possono direttamente assegnare queste due ultime all'oggetto sonoro senza passare per ulteriori sottodivisioni.\\
+
+per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per il riverbero per esempio basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza e apertura; per quanto riguarda gli oggetti "balzanti" (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto che l'intensità sonora $I'=\alpha I$ di un'oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ é l'intensità che dovrebbe avere originariamente l'oggetto).
 
 
 
@@ -244,9 +327,10 @@ Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare 
 
 \bibitem{wikihuygens} \textit{https://en.wikipedia.org/wiki/Huygens-Fresnel\_principle}
 \bibitem{5.1} \textit{https://www.itu.int/dms\_pubrec/itu-r/rec/bs/R-REC-BS.775-3-201208-I!!PDF-E.pdf}
-\bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_ Digital}
-\bibitem{prologic} \textit{https://it.wikipedia.org/wiki/Dolby\_ Surround\_ Pro\_ Logic}
+\bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_Digital}
+\bibitem{prologic} \textit{https://it.wikipedia.org/wiki/Dolby\_Surround\_Pro\_Logic}
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
+\bibitem{mda} \textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
 \end{thebibliography}
 \addcontentsline{toc} {chapter}{Bibliografia}
 

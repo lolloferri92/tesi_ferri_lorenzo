@@ -6,6 +6,9 @@
 \contentsline {subsection}{\numberline {1.1.1}audio in una dimensione}{5}
 \contentsline {subsection}{\numberline {1.1.2}Audio in due dimensioni}{6}
 \contentsline {section}{\numberline {1.2}Stream audio object-oriented}{7}
-\contentsline {chapter}{\numberline {2}Metodo Wave Field Syntesis}{9}
-\contentsline {section}{\numberline {2.1}Principio fisico alla base e algoritmo di implementazione}{9}
-\contentsline {chapter}{Bibliografia}{11}
+\contentsline {chapter}{\numberline {2}Spazilizzatore 3D e Format MDA}{9}
+\contentsline {section}{\numberline {2.1}Format MDA}{10}
+\contentsline {subsection}{\numberline {2.1.1}format MDA per riproduzione audio}{13}
+\contentsline {chapter}{\numberline {3}Metodo Wave Field Syntesis}{14}
+\contentsline {section}{\numberline {3.1}Principio fisico alla base e algoritmo di implementazione}{14}
+\contentsline {chapter}{Bibliografia}{16}

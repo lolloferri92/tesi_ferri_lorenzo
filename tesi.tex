@@ -189,6 +189,8 @@ Prima di tutto si devono preparare gli oggetti sonori esattamente come si vuole 
 
 Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come concretamente implementare questo nuovo procedimento.
 
+
+
 \chapter{Spazilizzatore 3D e Format MDA}
 
 In questo capitolo andremo a spiegare concretamente come possiamo creare questo stream audio ad oggetti e come in fase di post produzione posso spazializzare il mio contenuto sonoro.\\
@@ -206,7 +208,7 @@ Si veda \cite{mda} per la documentazione riguardante questo paragrafo.\\
 Il gioco che sta alla base di questo format è la scrittura di \textbf{metadati} contenenti gli attributi dell'oggetto sonoro da spazializzare, questo format essendo principalmente stato creato per il cinema avrà attributi che per la sola riproduzione musicale sono non necessari ma di questo ne parleremo dopo.\\
 
 Questi attributi sono:
-\begin{itemize}
+\begin{itemize}\label{aaa}
 \item \textbf{Coordinate Spaziali}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).\\
 
 Come coordinate abbiamo l'asse $X$ posto di fianco all'ascoltatore, l'asse $Y$ posto di fronte e l'asse $Z$ posto verso l'alto, quindi definito un angolo di azimut $\theta$, un'angolo di elavazione $\phi$ e un raggio $\rho$
@@ -277,6 +279,42 @@ tutti questi oggetti possono essere pensati come oggetti statici quindi che hann
 
 per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per il riverbero per esempio basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza e apertura; per quanto riguarda gli oggetti "balzanti" (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto che l'intensità sonora $I'=\alpha I$ di un'oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ é l'intensità che dovrebbe avere originariamente l'oggetto).
 
+\section{Spazializzatore 3D}
+
+Precedentemente abbiamo visto come è costituito il format MDA ora non ci rimane di piegare produrre materiale compatibile con questo format.\\
+
+Nel workflow di produzione di materiale audio 3D bisognerà fermarsi quindi prima del mixdown (sia che sia stereo, 5.1 ecc...) e bisognerà prendere un qualche software che sia in grado di sostituire il mio mixer e sostituirlo con uno 3D, diverse aziende stanno facendo software di questo tipo in quanto vogliono interfacciarsi a questo format ed in qualche modo creare un collegamente tra il loro format proprietario e l'MDA; per esempio la Dolby ha un panner 3D per Dolby Atmos mka che si interfaccia con l'MDA, anche la Auro Technologies ha adottato la stessa politica o in alternativa la casa Fairlight ha creato uno spazializzatore di nome 3DAW (secondo me molto interessante) che supporta anche l'MDA.\\
+
+Detto questo ho ricercato uno spazializzatore adatto e la mi ascelta è ricaduta proprio sull'\textbf{MDA creator} proprietaria della DTS in quanto è la più intuitiva ela miglior scelta per integrazione (in quanto essa ha creato sia il panner che il format).
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.50]{figures/mdacreator.jpg}
+	
+	\caption {MDA Creator, DTS technology} 
+	\label{fig:mdacreator}
+	\end{figure}
+
+Tutte le informazioni su MDA creator verranno prese dal suo manuale \cite{creator}.\\
+
+questo plugin disponibile solo per Protools è di semplice comprensione, come da manuale bisogna mettere in insert in ogni traccia questo plugin (condizione necessaria è che tutte le tracce devono avere la stessa lunghezza), poi aprendo l'interfaccia del panner bisognerà posizionare ogni oggetto nel punto in cui si desidera e con divergenza e apertura voluta (si veda il paragrafo \ref{aaa} per sapere i parametri del format), logicamente questi parametri possono essere automatizzati per spostare e modificare l'oggetto nel tempo.
+
+Inoltre si possono creare dei "Bed Object" che sarebbero oggetti i quali vengono direttamente codificati nel sistema di riproduzione scelto (esempio classico è la colonna sonora in 5.1 nei film) ai quali verranno sommati gli oggetti veri e propri del format e l'LFE-Object per gli effetti a bassa frequenza.\\
+
+Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di output, quella che interessa a noi è la modalità di esportazione con mda file: questa scelta ci porta alla creazione dei file \textbf{.map, .mix} e \textbf{.mda}, quest'ultimo è proprio il file contenente i metadati e gli oggetti sonori proposti in questo format.
+
+
+\chapter{Decodifica format MDA per adattamento a varie configurazioni}
+
+In questo capitolo parleremo di come invece da un format MDA posso passare a una configurazione di riproduzione usuale, mediante alcune tecniche quali il VBAP, il BINAURALE e la WFS.\\
+
+\section{decodifica in VBAP}
+
+
+
+
+
+
 
 
 \chapter{Metodo Wave Field Syntesis}
@@ -330,7 +368,9 @@ Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare 
 \bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_Digital}
 \bibitem{prologic} \textit{https://it.wikipedia.org/wiki/Dolby\_Surround\_Pro\_Logic}
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
-\bibitem{mda} \textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
+\bibitem{mda}\textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
+\bibitem{creator}\textit{//digitalcommons.calpoly.edu/cgi/viewcontent.cgi?article=1049}\&\textit{context=laessp}
+
 \end{thebibliography}
 \addcontentsline{toc} {chapter}{Bibliografia}
 

@@ -12,6 +12,6 @@
 \contentsline {section}{\numberline {2.2}Spazializzatore 3D}{13}
 \contentsline {chapter}{\numberline {3}Decodifica format MDA per adattamento a varie configurazioni}{16}
 \contentsline {section}{\numberline {3.1}decodifica in VBAP}{16}
-\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{17}
-\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{17}
-\contentsline {chapter}{Bibliografia}{19}
+\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{18}
+\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{18}
+\contentsline {chapter}{Bibliografia}{20}

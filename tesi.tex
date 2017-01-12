@@ -310,11 +310,51 @@ In questo capitolo parleremo di come invece da un format MDA posso passare a una
 
 \section{decodifica in VBAP}
 
+Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione che permette di localizzare una sorgente attraverso la differenza di intensità, mi spiego meglio:\\
+uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepiamo una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due di essi e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto previsto dalla IID.\\
 
+Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due speaker, se invece vogliamo fare un 3D allora serviranno un minimo di 3 speaker posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate,per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.\\
 
+E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
+Consideriamo un sistema fatto da due monitor, conoscendo la posizione della nostra sorgente virtuale (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $\vec{X},\vec{Y}$ definirò come $l_1= {\left[ l_{11} \ l_{12} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $p= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
 
+Il trucco ora sta nel fatto che posso riscrivere il vettore $p$ in funzione del vettore contenente i due gain $g= \left[ g_1 \ g_2 \right]$ come:
 
+\begin{equation}
+p= g \cdot l = \left[g_1 \ g_2 \right] \left[l_1 \ l_2 \right]^T = g_1 l_1 + g_2 l_2
+\label{eq:bbbb}
+\end{equation}
+
+In questo caso però possiamo ulteriormente compattare la scrittura in quanto:
+
+\begin{equation}
+p=g_1 {\left[ l_{11} \ l_{12} \right]}^T + g_2 {\left[ l_{21} \ l_{22} \right]}^T= \left[ g_1 \ g_2 \right] \left[\begin{matrix}
+l_{11} & l_{12}\\ l_{21} & {l_22}
+\end{matrix} \right]
+\label{eq:cccc}
+\end{equation}
+
+ora trovando tutto in funzione $g$ abbiamo che:
+
+\begin{equation}
+\left[g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[\begin{matrix} 
+l_{11} & l_{12}\\ l_{21} & l_{22}
+\end{matrix} \right]}^{-1} \ \ \Rightarrow \ \ \ g=p^T {L_{12}}^{-1}
+\label{eq:dddd}
+\end{equation}
+
+Logicamente assumo che la matrice $L_{12}$ ammetta l'inversa, fatto questo mi ritrovo con un'equazione a due incognite quindo devo trovare un qualcosa che leghi $g_1$ $g_2$ e in nostro aiuto viene la formula studiata da Blumlein e riproposta da Bauer che assieme alla formula \ref{eq:cccc} diventa:
+
+\begin{equation}
+\left\{ \begin{matrix}
+\dfrac{tg (\phi)}{tg(\phi_0)}= \dfrac{g_1 - g_2}{g_1 + g_2} \\
+\left[ g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[ \begin{matrix} 
+l_{11} & l_{12}\\ l_{21} & l_{22}
+\end{matrix} \right]}^{-1}
+\end{matrix}\right.
+\label{eq:eeee}
+\end{equation}
 
 
 \chapter{Metodo Wave Field Syntesis}
@@ -370,7 +410,8 @@ Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare 
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
 \bibitem{mda}\textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
 \bibitem{creator}\textit{//digitalcommons.calpoly.edu/cgi/viewcontent.cgi?article=1049}\&\textit{context=laessp}
-
+\bibitem{iid} \textit{https://en.wikipedia.org/wiki/Sound\_localization\#ITD\_and\_IID}
+\bibitem{vbap} \textit{http://lib.tkk.fi/Diss/2001/isbn9512255324/article1.pdf}
 \end{thebibliography}
 \addcontentsline{toc} {chapter}{Bibliografia}
 

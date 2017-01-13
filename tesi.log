@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  12 JAN 2017 18:06
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  13 JAN 2017 18:26
 entering extended mode
  %&-line parsing enabled.
 **tesi.tex
@@ -507,74 +507,99 @@ Underfull \hbox (badness 10000) in paragraph at lines 318--319
 [16
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 320--321
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 321.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 321.
+
+Underfull \hbox (badness 10000) in paragraph at lines 321--322
 
  []
 
-[17]
+<figures/matrix2d.png, id=83, 540.0175pt x 401.5pt>
+File: figures/matrix2d.png Graphic file (type png)
+ <use figures/matrix2d.png>
+[17 <./figures/matrix2d.png (PNG copy)>]
+<figures/angoli.png, id=90, 675.52374pt x 419.5675pt>
+File: figures/angoli.png Graphic file (type png)
+ <use figures/angoli.png>
+Underfull \hbox (badness 10000) in paragraph at lines 382--383
+
+ []
+
+[18 <./figures/angoli.png (PNG copy)>]
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
+
+[19]
 Capitolo 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--363
+Underfull \hbox (badness 10000) in paragraph at lines 392--393
 
  []
 
-<figures/huygens.jpg, id=87, 746.01291pt x 559.50967pt>
+<figures/huygens.jpg, id=97, 746.01291pt x 559.50967pt>
 File: figures/huygens.jpg Graphic file (type jpg)
 
-<use figures/huygens.jpg> [18
+<use figures/huygens.jpg> [20
 
 ]
-<figures/wfs.png, id=91, 427.8384pt x 213.9192pt>
+<figures/wfs.png, id=101, 427.8384pt x 213.9192pt>
 File: figures/wfs.png Graphic file (type png)
  <use figures/wfs.png>
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
 
  []
 
-[19 <./figures/huygens.jpg> <./figures/wfs.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 407--408
+[21 <./figures/huygens.jpg> <./figures/wfs.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
 []\OT1/cmr/m/it/12 https://www.itu.int/dms[]pubrec/itu-r/rec/bs/R-REC-BS.775-3-
 201208-I!!PDF-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 440--441
 []\OT1/cmr/m/it/12 https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-a
 tmos-next-
  []
 
 
-Overfull \hbox (57.59508pt too wide) in paragraph at lines 411--412
+Overfull \hbox (57.59508pt too wide) in paragraph at lines 441--442
 []\OT1/cmr/m/it/12 http://www.etsi.org/deliver/etsi[]ts/103200[]103299/103223/0
 1.01.01[]60/ts[]103223v010101p.pdf 
  []
 
-[20
+[22
 
 ] (./tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 3586 strings out of 495052
- 48418 string characters out of 1182205
- 100026 words of memory out of 3000000
- 6692 multiletter control sequences out of 15000+50000
- 15959 words of font info for 65 fonts, out of 3000000 for 9000
+ 3619 strings out of 495052
+ 48872 string characters out of 1182205
+ 100059 words of memory out of 3000000
+ 6714 multiletter control sequences out of 15000+50000
+ 18527 words of font info for 74 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,14n,24p,777b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,16n,24p,794b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmti12.pfb>
-Output written on tesi.pdf (22 pages, 996651 bytes).
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmib
+10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pf
+b>
+Output written on tesi.pdf (24 pages, 1074824 bytes).
 PDF statistics:
- 141 PDF objects out of 1000 (max. 8388607)
+ 157 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

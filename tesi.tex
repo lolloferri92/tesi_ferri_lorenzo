@@ -308,7 +308,7 @@ Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di outpu
 
 In questo capitolo parleremo di come invece da un format MDA posso passare a una configurazione di riproduzione usuale, mediante alcune tecniche quali il VBAP, il BINAURALE e la WFS.\\
 
-\section{decodifica in VBAP}
+\section{tecnica VBAP}
 
 Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione che permette di localizzare una sorgente attraverso la differenza di intensità, mi spiego meglio:\\
 uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepiamo una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due di essi e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto previsto dalla IID.\\
@@ -317,19 +317,27 @@ Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazi
 
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
-Consideriamo un sistema fatto da due monitor, conoscendo la posizione della nostra sorgente virtuale (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $\vec{X},\vec{Y}$ definirò come $l_1= {\left[ l_{11} \ l_{12} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $p= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
+\subsection{vbap 2D}
+Consideriamo un sistema fatto da due monitor, definiamo ora arco attivo la porzione di arco compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
 
-Il trucco ora sta nel fatto che posso riscrivere il vettore $p$ in funzione del vettore contenente i due gain $g= \left[ g_1 \ g_2 \right]$ come:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.40]{figures/matrix2d.png}
+	\caption {composizione vettoriale delle sorgenti reali e virtuale} 
+	\label{fig:vettori2d}
+	\end{figure}
+
+Il trucco ora sta nel fatto che posso riscrivere il vettore $\boldsymbol{p}$ in funzione del vettore contenente i due gain $\boldsymbol{g}= \left[ g_1 \ g_2 \right]$ come:
 
 \begin{equation}
-p= g \cdot l = \left[g_1 \ g_2 \right] \left[l_1 \ l_2 \right]^T = g_1 l_1 + g_2 l_2
+\boldsymbol{p}= \boldsymbol{g} \cdot \boldsymbol{l} = \left[g_1 \ g_2 \right] \left[\boldsymbol{l_{1}} \ \boldsymbol{l_{2}} \right]^T = g_1 \boldsymbol{l_{1}} + g_2 \boldsymbol{l_{2}}
 \label{eq:bbbb}
 \end{equation}
 
 In questo caso però possiamo ulteriormente compattare la scrittura in quanto:
 
 \begin{equation}
-p=g_1 {\left[ l_{11} \ l_{12} \right]}^T + g_2 {\left[ l_{21} \ l_{22} \right]}^T= \left[ g_1 \ g_2 \right] \left[\begin{matrix}
+\boldsymbol{p}=g_1 {\left[ l_{11} \ l_{12} \right]}^T + g_2 {\left[ l_{21} \ l_{22} \right]}^T= \left[ g_1 \ g_2 \right] \left[\begin{matrix}
 l_{11} & l_{12}\\ l_{21} & {l_22}
 \end{matrix} \right]
 \label{eq:cccc}
@@ -340,21 +348,43 @@ ora trovando tutto in funzione $g$ abbiamo che:
 \begin{equation}
 \left[g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[\begin{matrix} 
 l_{11} & l_{12}\\ l_{21} & l_{22}
-\end{matrix} \right]}^{-1} \ \ \Rightarrow \ \ \ g=p^T {L_{12}}^{-1}
+\end{matrix} \right]}^{-1} \ \ \Rightarrow \ \ \ \boldsymbol{g}=\boldsymbol{p}^T {\boldsymbol{L_{12}}}^{-1}
 \label{eq:dddd}
 \end{equation}
 
-Logicamente assumo che la matrice $L_{12}$ ammetta l'inversa, fatto questo mi ritrovo con un'equazione a due incognite quindo devo trovare un qualcosa che leghi $g_1$ $g_2$ e in nostro aiuto viene la formula studiata da Blumlein e riproposta da Bauer che assieme alla formula \ref{eq:cccc} diventa:
+Logicamente assumo che la matrice $\boldsymbol{L_{12}}$ ammetta l'inversa, ora parametrizzo tutto in funzione di $\phi$ e $\phi_0$ nel modo seguente: 
 
-\begin{equation}
-\left\{ \begin{matrix}
-\dfrac{tg (\phi)}{tg(\phi_0)}= \dfrac{g_1 - g_2}{g_1 + g_2} \\
-\left[ g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[ \begin{matrix} 
-l_{11} & l_{12}\\ l_{21} & l_{22}
-\end{matrix} \right]}^{-1}
-\end{matrix}\right.
+\[ p_1=cos(\phi),\ p_2=sen(\phi),\ l_{11}=cos(\phi_0),\ l_{12}=sen(\phi_0),\ l_{21}=cos(-\phi_0),\ l_{22}=sen(-\phi_0) \]
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.40]{figures/angoli.png}
+	\caption {angoli delle sorgenti reali e virtuale} 
+	\label{fig:angoli}
+	\end{figure}
+
+fatto questo, essendo il nostro spazio ortogonale, posso calcolare direttamente i coefficienti dei due gain invertendo prima la matrice, il risultato è il seguente:
+
+\begin{equation}\begin{split}
+g_1=\dfrac{cos\phi sen\phi_0 + sen \phi cos\phi_0}{2 cos\phi_0 sen\phi_0}\\ \\
+g_2=\dfrac{cos\phi sen\phi_0 - sen \phi cos\phi_0}{2 cos\phi_0 sen\phi_0}
+\end{split}
 \label{eq:eeee}
 \end{equation}
+
+Logicamente introduciamo un coefficente $C$ che indica il gain complessivo (ci servirà per definire la distanza dell'oggetto) e che scalerà i nosti due gain in questo modo:
+
+\begin{equation}
+\left[g_1 \ g_2\right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \right]}{\sqrt{g_1 + g_2}} 
+\label{eq:ffff}
+\end{equation}
+
+Logicamente sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione stereo, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà "selezionare" solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un'arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco, saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:\\
+
+consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\phi_{0,n}$ tali che $0°\leq \phi_{0,1},\ \phi_{0,2},\ \ldots,\ \phi_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\phi^{\prime}$ dovrà verificarsi che $\phi_{0,m}\leq \phi^{\prime} \leq \phi_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere: \[\phi_0 = \dfrac{\phi_{0,m+1}-\phi_{0,m}}{2} \ \ \ \ \ \phi=\phi^{\prime}-\dfrac{\phi_{0,m+1}+\phi_{0,m}}{2} \]
+
+
+
 
 
 \chapter{Metodo Wave Field Syntesis}

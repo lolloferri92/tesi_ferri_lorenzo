@@ -13,6 +13,9 @@
 \contentsline {chapter}{\numberline {3}Decodifica format MDA per adattamento a varie configurazioni}{16}
 \contentsline {section}{\numberline {3.1}tecnica VBAP}{16}
 \contentsline {subsection}{\numberline {3.1.1}vbap 2D}{17}
-\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{20}
-\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{20}
-\contentsline {chapter}{Bibliografia}{22}
+\contentsline {subsection}{\numberline {3.1.2}VBAP 3D}{19}
+\contentsline {section}{\numberline {3.2}integrazione del formato MDA con la tecnica VBAP}{21}
+\contentsline {section}{\numberline {3.3}MDA in }{21}
+\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{22}
+\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{22}
+\contentsline {chapter}{Bibliografia}{24}

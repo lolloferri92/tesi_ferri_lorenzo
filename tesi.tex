@@ -163,6 +163,9 @@ Una successiva configurazione è la \textbf{7.1} che riporta angoli di 0°, $\pm
 	\label{fig:5.1}
 	\end{figure}
   
+In parallelo una configurazione che trova il suo utilizzo nel campo della ricerca musicale e in minor misura nell'ascolto di musica è la \textbf{quadrifonia}; questa tecnica prevede 
+
+
 
 \section{Stream audio object-oriented}
 
@@ -318,7 +321,7 @@ Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazi
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
 \subsection{vbap 2D}
-Consideriamo un sistema fatto da due monitor, definiamo ora arco attivo la porzione di arco compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
+Consideriamo un sistema fatto da due monitor, definiamo ora arco attivo la porzione di arco compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
 
 \begin{figure}[htbp]
 	\centering
@@ -338,7 +341,7 @@ In questo caso però possiamo ulteriormente compattare la scrittura in quanto:
 
 \begin{equation}
 \boldsymbol{p}=g_1 {\left[ l_{11} \ l_{12} \right]}^T + g_2 {\left[ l_{21} \ l_{22} \right]}^T= \left[ g_1 \ g_2 \right] \left[\begin{matrix}
-l_{11} & l_{12}\\ l_{21} & {l_22}
+l_{11} & l_{12}\\ l_{21} & l_{22}
 \end{matrix} \right]
 \label{eq:cccc}
 \end{equation}
@@ -382,6 +385,74 @@ Logicamente introduciamo un coefficente $C$ che indica il gain complessivo (ci s
 Logicamente sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione stereo, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà "selezionare" solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un'arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco, saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:\\
 
 consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\phi_{0,n}$ tali che $0°\leq \phi_{0,1},\ \phi_{0,2},\ \ldots,\ \phi_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\phi^{\prime}$ dovrà verificarsi che $\phi_{0,m}\leq \phi^{\prime} \leq \phi_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere: \[\phi_0 = \dfrac{\phi_{0,m+1}-\phi_{0,m}}{2} \ \ \ \ \ \phi=\phi^{\prime}-\dfrac{\phi_{0,m+1}+\phi_{0,m}}{2} \]
+
+\subsection{VBAP 3D}
+
+Capito qual'è il modello e l'algoritmo di implementazione del VBAP in due dimensioni estenderemo il concetto in tre dimensioni.\\
+
+la più piccola configurazione di tre altoparlanti consiste nel disporli ai vertici di un triangolo equilatero come in figura \ref{fig:triangolo}, quindi ora basta prendere la formule usate sopra ed estenderle con la dimensione $\boldsymbol{Z}$ introducendo quindi l'angolo $\theta$ che indica l'elevazione dal piano orizzontale.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.40]{figures/matrix3d.png}
+	\caption {composizione vettoriale delle sorgenti reali e virtuale in tre dimensioni} 
+	\label{fig:triangolo}
+	\end{figure}
+
+E' logico anche che la sorgente virtuale potrà essere collocata soltanto nella calotta\footnote{con calotta si intende una porzione di superficie di una sfera} delimitata dalle rette congiungenti gli altoparlanti a due a due,	 quindi esattamente come sopra se definiamo i vettori unitari che puntano alle tre casse come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \ l_{13} \right]}^T \ \ \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \ l_{23} \right]}^T \ \ \boldsymbol{l_{3}}= {\left[ l_{31} \ l_{32} \ l_{33} \right]}^T$ e il vettore della sorgente virtuale $\boldsymbol{p}= {\left[ p_{1} \ p_{2} \ p_{3} \right]}^T$ risulta che:
+
+\begin{equation}
+\boldsymbol{p} = \boldsymbol{g} \cdot \boldsymbol{l} = \left[ g_1 \ g_2 \ g_3 \right] \left[ \boldsymbol{l_{1}} \ \boldsymbol{l_{2}} \ \boldsymbol{l_{3}} \right]^T
+\label{gggg}
+\end{equation}
+
+quindi ribaltando l'equazione ci rimane che:
+
+\begin{equation}
+\left[g_1 \ g_2 \ g_3 \right] = \left[ p_1 \ p_2 \ p_3 \right]  {\left[\begin{matrix} 
+l_{11} & l_{12} & l_{13}\\ l_{21} & l_{22} & l_{23} \\ l_{31} & l_{32} & l_{33}
+\end{matrix} \right]}^{-1} \ \ \Rightarrow \ \ \ \boldsymbol{g}=\boldsymbol{p}^T {\boldsymbol{L_{123}}}^{-1}
+\label{hhhh}
+\end{equation}
+
+anche in questo caso possiamo calcolare i tre coefficienti scalati in questa maniera:
+
+\begin{equation}
+\left[g_1 \ g_2 \ g_3 \right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \ g_3 \right]}{\sqrt{g_1 + g_2 + g_3}} 
+\label{iiii}
+\end{equation}
+
+in questo caso fare un'esempio non è possibile in quanto il VBAP in tre dimensioni è molto legato alla geometria di implementazione e la trigonometria sulla sfera è analiticamente pesante anche se possibile, quindi si preferisce lasciare al calcolatore il compito del calcolo vettoriale senza lasciare a noi il compito di tradurre il tutto in funzioni angolari, si veda per esempio il passaggio dalla formula \ref{eq:dddd} alla formula \ref{eq:eeee}.\\
+
+Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire tutto l'angolo solido, anche qui il nostro algoritmo dovrà "selezionare" gli altoparlanti che saranno imputati alla riproduzione del nostro oggetto sonoro, gli stessi che delimiteranno la calotta attiva che racchiude la sorgente virtuale.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.40]{figures/matrix3dfull.png}
+	\caption {configurazione a più altoparlanti per la tecnica VBAP in tre dimensioni} 
+	\label{fig:matrix3dfull}
+	\end{figure}
+
+
+\section{integrazione del formato MDA con la tecnica VBAP}
+
+Ricapitolando siamo arrivati al punto di sapere cos'è il format MDA e che cos'è la tecnica di spazializzazione VBAP, 
+il passo successivo è riuscire ad integrare i due insieme, la cosa non è difficile ma procediamo per gradi.
+
+
+ricordiamo che il format MDA contiene oggetti sonori a cui vengono associati metadati contenenti posizione nelle tre dimensioni e grandezza, essi devono essere spacchettati e adattati in modo da essere letti dall'algoritmo del VBAP.\\
+
+Un concetto fondamentale da capire è che essendo le informazioni, nei metadati, relative a uno spazio tridimensionale, esse si adatteranno benissimo a una riproduzione VBAP tridimensionale con la somma delle calotte attive coprenti l'intera superficie sferica in cui è immerso l'ascoltatore, se il tipo di riproduzione no è questo allora bisognerà adattare i metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterato la percezione spaziale a quello che è stato deciso in fase di post-produzione.\\
+
+andremo ora a vedere come integrare le due cose per le configurazioni del capitolo \ref{metodi}.
+
+\section{MDA in }
+
+
+
+
+
+
 
 
 

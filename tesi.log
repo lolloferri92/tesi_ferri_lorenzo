@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  13 JAN 2017 18:26
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  16 JAN 2017 18:20
 entering extended mode
  %&-line parsing enabled.
 **tesi.tex
@@ -534,55 +534,81 @@ LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
 
 LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
 
-[19]
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
+
+ []
+
+<figures/matrix3d.png, id=94, 453.695pt x 398.48875pt>
+File: figures/matrix3d.png Graphic file (type png)
+
+<use figures/matrix3d.png> [19 <./figures/matrix3d.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 422--423
+
+ []
+
+<figures/matrix3dfull.png, id=98, 473.77pt x 314.17375pt>
+File: figures/matrix3dfull.png Graphic file (type png)
+
+<use figures/matrix3dfull.png> [20 <./figures/matrix3dfull.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 440--441
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 442--443
+
+ []
+
+[21]
 Capitolo 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--393
+Underfull \hbox (badness 10000) in paragraph at lines 460--461
 
  []
 
-<figures/huygens.jpg, id=97, 746.01291pt x 559.50967pt>
+<figures/huygens.jpg, id=105, 746.01291pt x 559.50967pt>
 File: figures/huygens.jpg Graphic file (type jpg)
 
-<use figures/huygens.jpg> [20
+<use figures/huygens.jpg> [22
 
 ]
-<figures/wfs.png, id=101, 427.8384pt x 213.9192pt>
+<figures/wfs.png, id=109, 427.8384pt x 213.9192pt>
 File: figures/wfs.png Graphic file (type png)
  <use figures/wfs.png>
-Underfull \hbox (badness 10000) in paragraph at lines 427--428
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
 
  []
 
-[21 <./figures/huygens.jpg> <./figures/wfs.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+[23 <./figures/huygens.jpg> <./figures/wfs.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 505--506
 []\OT1/cmr/m/it/12 https://www.itu.int/dms[]pubrec/itu-r/rec/bs/R-REC-BS.775-3-
 201208-I!!PDF-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--441
+Underfull \hbox (badness 10000) in paragraph at lines 508--509
 []\OT1/cmr/m/it/12 https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-a
 tmos-next-
  []
 
 
-Overfull \hbox (57.59508pt too wide) in paragraph at lines 441--442
+Overfull \hbox (57.59508pt too wide) in paragraph at lines 509--510
 []\OT1/cmr/m/it/12 http://www.etsi.org/deliver/etsi[]ts/103200[]103299/103223/0
 1.01.01[]60/ts[]103223v010101p.pdf 
  []
 
-[22
+[24
 
 ] (./tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 3619 strings out of 495052
- 48872 string characters out of 1182205
- 100059 words of memory out of 3000000
- 6714 multiletter control sequences out of 15000+50000
+ 3634 strings out of 495052
+ 49165 string characters out of 1182205
+ 101114 words of memory out of 3000000
+ 6727 multiletter control sequences out of 15000+50000
  18527 words of font info for 74 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,16n,24p,794b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,16n,24p,852b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
 share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-
@@ -597,9 +623,9 @@ s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
 cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pf
 b>
-Output written on tesi.pdf (24 pages, 1074824 bytes).
+Output written on tesi.pdf (26 pages, 1171198 bytes).
 PDF statistics:
- 157 PDF objects out of 1000 (max. 8388607)
+ 166 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

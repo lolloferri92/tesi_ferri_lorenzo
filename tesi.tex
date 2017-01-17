@@ -219,9 +219,9 @@ posso definire le coordinate polari come:
 
 \begin{equation}
 	\left\{\begin{matrix}
-x=\rho sin(\theta) cos(\phi) \\
-y=\rho cos(\theta) cos(\phi)\\
-z=\rho sin(\phi)\\
+x= \rho sin(\theta) cos(\phi) \\
+y= \rho cos(\theta) cos(\phi)\\
+z= \rho sin(\phi)\\
 \end{matrix}\right.
 	\label{eq:coordinatepolari}
 \end{equation}
@@ -320,7 +320,7 @@ Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazi
 
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
-\subsection{vbap 2D}
+\subsection{vbap 2D}\label{c}
 Consideriamo un sistema fatto da due monitor, definiamo ora arco attivo la porzione di arco compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
 
 \begin{figure}[htbp]
@@ -378,7 +378,7 @@ g_2=\dfrac{cos\phi sen\phi_0 - sen \phi cos\phi_0}{2 cos\phi_0 sen\phi_0}
 Logicamente introduciamo un coefficente $C$ che indica il gain complessivo (ci servirà per definire la distanza dell'oggetto) e che scalerà i nosti due gain in questo modo:
 
 \begin{equation}
-\left[g_1 \ g_2\right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \right]}{\sqrt{g_1 + g_2}} 
+\left[g_1 \ g_2\right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \right]}{\sqrt{g_1^2 + g_2^2}} 
 \label{eq:ffff}
 \end{equation}
 
@@ -418,7 +418,7 @@ l_{11} & l_{12} & l_{13}\\ l_{21} & l_{22} & l_{23} \\ l_{31} & l_{32} & l_{33}
 anche in questo caso possiamo calcolare i tre coefficienti scalati in questa maniera:
 
 \begin{equation}
-\left[g_1 \ g_2 \ g_3 \right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \ g_3 \right]}{\sqrt{g_1 + g_2 + g_3}} 
+\left[g_1 \ g_2 \ g_3 \right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \ g_3 \right]}{\sqrt{g_1^2 + g_2^2 + g_3^2}} 
 \label{iiii}
 \end{equation}
 
@@ -442,11 +442,50 @@ il passo successivo è riuscire ad integrare i due insieme, la cosa non è diffi
 
 ricordiamo che il format MDA contiene oggetti sonori a cui vengono associati metadati contenenti posizione nelle tre dimensioni e grandezza, essi devono essere spacchettati e adattati in modo da essere letti dall'algoritmo del VBAP.\\
 
-Un concetto fondamentale da capire è che essendo le informazioni, nei metadati, relative a uno spazio tridimensionale, esse si adatteranno benissimo a una riproduzione VBAP tridimensionale con la somma delle calotte attive coprenti l'intera superficie sferica in cui è immerso l'ascoltatore, se il tipo di riproduzione no è questo allora bisognerà adattare i metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterato la percezione spaziale a quello che è stato deciso in fase di post-produzione.\\
+Un concetto fondamentale da capire è che essendo le informazioni, nei metadati, relative a uno spazio tridimensionale, esse si adatteranno benissimo a una riproduzione VBAP tridimensionale con la somma delle calotte attive coprenti l'intera superficie sferica in cui è immerso l'ascoltatore, se il tipo di riproduzione no è questo allora bisognerà adattare i metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.\\
 
-andremo ora a vedere come integrare le due cose per le configurazioni del capitolo \ref{metodi}.
+andremo ora a vedere come integrare le due cose per le configurazioni del capitolo \ref{metodi}
 
-\section{MDA in }
+\subsection{utilizzo MDA in geometrie tridimensionali}
+
+Per prima cosa facciamolo per le geometrie tridimensionali infatti per queste non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.\\
+
+Introduciamo due raggi, $\rho_0$ che sarebbe la lunghezza del vettore congiungente l'ascoltatore con uno degli speaker (non importa quale dato che tutti gli speaker sono posizionati sulla superficie di una sfera quindi si avranno tutti raggi uguali) e definiamo $\rho_1$ come la lunghezza del vettore congiungente l'ascoltatore e il più vicino degli oggetti virtuali che si vuole creare, premettendo che io posso solo riprodurre sorgenti virtuali a partire dalla superficie della sfera verso l'esterno, allora qualsiasi di questi che avranno $\rho_n \leq \rho_0$ non sarò in grado di riprodurli nella maniera corretta, quindi dovrò attuare una trasformazione in modo da lasciare inalterata la distanza relativa fra le sorgenti virtuali in questo modo:
+
+\begin{equation}
+\left\{\begin{matrix}
+se\ \  \rho_1 \leq \rho_0\ \ \Rightarrow \ \ \rho_n^{\prime} = \rho_n+(\rho_0 - \rho_1) \ \ \forall n \geq 1\\
+\\
+se\ \  \rho_1 \geq \rho_0\ \ \Rightarrow \ \ \rho_n^{\prime} = \rho_n\ \ \forall n \geq 1\\
+\end{matrix}\right.
+\label{jjjj}
+\end{equation}
+
+fatto questo non ci rimane che intervenire sul fattore $C$ introdotto nel paragrafo \ref{c} in quanto esso contribuisce alla sensazione di lontananza, mi spiego meglio:
+
+Principalmente sono quattro i fattori che intercorrono alla corretta ricostruzione in lontananza di un'oggetto, essi sono l'intensità sonora, la colorazione timbrica, il rapporto riverbero/segnale diretto e il delay temporale \footnote{la spiegazione del perchè di tutti questi parametri richiederebbe molto tempo quindi diamo per buone queste assunzioni}, l'informazione relativa agli ultimi tre parametri possono essere contenute direttamente nel segnale audio dell'oggetto sonoro, invece noi possiamo dobbiamo considerare l'intensità sonora in quanto legata alla distanza dall'oggetto all'ascoltatore e quindi al suo raggio\footnote{in realtà ogni modifica del raggio si dovrebbe ripercuote anche sugli altri tre parametri cosa che nel nostro caso non avviene essendo questi ultimi tre contenuti nell'audio dell'oggetto sonoro, siamo quindi di fronte ad un'errore ma che possiamo considerare trascurabile visto l'entità ridotta delle trasformazioni sui raggi }.\\
+
+come detto sempre nel paragrafo \ref{c} il fattore $C$ è legato al gain complessivo dell'oggetto ma quest'ultimo posizionato sulla superficie della sfera, ora sappiamo dalla formula \ref{jjjj} che ogni oggetto è posizionato o sulla sfera o al suo esterno quindi possiamo prenderci la libertà di scalare il coefficiente $C$ in base alla distanza dell'oggetto dalla sfera in questo modo:
+
+\begin{equation}
+\boldsymbol{g_{n\ scaled}} = \dfrac{\sqrt{\dfrac{C}{r_n^{\prime}-r_0}}\ \boldsymbol{g_n}}{\sqrt{g_1^2 +g_2^2 + g_3^2}}
+\label{kkkk}
+\end{equation}
+
+così in teoria con il fatto che l'intesità sonora scala come il quadrato della distanza dovremmo avere una giusto riposizionamento dell'oggetto.
+
+Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non in quanto bisogna tener conto della distanza degli speaker ed è molto difficile che si abbiano tutti gli oggetti alla stessa distanza.\\
+
+\subsection{utilizzo MDA in geometrie bidimensionali}
+
+introduciamo ora un problema aggiuntivo: come faccio a riprodurre un programma sonoro tridimensionale in un'impianto bidimensionale? semplice, non si può; possiamo però introdurre un passaggio dal format MDA alla riproduzione in modo da "togliere una dimensione", vediamo come.\\
+
+Nei metadati del format MDA sono presenti gli angoli $\theta, \phi$ e il raggio $\rho$ che identificano la posizione, quello che ci da informazioni sull'altezza è l'angolo (appunto detto di elevazione) $\phi$ 
+
+
+
+
+
 
 
 
@@ -498,7 +537,7 @@ Ora l'unica cosa che è rimasta da fare è sostituire ogni fenditura con un alto
 Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare ogni altoparlante; le risposte possono essere molteplici ma tutte devono tener conto della geometria di progettazione del nostro sistema WFS, prendiamo uno dei casi più semplici.\\
 
 
-
+\chapter*{conclusioni}
 
 
 

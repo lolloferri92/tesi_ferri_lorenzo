@@ -15,7 +15,8 @@
 \contentsline {subsection}{\numberline {3.1.1}vbap 2D}{17}
 \contentsline {subsection}{\numberline {3.1.2}VBAP 3D}{19}
 \contentsline {section}{\numberline {3.2}integrazione del formato MDA con la tecnica VBAP}{21}
-\contentsline {section}{\numberline {3.3}MDA in }{21}
-\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{22}
-\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{22}
-\contentsline {chapter}{Bibliografia}{24}
+\contentsline {subsection}{\numberline {3.2.1}utilizzo MDA in geometrie tridimensionali}{21}
+\contentsline {subsection}{\numberline {3.2.2}utilizzo MDA in geometrie bidimensionali}{22}
+\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{23}
+\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{23}
+\contentsline {chapter}{Bibliografia}{26}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  17 JAN 2017 17:00
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  18 JAN 2017 17:54
 entering extended mode
  %&-line parsing enabled.
 **tesi.tex
@@ -251,61 +251,91 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--46
 
  [2
 
-] [3
+]
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+
+ []
+
+[3
 
 ]
 Capitolo 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--102
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
 <figures/stereo.jpg, id=28, 702.625pt x 541.02126pt>
 File: figures/stereo.jpg Graphic file (type jpg)
  <use figures/stereo.jpg>
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--145
-
- []
-
-[5]
 Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+ []
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 161.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 161.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
+
+ []
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 163.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 163.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 163.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
 
  []
 
@@ -314,51 +344,76 @@ File: figures/5-1.png Graphic file (type png)
  <use figures/5-1.png>
 <figures/7-1.png, id=35, 602.25pt x 616.3025pt>
 File: figures/7-1.png Graphic file (type png)
- <use figures/7-1.png> [6 <./figures/stereo.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 175.
+ <use figures/7-1.png>
 
- (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+LaTeX Warning: Command \textdegree invalid in math mode on input line 172.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 172.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 172.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
+
+ []
+
+[6 <./figures/stereo.jpg>]
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 174.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 174.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 174.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 174.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 174.
+
+
+Overfull \hbox (35.15427pt too wide) in paragraph at lines 174--175
+\OT1/cmr/m/n/12 par-lan-ti ad an-go-li ri-spet-ti-vi di $45[]$ il che po-ne que
+-sti ul-ti-mi a $\OMS/cmsy/m/n/12 ^^F\OT1/cmr/m/n/12 22\OML/cmm/m/it/12 ; \OT1/
+cmr/m/n/12 5[] \OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 ^^F\OT1/cmr/m/n/12 67\OML/cm
+m/m/it/12 ; \OT1/cmr/m/n/12 5[] \OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 ^^F\OT1/cmr
+/m/n/12 112\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 5[] \OML/cmm/m/it/12 ; \OMS/cmsy/
+m/n/12 ^^F\OT1/cmr/m/n/12 157\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 5[]$
+ []
+
+<figures/quad.jpg, id=41, 501.875pt x 496.85625pt>
+File: figures/quad.jpg Graphic file (type jpg)
+ <use figures/quad.jpg>
+<figures/ottofonia.png, id=42, 408.77719pt x 347.04657pt>
+File: figures/ottofonia.png Graphic file (type png)
+
+<use figures/ottofonia.png>
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 185.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 185.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 185.
+
+<figures/cubo4.png, id=43, 402.00188pt x 290.58563pt>
+File: figures/cubo4.png Graphic file (type png)
+ <use figures/cubo4.png>
+[7 <./figures/5-1.png> <./figures/7-1.png (PNG copy)>] [8 <./figures/quad.jpg> 
+<./figures/ottofonia.png (PNG copy)> <./figures/cubo4.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 199.
+
+
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
-
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
-
- []
-
-[7 <./figures/5-1.png> <./figures/7-1.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 187--188
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 189--190
-
- []
-
-[8]
-Capitolo 2.
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
-
- []
-
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 199.
 
 Underfull \hbox (badness 10000) in paragraph at lines 203--204
 
@@ -374,72 +429,65 @@ Underfull \hbox (badness 10000) in paragraph at lines 209--210
 
  []
 
-[9
 
-]
 Underfull \hbox (badness 10000) in paragraph at lines 211--212
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 213--214
 
  []
 
-<figures/azimut.png, id=50, 881.2925pt x 426.59375pt>
+[10]
+Capitolo 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 225--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
+
+ []
+
+[11
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 235--236
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
+
+ []
+
+<figures/azimut.png, id=62, 881.2925pt x 426.59375pt>
 File: figures/azimut.png Graphic file (type png)
  <use figures/azimut.png>
-[10 <./figures/azimut.png (PNG copy)>]
-<figures/apertura.png, id=56, 991.705pt x 388.45125pt>
+[12 <./figures/azimut.png (PNG copy)>]
+<figures/apertura.png, id=67, 991.705pt x 388.45125pt>
 File: figures/apertura.png Graphic file (type png)
 
 <use figures/apertura.png>
-Underfull \hbox (badness 10000) in paragraph at lines 251--252
+Underfull \hbox (badness 10000) in paragraph at lines 275--276
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 253--254
-
- []
-
-<figures/timeline.png, id=57, 902.37125pt x 102.3825pt>
-File: figures/timeline.png Graphic file (type png)
-
-<use figures/timeline.png>
-Overfull \hbox (1.18452pt too wide) in paragraph at lines 257--257
- [][] 
- []
-
-<figures/object1.png, id=58, 903.375pt x 204.765pt>
-File: figures/object1.png Graphic file (type png)
- <use figures/object1.png>
-Overfull \hbox (1.6864pt too wide) in paragraph at lines 258--258
- [][] 
- []
-
-<figures/object2.png, id=59, 901.3675pt x 206.7725pt>
-File: figures/object2.png Graphic file (type png)
-
-<use figures/object2.png>
-Overfull \hbox (0.68263pt too wide) in paragraph at lines 259--259
- [][] 
- []
-
-<figures/object3.png, id=60, 901.3675pt x 203.76125pt>
-File: figures/object3.png Graphic file (type png)
-
-<use figures/object3.png>
-Overfull \hbox (0.68263pt too wide) in paragraph at lines 260--261
- [][] 
- []
-
-<figures/timeline2.png, id=61, 952.55875pt x 238.8925pt>
-File: figures/timeline2.png Graphic file (type png)
-
-<use figures/timeline2.png>
-Overfull \hbox (26.27821pt too wide) in paragraph at lines 267--268
- [][] 
  []
 
 
@@ -447,28 +495,42 @@ Underfull \hbox (badness 10000) in paragraph at lines 277--278
 
  []
 
-[11 <./figures/apertura.png (PNG copy)>] [12 <./figures/timeline.png (PNG copy)
-> <./figures/object1.png (PNG copy)> <./figures/object2.png (PNG copy)> <./figu
-res/object3.png (PNG copy)> <./figures/timeline2.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 281--282
+<figures/timeline.png, id=68, 902.37125pt x 102.3825pt>
+File: figures/timeline.png Graphic file (type png)
 
+<use figures/timeline.png>
+Overfull \hbox (1.18452pt too wide) in paragraph at lines 281--281
+ [][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
-
+<figures/object1.png, id=69, 903.375pt x 204.765pt>
+File: figures/object1.png Graphic file (type png)
+ <use figures/object1.png>
+Overfull \hbox (1.6864pt too wide) in paragraph at lines 282--282
+ [][] 
  []
 
+<figures/object2.png, id=70, 901.3675pt x 206.7725pt>
+File: figures/object2.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
-
+<use figures/object2.png>
+Overfull \hbox (0.68263pt too wide) in paragraph at lines 283--283
+ [][] 
  []
 
-[13] <figures/mdacreator.jpg, id=73, 903.375pt x 670.505pt>
-File: figures/mdacreator.jpg Graphic file (type jpg)
+<figures/object3.png, id=71, 901.3675pt x 203.76125pt>
+File: figures/object3.png Graphic file (type png)
 
-<use figures/mdacreator.jpg>
-Overfull \hbox (1.6864pt too wide) in paragraph at lines 295--296
+<use figures/object3.png>
+Overfull \hbox (0.68263pt too wide) in paragraph at lines 284--285
+ [][] 
+ []
+
+<figures/timeline2.png, id=72, 952.55875pt x 238.8925pt>
+File: figures/timeline2.png Graphic file (type png)
+
+<use figures/timeline2.png>
+Overfull \hbox (26.27821pt too wide) in paragraph at lines 291--292
  [][] 
  []
 
@@ -477,160 +539,201 @@ Underfull \hbox (badness 10000) in paragraph at lines 301--302
 
  []
 
-[14 <./figures/mdacreator.jpg>]
+[13 <./figures/apertura.png (PNG copy)>] [14 <./figures/timeline.png (PNG copy)
+> <./figures/object1.png (PNG copy)> <./figures/object2.png (PNG copy)> <./figu
+res/object3.png (PNG copy)> <./figures/timeline2.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 305--306
 
  []
 
-[15]
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 313--314
+
+ []
+
+[15] <figures/mdacreator.jpg, id=83, 903.375pt x 670.505pt>
+File: figures/mdacreator.jpg Graphic file (type jpg)
+
+<use figures/mdacreator.jpg>
+Overfull \hbox (1.6864pt too wide) in paragraph at lines 319--320
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--326
+
+ []
+
+[16 <./figures/mdacreator.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 329--330
+
+ []
+
+[17]
 Capitolo 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 312--313
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--318
+Underfull \hbox (badness 10000) in paragraph at lines 340--342
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 319--320
+Underfull \hbox (badness 10000) in paragraph at lines 343--344
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--322
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 
  []
 
-[16
+[18
 
 ]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 324.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 348.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 324.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 348.
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--325
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
-<figures/matrix2d.png, id=83, 540.0175pt x 401.5pt>
+<figures/matrix2d.png, id=94, 540.0175pt x 401.5pt>
 File: figures/matrix2d.png Graphic file (type png)
  <use figures/matrix2d.png>
-[17 <./figures/matrix2d.png (PNG copy)>]
-<figures/angoli.png, id=90, 675.52374pt x 419.5675pt>
+[19 <./figures/matrix2d.png (PNG copy)>]
+<figures/angoli.png, id=100, 675.52374pt x 419.5675pt>
 File: figures/angoli.png Graphic file (type png)
- <use figures/angoli.png>
-Underfull \hbox (badness 10000) in paragraph at lines 385--386
+
+<use figures/angoli.png>
+Underfull \hbox (badness 10000) in paragraph at lines 409--410
 
  []
 
-[18 <./figures/angoli.png (PNG copy)>]
+[20 <./figures/angoli.png (PNG copy)>]
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 387.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 387.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 411.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 391--392
+LaTeX Warning: Command \textdegree invalid in math mode on input line 411.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 415--416
 
  []
 
-<figures/matrix3d.png, id=94, 453.695pt x 398.48875pt>
+<figures/matrix3d.png, id=104, 453.695pt x 398.48875pt>
 File: figures/matrix3d.png Graphic file (type png)
 
-<use figures/matrix3d.png> [19 <./figures/matrix3d.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 425--426
+<use figures/matrix3d.png> [21 <./figures/matrix3d.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 449--450
 
  []
 
-<figures/matrix3dfull.png, id=98, 473.77pt x 314.17375pt>
+<figures/matrix3dfull.png, id=108, 473.77pt x 314.17375pt>
 File: figures/matrix3dfull.png Graphic file (type png)
 
-<use figures/matrix3dfull.png> [20 <./figures/matrix3dfull.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 443--444
+<use figures/matrix3dfull.png> [22 <./figures/matrix3dfull.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 467--468
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 445--446
+Underfull \hbox (badness 10000) in paragraph at lines 469--470
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--452
+Underfull \hbox (badness 10000) in paragraph at lines 475--476
 
  []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 466--467
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 477--478
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 490--491
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--482
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
 
  []
 
-[22]
+
+Underfull \hbox (badness 10000) in paragraph at lines 505--506
+
+ []
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 507.
+
+[24]
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 509.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 509.
+
+[25]
 Capitolo 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 502--503
+Underfull \hbox (badness 10000) in paragraph at lines 527--528
 
  []
 
-<figures/huygens.jpg, id=109, 746.01291pt x 559.50967pt>
+<figures/huygens.jpg, id=123, 746.01291pt x 559.50967pt>
 File: figures/huygens.jpg Graphic file (type jpg)
 
-<use figures/huygens.jpg> [23
+<use figures/huygens.jpg> [26
 
 ]
-<figures/wfs.png, id=114, 427.8384pt x 213.9192pt>
+<figures/wfs.png, id=127, 427.8384pt x 213.9192pt>
 File: figures/wfs.png Graphic file (type png)
  <use figures/wfs.png>
-Underfull \hbox (badness 10000) in paragraph at lines 537--538
+Underfull \hbox (badness 10000) in paragraph at lines 562--563
 
  []
 
-[24 <./figures/huygens.jpg> <./figures/wfs.png>] [25
+[27 <./figures/huygens.jpg> <./figures/wfs.png>] [28
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 547--548
+Underfull \hbox (badness 10000) in paragraph at lines 572--573
 []\OT1/cmr/m/it/12 https://www.itu.int/dms[]pubrec/itu-r/rec/bs/R-REC-BS.775-3-
 201208-I!!PDF-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 550--551
+Underfull \hbox (badness 10000) in paragraph at lines 575--576
 []\OT1/cmr/m/it/12 https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-a
 tmos-next-
  []
 
 
-Overfull \hbox (57.59508pt too wide) in paragraph at lines 551--552
+Overfull \hbox (57.59508pt too wide) in paragraph at lines 576--577
 []\OT1/cmr/m/it/12 http://www.etsi.org/deliver/etsi[]ts/103200[]103299/103223/0
 1.01.01[]60/ts[]103223v010101p.pdf 
  []
 
-[26
+[29
 
 ] (./tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 3638 strings out of 495052
- 49189 string characters out of 1182205
- 101150 words of memory out of 3000000
- 6731 multiletter control sequences out of 15000+50000
+ 3655 strings out of 495052
+ 49527 string characters out of 1182205
+ 101179 words of memory out of 3000000
+ 6746 multiletter control sequences out of 15000+50000
  18527 words of font info for 74 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,16n,24p,1005b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,16n,24p,996b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
 share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-
@@ -645,9 +748,9 @@ ve/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cms
 y8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on tesi.pdf (28 pages, 1186511 bytes).
+Output written on tesi.pdf (31 pages, 1281743 bytes).
 PDF statistics:
- 176 PDF objects out of 1000 (max. 8388607)
+ 190 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,18 +5,19 @@
 \contentsline {section}{\numberline {1.1}Standard di riproduzione}{5}
 \contentsline {subsection}{\numberline {1.1.1}audio in una dimensione}{5}
 \contentsline {subsection}{\numberline {1.1.2}Audio in due dimensioni}{6}
-\contentsline {section}{\numberline {1.2}Stream audio object-oriented}{7}
-\contentsline {chapter}{\numberline {2}Spazilizzatore 3D e Format MDA}{9}
-\contentsline {section}{\numberline {2.1}Format MDA}{10}
-\contentsline {subsection}{\numberline {2.1.1}format MDA per riproduzione audio}{13}
-\contentsline {section}{\numberline {2.2}Spazializzatore 3D}{13}
-\contentsline {chapter}{\numberline {3}Decodifica format MDA per adattamento a varie configurazioni}{16}
-\contentsline {section}{\numberline {3.1}tecnica VBAP}{16}
-\contentsline {subsection}{\numberline {3.1.1}vbap 2D}{17}
-\contentsline {subsection}{\numberline {3.1.2}VBAP 3D}{19}
-\contentsline {section}{\numberline {3.2}integrazione del formato MDA con la tecnica VBAP}{21}
-\contentsline {subsection}{\numberline {3.2.1}utilizzo MDA in geometrie tridimensionali}{21}
-\contentsline {subsection}{\numberline {3.2.2}utilizzo MDA in geometrie bidimensionali}{22}
-\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{23}
-\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{23}
-\contentsline {chapter}{Bibliografia}{26}
+\contentsline {subsection}{\numberline {1.1.3}audio in tre dimensioni}{7}
+\contentsline {section}{\numberline {1.2}Stream audio object-oriented}{9}
+\contentsline {chapter}{\numberline {2}Spazilizzatore 3D e Format MDA}{11}
+\contentsline {section}{\numberline {2.1}Format MDA}{12}
+\contentsline {subsection}{\numberline {2.1.1}format MDA per riproduzione audio}{15}
+\contentsline {section}{\numberline {2.2}Spazializzatore 3D}{15}
+\contentsline {chapter}{\numberline {3}Decodifica format MDA per adattamento a varie configurazioni}{18}
+\contentsline {section}{\numberline {3.1}tecnica VBAP}{18}
+\contentsline {subsection}{\numberline {3.1.1}vbap 2D}{19}
+\contentsline {subsection}{\numberline {3.1.2}VBAP 3D}{21}
+\contentsline {section}{\numberline {3.2}integrazione del formato MDA con la tecnica VBAP}{23}
+\contentsline {subsection}{\numberline {3.2.1}utilizzo MDA in geometrie tridimensionali}{23}
+\contentsline {subsection}{\numberline {3.2.2}utilizzo MDA in geometrie bidimensionali}{24}
+\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{26}
+\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{26}
+\contentsline {chapter}{Bibliografia}{29}

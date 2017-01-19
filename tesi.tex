@@ -236,16 +236,20 @@ Il gioco che sta alla base di questo format è la scrittura di \textbf{metadati}
 
 Questi attributi sono:
 \begin{itemize}\label{aaa}
-\item \textbf{Coordinate Spaziali}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).\\
+\item \textbf{Coordinate Sferiche}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).\\
 
-Come coordinate abbiamo l'asse $X$ posto di fianco all'ascoltatore, l'asse $Y$ posto di fronte e l'asse $Z$ posto verso l'alto, quindi definito un angolo di azimut $\theta$, un'angolo di elavazione $\phi$ e un raggio $\rho$
-posso definire le coordinate polari come:
+Come sistema di coordinate abbiamo l'asse $X$ posto di fianco all'ascoltatore, l'asse $Y$ posto di fronte e l'asse $Z$ posto verso l'alto, quindi definiti i valori $x,y$ e $z$ su queste rette possiamo ricavare un angolo di azimut $\theta$, un'angolo di elavazione $\phi$ e un raggio $\rho$
+posso trasformare le coordinate cartesiane in sferiche in questo modo:
 
 \begin{equation}
 	\left\{\begin{matrix}
 x= \rho sin(\theta) cos(\phi) \\
 y= \rho cos(\theta) cos(\phi)\\
 z= \rho sin(\phi)\\
+\end{matrix}\right. \ \ \Rightarrow \ \  \left\{\begin{matrix}
+\theta = arctg \left(\dfrac{x}{y} \right) \\
+\phi   = arctg \left(\dfrac{\sqrt{y^2 + x^2 }}{z} \right) \\
+\rho = \sqrt{x^2 +y^2 +z^2 }\\
 \end{matrix}\right.
 	\label{eq:coordinatepolari}
 \end{equation}
@@ -344,7 +348,7 @@ Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazi
 
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
-\subsection{vbap 2D}\label{c}
+\subsection{vbap 2D} \label{c}
 Consideriamo un sistema fatto da due monitor, definiamo ora arco attivo la porzione di arco compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
 
 \begin{figure}[htbp]
@@ -408,7 +412,13 @@ Logicamente introduciamo un coefficente $C$ che indica il gain complessivo (ci s
 
 Logicamente sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione stereo, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà "selezionare" solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un'arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco, saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:\\
 
-consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\phi_{0,n}$ tali che $0°\leq \phi_{0,1},\ \phi_{0,2},\ \ldots,\ \phi_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\phi^{\prime}$ dovrà verificarsi che $\phi_{0,m}\leq \phi^{\prime} \leq \phi_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere: \[\phi_0 = \dfrac{\phi_{0,m+1}-\phi_{0,m}}{2} \ \ \ \ \ \phi=\phi^{\prime}-\dfrac{\phi_{0,m+1}+\phi_{0,m}}{2} \]
+consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\phi_{0,n}$ tali che $0°\leq \phi_{0,1},\ \phi_{0,2},\ \ldots,\ \phi_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\phi^{\prime}$ dovrà verificarsi che $\phi_{0,m}\leq \phi^{\prime} \leq \phi_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere: 
+
+\begin{equation}
+\phi_0 = \dfrac{\phi_{0,m+1}-\phi_{0,m}}{2} \ \ \ \ \ \phi=\phi^{\prime}-\dfrac{\phi_{0,m+1}+\phi_{0,m}}{2}
+\label{phidiverso}
+\end{equation}
+
 
 \subsection{VBAP 3D}
 
@@ -506,20 +516,57 @@ introduciamo ora un problema aggiuntivo: come faccio a riprodurre un programma s
 
 Nei metadati del format MDA sono presenti gli angoli $\theta, \phi$ e il raggio $\rho$ che identificano la posizione, quello che ci da informazioni sull'altezza è l'angolo (appunto detto di elevazione) $\phi$ quindi ponendo semplicemente $\phi=0°$ sulla carta elimineremmo la dimensione verticale ma comprometteremmo anche la percezione degli oggetti originariamente posti sopra l'ascoltatore, per esempio:
 
-Mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90° $ e un'angolo $\phi=89°$, esso praticamente si trova quasi perfettamente al disopra della nostra testa, ponendo semplicemente quest'ultimo a $0$ si avrebbe uno spostamento netto dell'oggetto alla completa sinistra dell'ascoltatore il che è incongruente con la scelta iniziale del produttore, una soluzione al caso potrebbe essere di creare un ascolto immersivo per quell'oggetto sfruttando tutti gli speaker del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano orizzontale, nel caso sopra la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due speaker a sinistra dovrebbero riprodurre la metà più un poco di potenza sonora attribuita all'oggetto, invece gli speaker a destra dovrebbero riprodurre la metà meno un poco di potenza.
+Mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90° $ e un angolo $\phi=89°$, esso praticamente si trova quasi perfettamente al disopra della nostra testa, ponendo semplicemente quest'ultimo a $0$ si avrebbe uno spostamento netto dell'oggetto alla completa sinistra dell'ascoltatore il che è incongruente con la scelta iniziale del produttore, una soluzione al caso potrebbe essere di creare un ascolto immersivo per quell'oggetto sfruttando tutti gli speaker del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano orizzontale, nel caso sopra la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due speaker a sinistra dovrebbero riprodurre la metà più un poco di potenza sonora attribuita all'oggetto, invece gli speaker a destra dovrebbero riprodurre la metà meno un poco di potenza.
+
+\subsection{utilizzo MDA in geometrie monodimensionali}
 
 
+\subsection{esempio di integrazione con sistema planare (quadrifonico e 5.1)}
 
+Per tutti gli esempi che farò vorrò riprodurre tre oggetti con seguenti coordinate sferiche per far vedere ogni caso:\\
 
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+oggetto 1 & $\theta_1=15°$ & $\phi_1=0°$ & $\rho_1=1,5m$ & $C_1=1,3$ \\ 
+\hline 
+oggetto 2 & $\theta_2=275°$ & $\phi_2=0°$ & $\rho_2=2,5m$ & $C_2=1,6$ \\ 
+\hline 
+oggetto 3 & $\theta_3=180°$ & $\phi_3=45°$ & $\rho_3=3,0m$ & $C_1=0,8$ \\ 
+\hline 
 
+\end{tabular} \\ \\
 
+Cominciamo con la quadrifonia, una possibile configurazione potrebbe essere questa:\\
 
+\begin{tabular}{|c|c|c|}
+\hline 
+speaker 1 & $\theta_{0,1}=45°$ & $\rho_0=2m$\\ 
+\hline 
+speaker 2 & $\theta_{0,2}=45°$ & $\rho_0=2m$\\ 
+\hline 
+speaker 3 & $\theta_{0,3}=45°$ & $\rho_0=2m$\\ 
+\hline 
+speaker 4 & $\theta_{0,4}=45°$ & $\rho_0=2m$\\ 
+\hline 
+\end{tabular} \\
 
+quindi come prima cosa applichiamo la formula \ref{jjjj} in modo da scalare i raggi degli oggetti e rendergli
 
+\[\rho_1^{\prime}=2m \ \  \rho_2^{\prime}=3m \ \ \rho_3^{\prime}=3,5m  \]
 
+successivamente è facile trovare i gain e i gain scalati del primo e del secondo oggetto in quanto il primo è riprodotto dagli speaker 4 e 1 invece il secondo dagli speaker 3 e 4 in questo modo:\\
 
+per entrambi gli oggetti, prima applico la formula \ref{phidiverso} in modo da trovare i nuovi angoli da mettere nella formula \ref{eq:eeee} poi considerando i coefficienti $C_n$ e i raggi $\rho_n^{\prime}$ ricavo dalla formula \ref{kkkk} i gain scalti per entrambi gli oggetti che in questo caso saranno:
 
-
+\begin{equation}
+\begin{matrix}
+g_{(1,obj\ 1)} = 0,87 & g_{(1,obj\ 1)scaled} = \\ 
+g_{(4,obj\ 1)} = 0,5 & g_{(4,obj\ 1)scaled} = \\
+g_{(3,obj\ 2)} = & g_{(3,obj\ 2)scaled} = \\
+g_{(4,obj\ 2)} = & g_{(4,obj\ 2)scaled} = \\
+\end{matrix} 
+\label{gscalatiesempio1}
+\end{equation}
 
 
 \chapter{Metodo Wave Field Syntesis}

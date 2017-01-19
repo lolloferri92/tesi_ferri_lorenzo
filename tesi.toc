@@ -18,6 +18,7 @@
 \contentsline {section}{\numberline {3.2}integrazione del formato MDA con la tecnica VBAP}{23}
 \contentsline {subsection}{\numberline {3.2.1}utilizzo MDA in geometrie tridimensionali}{23}
 \contentsline {subsection}{\numberline {3.2.2}utilizzo MDA in geometrie bidimensionali}{24}
-\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{26}
-\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{26}
-\contentsline {chapter}{Bibliografia}{29}
+\contentsline {subsection}{\numberline {3.2.3}esempio di integrazione con sistema planare (quadrifonico e 5.1)}{25}
+\contentsline {chapter}{\numberline {4}Metodo Wave Field Syntesis}{27}
+\contentsline {section}{\numberline {4.1}Principio fisico alla base e algoritmo di implementazione}{27}
+\contentsline {chapter}{Bibliografia}{30}

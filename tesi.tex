@@ -93,8 +93,9 @@ La risposta è si, in quanto esistono già tecniche che trasformano un format in
 
  cercherò di introdurre, nella prima parte di questa tesi, un \textbf{format} "generale" che non ha bisogno di dover passare da questo stadio di trasformazione (in quanto esso stesso non è inizialmente adattato per nessuna configurazione di riproduzione, sto parlando del format \textbf{Multi-Dimesional Audio MDA} orientato verso l'\textbf{audio ad oggetti} (object-oriented).\\
 
-In una seconda parte invece cercherò di implementare questo format in alcune delle più comuni configurazioni di riproduzione servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.
+In una seconda parte invece cercherò di implementare questo format in alcune delle più comuni configurazioni di riproduzione servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.\\
 
+Infine farò degli esempi adattando il format MDA nelle configurazioni quadrifonica, 5.1 e stereo.
 \addcontentsline{toc}{chapter}{Abstract}
 
 
@@ -126,7 +127,7 @@ Ora è d'obbligo fermarsi un attimo e ripercorrergli brevemente (per quanto rigu
 
 \section{Standard di riproduzione}\label{metodi}
 
-\subsection{audio in una dimensione}
+\subsection{Audio in una dimensione}
 Il modo più semplice e basilare con cui riusciamo a riprodurre del materiale audio è la \textbf{MONOFONIA}; essa è una tecnica attuabile solo con l'ausilio di una cassa acustica e sfrutta un solo canale audio \footnote{per canale audio si intende un supporto in cui "scorre" solo un'informazione sonora}
 quindi di conseguenza nello spazio sonoro \footnote{per spazio sonoro si intende lo spazio acustico dove si generano e si propagano le onde sonore, nei nostri casi sarà sempre uno spazio chiuso quindi di conseguenza le leggi fisiche vigenti sono quelle degli spazi chiusi} vive una sola informazione sonora.
 
@@ -180,7 +181,7 @@ Un successivo utilizzo di questa tecnica è stata sviluppata implementando otto 
 	\label{fig:quadrifonia}
 	\end{figure}
 
-\subsection{audio in tre dimensioni}
+\subsection{Audio in tre dimensioni}
 
 Per finire possiamo introdurre anche l'altezza nelle nostre configurazioni, infatti sempre più spesso anche nell'uso commerciale (soprattutto nei cinema e ora anche negli home cinema) si cominciano ad utilizzare anche speaker posti sopra l'ascoltatore in modo da riprodurre oggetti sonori provenienti da quella direzione, un'esempio commerciale che da bene l'idea è la tecnologia Dolby Atmos (si veda nel paragrafo \ref{dolby} la spiegazione di quest'ultimo) ma noi per scopi diciamo accademici prendiamo come esempio la disposizione ottofonica tridimansionale composta da 2 piani orizzontali quadrifonici con speaker ad angoli  posti al di sopra e al di sotto dell'ascoltatore ad angoli di $\pm45°$ e $\pm135°$ con elevazione di angoli $\pm 45°$ come in figura \ref{fig:ottofonia}
 
@@ -300,7 +301,7 @@ Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di 
 
 Da notare che è presente anche un LFE-Object in cui non è segnata la posizione, questo perchè data la natura omnidirezionale delle basse frequenze non avrebbe senso collocarle spazialmente e anche perchè solo il/i subwoofer sono in grado di riprodurre tali frequenze.
 
-\subsection{format MDA per riproduzione audio}
+\subsection{Format MDA per riproduzione audio}
 
 Qui faccio una piccola annotazione personale che mi tornerà utile più avanti, nella maggior parte dei casi quando si fa musica in studio di registrazione è abbastanza difficile che abbiamo oggetti sonori in movimento e di dimensioni che variano nel tempo, quindi si potrebbe fare una piccola modifica al format in modo da alleggerire il succesivo rendering per creare fisicamente lo spazio sonoro.\\
 
@@ -339,7 +340,7 @@ Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di outpu
 
 In questo capitolo parleremo di come invece da un format MDA posso passare a una configurazione di riproduzione usuale, mediante alcune tecniche quali il VBAP, il BINAURALE e la WFS.\\
 
-\section{tecnica VBAP}
+\section{Tecnica VBAP}
 
 Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione che permette di localizzare una sorgente attraverso la differenza di intensità, mi spiego meglio:\\
 uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepiamo una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due di essi e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto previsto dalla IID.\\
@@ -348,7 +349,7 @@ Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazi
 
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
-\subsection{vbap 2D} \label{c}
+\subsection{VBAP 2D}\label{c}
 Consideriamo un sistema fatto da due monitor, definiamo ora arco attivo la porzione di arco compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
 
 \begin{figure}[htbp]
@@ -468,7 +469,7 @@ Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire 
 	\end{figure}
 
 
-\section{integrazione del formato MDA con la tecnica VBAP}
+\section{Integrazione del formato MDA con la tecnica VBAP}
 
 Ricapitolando siamo arrivati al punto di sapere cos'è il format MDA e che cos'è la tecnica di spazializzazione VBAP, 
 il passo successivo è riuscire ad integrare i due insieme, la cosa non è difficile ma procediamo per gradi.
@@ -480,7 +481,7 @@ Un concetto fondamentale da capire è che essendo le informazioni, nei metadati,
 
 andremo ora a vedere come integrare le due cose per le configurazioni del capitolo \ref{metodi}
 
-\subsection{utilizzo MDA in geometrie tridimensionali}
+\subsection{Utilizzo MDA in geometrie tridimensionali}
 
 Per prima cosa facciamolo per le geometrie tridimensionali infatti per queste non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.\\
 
@@ -502,15 +503,22 @@ Principalmente sono quattro i fattori che intercorrono alla corretta ricostruzio
 come detto sempre nel paragrafo \ref{c} il fattore $C$ è legato al gain complessivo dell'oggetto ma quest'ultimo posizionato sulla superficie della sfera, ora sappiamo dalla formula \ref{jjjj} che ogni oggetto è posizionato o sulla sfera o al suo esterno quindi possiamo prenderci la libertà di scalare il coefficiente $C$ in base alla distanza dell'oggetto dalla sfera in questo modo:
 
 \begin{equation}
-\boldsymbol{g_{n\ scaled}} = \dfrac{\sqrt{\dfrac{C_n}{r_n^{\prime}-r_0}}\ \boldsymbol{g_n}}{\sqrt{g_1^2 +g_2^2 + g_3^2}}
+\boldsymbol{g_{n\ scaled}} = \dfrac{\sqrt{C_n \ f^{\prime}}\ \boldsymbol{g_n}}{\sqrt{g_1^2 +g_2^2 + g_3^2}} \ \ \ con \ \ \ f^{\prime}= \frac{arctan\left((r_n^{\prime}-r_0)\ \dfrac{\pi}{2}\right)}{(r_n^{\prime}-r_0)\ \dfrac{\pi}{2}}
 \label{kkkk}
 \end{equation}
 
-così in teoria con il fatto che l'intensità sonora scala come il quadrato della distanza dovremmo avere una giusto riposizionamento dell'oggetto.
+In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della distanza e quindi nel nostro caso come $\frac{1}{r_n^{\prime}-r_0}$ ma facendo così avremmo dei problemi di divergenza per $r_n^{\prime}=r_0$ e valori sballati per la differenza $<1$, quindi in accordo con quanto scritto in \cite{distanza} introduco una funzione $f^{\prime}$ che approssima il più possibile la funzione originale ma che risolve totalmente i problemi nelle zone difficili (figura \ref{fig:distance})\\
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.60]{figures/distance.png}
+	\caption {funzione distanza originale e funzione approssimata} 
+	\label{fig:distance}
+	\end{figure} 
 
 Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non in quanto bisogna tener conto della distanza degli speaker ed è molto difficile che si abbiano tutti gli oggetti alla stessa distanza.\\
 
-\subsection{utilizzo MDA in geometrie bidimensionali}
+\subsection{Utilizzo MDA in geometrie bidimensionali}
 
 introduciamo ora un problema aggiuntivo: come faccio a riprodurre un programma sonoro tridimensionale in un'impianto bidimensionale? semplice, non si può; possiamo però introdurre un passaggio dal format MDA alla riproduzione in modo da "togliere una dimensione", vediamo come.\\
 
@@ -518,10 +526,33 @@ Nei metadati del format MDA sono presenti gli angoli $\theta, \phi$ e il raggio 
 
 Mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90° $ e un angolo $\phi=89°$, esso praticamente si trova quasi perfettamente al disopra della nostra testa, ponendo semplicemente quest'ultimo a $0$ si avrebbe uno spostamento netto dell'oggetto alla completa sinistra dell'ascoltatore il che è incongruente con la scelta iniziale del produttore, una soluzione al caso potrebbe essere di creare un ascolto immersivo per quell'oggetto sfruttando tutti gli speaker del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano orizzontale, nel caso sopra la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due speaker a sinistra dovrebbero riprodurre la metà più un poco di potenza sonora attribuita all'oggetto, invece gli speaker a destra dovrebbero riprodurre la metà meno un poco di potenza.
 
-\subsection{utilizzo MDA in geometrie monodimensionali}
+\subsection{Utilizzo MDA in geometrie monodimensionali}
+
+per ultimo vediamo come adattare il format alla configurazione modomensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema stereo posto di fronte all'ascoltatore, bisogna qui stravolgere il format in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici\\ 
+
+come prima cosa, siccome originariamente avrò una riproduzione sonora sia al di sopra che dietro l'ascoltatore , dovrò porre tutti gli angoli di elevazione $\phi_n=0$, così da trovarmi spalmati tutti gli oggetti nel piano orizzontale in cui l'ascoltatore è immerso, per seconda cosa dovrò spostare tutti gli oggetti che originariamente sono posti dietro (quindi con angoli compresi tra $90°$ e $270°$) davanti all'ascoltatore operando una trasformazione sull'angolo azimutale:
+
+\begin{equation}
+\theta_{n,front} = arctg  \left( \dfrac{sen(\theta_n)}{\vert cos(\theta_n)\vert } \right)
+\label{llll}
+\end{equation}
+
+in questo modo tutti gli angoli saranno compresi tra % discorso angoli negativi e bla bla bla.....
+
+Abbiamo ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma la configurazione stereo prevede al massimo una riproduzione di oggetti a $\pm 30°$ data dalla limitata ampiezza angolare $\pm \theta_0$ degli speaker, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0, \pm 30°$.\\ 
+
+in un primo momento ho pensato semplicemente di dividere per un fattore tre gli angoli ma accade che gli oggetti posti sullo scenario frontale vengono schiacciati troppo verso l'origine degli angoli, quindi ho optato per la funzione seno (usata come peso) che schiacciasse gli oggetti posti sui lati e che lasciasse il più inalterati possibile gli angoli degli oggetti posti di fronte:
+
+\begin{equation}
+\theta_{n, remapped}= \theta_0 \ sen (\theta_{n,front}) = \theta_0 \ sen \left( arctg  \left( \dfrac{sen(\theta_n)}{\vert cos(\theta_n)\vert } \right)\right)
+\label{mmmm}
+\end{equation}
 
 
-\subsection{esempio di integrazione con sistema planare (quadrifonico e 5.1)}
+
+
+
+\subsection{Esempio di integrazione con sistemi quadrifonico, 5.1 e stereo}
 
 Per tutti gli esempi che farò vorrò riprodurre tre oggetti con seguenti coordinate sferiche per far vedere ogni caso:\\
 
@@ -535,6 +566,8 @@ oggetto 3 & $\theta_3=180°$ & $\phi_3=45°$ & $\rho_3=3,0m$ & $C_1=0,8$ \\
 \hline 
 
 \end{tabular} \\ \\
+ 
+N.B) ai fini dei calcoli conviene pensare $\theta_2=275°$ come $\theta_2=-85°$.\\
 
 Cominciamo con la quadrifonia, una possibile configurazione potrebbe essere questa:\\
 
@@ -542,11 +575,11 @@ Cominciamo con la quadrifonia, una possibile configurazione potrebbe essere ques
 \hline 
 speaker 1 & $\theta_{0,1}=45°$ & $\rho_0=2m$\\ 
 \hline 
-speaker 2 & $\theta_{0,2}=45°$ & $\rho_0=2m$\\ 
+speaker 2 & $\theta_{0,2}=135°$ & $\rho_0=2m$\\ 
 \hline 
-speaker 3 & $\theta_{0,3}=45°$ & $\rho_0=2m$\\ 
+speaker 3 & $\theta_{0,3}=-135°$ & $\rho_0=2m$\\ 
 \hline 
-speaker 4 & $\theta_{0,4}=45°$ & $\rho_0=2m$\\ 
+speaker 4 & $\theta_{0,4}=-45°$ & $\rho_0=2m$\\ 
 \hline 
 \end{tabular} \\
 
@@ -567,6 +600,53 @@ g_{(4,obj\ 2)} = & g_{(4,obj\ 2)scaled} = \\
 \end{matrix} 
 \label{gscalatiesempio1}
 \end{equation}
+
+
+
+per ultimo esempio vediamo il risultato dell'adattamento alla configurazione stereo.\\
+
+Una configurazione possibile potrebbe essere la seguente:\\
+
+\begin{tabular}{|c|c|c|}
+\hline 
+speaker 1 & $\theta_{0,1}=30°$ & $\rho_0=2m$\\ 
+\hline 
+speaker 2 & $\theta_{0,2}=-30°$ & $\rho_0=2m$\\ 
+\hline 
+\end{tabular} \\
+
+ora applicando rispettivamente la formula \ref{llll} e la formula \ref{mmmm} ottengo i seguenti risultati:\\
+
+
+\begin{tabular}{|c|c|}
+\hline 
+$\theta_{1,front} = 15°$     & $\theta_{1,remapped} =  8°  $   \\ 
+\hline 
+$\theta_{2,front} = -85°$     & $\theta_{2,remapped} = -29° $     \\
+\hline  
+$\theta_{3,front} = 0°$    & $ \theta_{3,remapped} =  0° $    \\
+\hline
+\end{tabular} \\
+
+ora non ci rimane da trovare i gain degli oggetti tramite la formula \ref{eq:eeee} e i gain scalati con la \ref{kkkk}
+
+\begin{equation}
+\begin{matrix}
+g_{(1,obj\ 1)} = 0.71 & g_{(1,obj\ 1)scaled} = 0.975 \\ 
+g_{(2,obj\ 1)} = 0.43 & g_{(2,obj\ 1)scaled} = 0.590       \\
+g_{(1,obj\ 2)} = 0.02 & g_{(1,obj\ 2)scaled} = 0.021\\
+g_{(2,obj\ 2)} = 0.99 & g_{(2,obj\ 2)scaled} = 1.011\\
+g_{(1,obj\ 3)} = 0.58 & g_{(1,obj\ 3)scaled} = 0.445\\
+g_{(2,obj\ 3)} = 0,58 & g_{(2,obj\ 3)scaled} = 0.455\\
+\end{matrix} 
+\label{gscalatiesempio3}
+\end{equation}
+
+
+
+
+
+
 
 
 \chapter{Metodo Wave Field Syntesis}
@@ -624,9 +704,11 @@ Ora le questioni che ci vengono naturali sono come e con quale segnale pilotare 
 \bibitem{creator}\textit{//digitalcommons.calpoly.edu/cgi/viewcontent.cgi?article=1049}\&\textit{context=laessp}
 \bibitem{iid} \textit{https://en.wikipedia.org/wiki/Sound\_localization\#ITD\_and\_IID}
 \bibitem{vbap} \textit{http://lib.tkk.fi/Diss/2001/isbn9512255324/article1.pdf}
+\bibitem{distanza} \textit{http://write.flossmanuals.net/csound/b-panning-and-spatialization/}
 \end{thebibliography}
 \addcontentsline{toc} {chapter}{Bibliografia}
 
 
 \end{document}
 
+% sqrt                  (  (arctan( (3-1)*(pi/2) ) )/( (3-1)*(pi/2)) *1.3/       0.689 ) * 0.43

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  28 JAN 2017 16:09
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.12.23)  31 JAN 2017 17:54
 entering extended mode
  %&-line parsing enabled.
 **tesi.tex
@@ -252,17 +252,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--46
  [2
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
@@ -271,29 +271,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 94--95
 ]
 Capitolo 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--103
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--109
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
 
  []
 
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
  []
 
@@ -301,41 +301,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--118
 File: figures/stereo.jpg Graphic file (type jpg)
  <use figures/stereo.jpg>
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 126.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 123.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
 [5 <./figures/stereo.jpg>]
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 137.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 134.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 137.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 134.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 139.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 136.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 139.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 136.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 139.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 136.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
@@ -346,37 +346,37 @@ File: figures/5-1.png Graphic file (type png)
 File: figures/7-1.png Graphic file (type png)
  <use figures/7-1.png>
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 148.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 145.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 148.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 145.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 148.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 145.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
+Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
 [6 <./figures/5-1.png> <./figures/7-1.png (PNG copy)>]
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 150.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 147.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 150.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 147.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 150.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 147.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 150.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 147.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 150.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 147.
 
 
-Overfull \hbox (35.15427pt too wide) in paragraph at lines 150--151
+Overfull \hbox (35.15427pt too wide) in paragraph at lines 147--148
 \OT1/cmr/m/n/12 par-lan-ti ad an-go-li ri-spet-ti-vi di $45[]$ il che po-ne que
 -sti ul-ti-mi a $\OMS/cmsy/m/n/12 ^^F\OT1/cmr/m/n/12 22\OML/cmm/m/it/12 ; \OT1/
 cmr/m/n/12 5[] \OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 ^^F\OT1/cmr/m/n/12 67\OML/cm
@@ -393,91 +393,96 @@ File: figures/ottofonia.png Graphic file (type png)
 
 <use figures/ottofonia.png>
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 161.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 158.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 161.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 158.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 161.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 158.
 
 <figures/cubo4.png, id=44, 402.00188pt x 290.58563pt>
 File: figures/cubo4.png Graphic file (type png)
  <use figures/cubo4.png>
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 175.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 172.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 172.
  [7 <./figures/quad.jpg> <./figures/ottofonia.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
 
  []
 
 [8 <./figures/cubo4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 187--188
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--190
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
 
  []
 
 [9]
 Capitolo 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
+Underfull \hbox (badness 10000) in paragraph at lines 196--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--204
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--206
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--210
+Underfull \hbox (badness 10000) in paragraph at lines 206--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
 [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 
  []
 
@@ -489,12 +494,12 @@ File: figures/azimut.png Graphic file (type png)
 File: figures/apertura.png Graphic file (type png)
 
 <use figures/apertura.png>
-Underfull \hbox (badness 10000) in paragraph at lines 255--256
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 257--258
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
 
  []
 
@@ -502,14 +507,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 257--258
 File: figures/timeline.png Graphic file (type png)
 
 <use figures/timeline.png>
-Overfull \hbox (1.18452pt too wide) in paragraph at lines 261--261
+Overfull \hbox (1.18452pt too wide) in paragraph at lines 257--257
  [][] 
  []
 
 <figures/object1.png, id=66, 903.375pt x 204.765pt>
 File: figures/object1.png Graphic file (type png)
  <use figures/object1.png>
-Overfull \hbox (1.6864pt too wide) in paragraph at lines 262--262
+Overfull \hbox (1.6864pt too wide) in paragraph at lines 258--258
  [][] 
  []
 
@@ -517,7 +522,7 @@ Overfull \hbox (1.6864pt too wide) in paragraph at lines 262--262
 File: figures/object2.png Graphic file (type png)
 
 <use figures/object2.png>
-Overfull \hbox (0.68263pt too wide) in paragraph at lines 263--263
+Overfull \hbox (0.68263pt too wide) in paragraph at lines 259--259
  [][] 
  []
 
@@ -525,7 +530,7 @@ Overfull \hbox (0.68263pt too wide) in paragraph at lines 263--263
 File: figures/object3.png Graphic file (type png)
 
 <use figures/object3.png>
-Overfull \hbox (0.68263pt too wide) in paragraph at lines 264--265
+Overfull \hbox (0.68263pt too wide) in paragraph at lines 260--261
  [][] 
  []
 
@@ -533,29 +538,29 @@ Overfull \hbox (0.68263pt too wide) in paragraph at lines 264--265
 File: figures/timeline2.png Graphic file (type png)
 
 <use figures/timeline2.png>
-Overfull \hbox (26.27821pt too wide) in paragraph at lines 271--272
+Overfull \hbox (26.27821pt too wide) in paragraph at lines 267--268
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 281--282
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
 
  []
 
 [12 <./figures/apertura.png (PNG copy)>] [13 <./figures/timeline.png (PNG copy)
 > <./figures/object1.png (PNG copy)> <./figures/object2.png (PNG copy)> <./figu
 res/object3.png (PNG copy)> <./figures/timeline2.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 279--280
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 285--286
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 293--294
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
 
  []
 
@@ -563,39 +568,39 @@ Underfull \hbox (badness 10000) in paragraph at lines 293--294
 File: figures/mdacreator.jpg Graphic file (type jpg)
 
 <use figures/mdacreator.jpg>
-Overfull \hbox (1.6864pt too wide) in paragraph at lines 299--300
+Overfull \hbox (1.6864pt too wide) in paragraph at lines 293--294
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
 
  []
 
-[15 <./figures/mdacreator.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--304
 
  []
 
-[16]
+[15 <./figures/mdacreator.jpg>] [16]
 Capitolo 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--317
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--322
+Underfull \hbox (badness 10000) in paragraph at lines 314--316
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 323--324
+Underfull \hbox (badness 10000) in paragraph at lines 317--318
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+Underfull \hbox (badness 10000) in paragraph at lines 319--320
 
  []
 
@@ -603,11 +608,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 325--326
 
 ]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 328.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 322.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 328.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 322.
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
 
  []
 
@@ -618,64 +623,64 @@ File: figures/matrix2d.png Graphic file (type png)
 <figures/angoli.png, id=97, 675.52374pt x 419.5675pt>
 File: figures/angoli.png Graphic file (type png)
  <use figures/angoli.png>
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 383--384
 
  []
 
 [19 <./figures/angoli.png (PNG copy)>]
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 391.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 385.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 391.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 385.
 
 <figures/matrix5-1.png, id=101, 400.49625pt x 399.4925pt>
 File: figures/matrix5-1.png Graphic file (type png)
 
 <use figures/matrix5-1.png>
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
 
  []
 
-<figures/matrix3d.png, id=102, 453.695pt x 398.48875pt>
+[20 <./figures/matrix5-1.png (PNG copy)>]
+<figures/matrix3d.png, id=105, 453.695pt x 398.48875pt>
 File: figures/matrix3d.png Graphic file (type png)
 
-<use figures/matrix3d.png> [20 <./figures/matrix5-1.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 444--445
+<use figures/matrix3d.png> [21 <./figures/matrix3d.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 438--439
 
  []
 
-[21 <./figures/matrix3d.png (PNG copy)>]
 <figures/matrix3dfull.png, id=109, 473.77pt x 314.17375pt>
 File: figures/matrix3dfull.png Graphic file (type png)
 
 <use figures/matrix3dfull.png>
-Underfull \hbox (badness 10000) in paragraph at lines 458--460
+Underfull \hbox (badness 10000) in paragraph at lines 452--454
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 461--463
+Underfull \hbox (badness 10000) in paragraph at lines 455--457
 
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 458--459
+
+ []
+
+[22 <./figures/matrix3dfull.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 464--465
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 470--471
-
- []
-
-[22 <./figures/matrix3dfull.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 485--486
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
 
  []
 
 [23]
-Underfull \hbox (badness 10000) in paragraph at lines 498--499
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
 
  []
 
@@ -683,9 +688,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 498--499
 File: figures/distance.png Graphic file (type png)
 
 <use figures/distance.png>
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 505--506
+
+ []
+
+[24 <./figures/distance.png (PNG copy)>]
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 507.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 507--508
 
  []
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 509.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 509.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--510
+
+ []
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 511.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 511.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 511--512
@@ -693,47 +729,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 511--512
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 513.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 513--514
+Underfull \hbox (badness 10000) in paragraph at lines 527--528
 
  []
 
-[24 <./figures/distance.png (PNG copy)>]
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 515.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 515.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 515--516
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 529--530
 
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 517.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 517.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 517--518
+Underfull \hbox (badness 10000) in paragraph at lines 535--536
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 533--534
+LaTeX Warning: Command \textdegree invalid in math mode on input line 537.
 
- []
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 537.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 544--545
 
  []
 
-[25]
 
 LaTeX Warning: Command \textdegree invalid in math mode on input line 546.
 
@@ -741,175 +761,161 @@ LaTeX Warning: Command \textdegree invalid in math mode on input line 546.
 LaTeX Warning: Command \textdegree invalid in math mode on input line 546.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 553--554
-
- []
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 555.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 555.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--556
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 570--571
-
- []
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 574.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 574.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 576.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 576.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 578.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 578.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 572--582
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 572--582
+Underfull \hbox (badness 10000) in paragraph at lines 546--547
 
  []
 
 [26]
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 583.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 583.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 583--584
+Underfull \hbox (badness 10000) in paragraph at lines 561--562
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 585--586
+LaTeX Warning: Command \textdegree invalid in math mode on input line 565.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 565.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 567.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 567.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 569.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 569.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 563--573
 
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 589.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 591.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 593.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 595.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 587--599
+Underfull \hbox (badness 10000) in paragraph at lines 563--573
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 587--599
+LaTeX Warning: Command \textdegree invalid in math mode on input line 574.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 574.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 574--575
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 616--618
+Underfull \hbox (badness 10000) in paragraph at lines 576--577
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 619--620
+LaTeX Warning: Command \textdegree invalid in math mode on input line 580.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 582.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 584.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 586.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 578--590
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 621--622
+Underfull \hbox (badness 10000) in paragraph at lines 578--590
 
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 625.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 627.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 629.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 631.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 633.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 623--636
+Underfull \hbox (badness 10000) in paragraph at lines 607--609
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 637--638
+Underfull \hbox (badness 10000) in paragraph at lines 610--611
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 612--613
+
+ []
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 616.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 618.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 620.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 622.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 624.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 614--627
 
  []
 
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 648--649
+Underfull \hbox (badness 10000) in paragraph at lines 628--629
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 656--657
+Underfull \hbox (badness 10000) in paragraph at lines 639--640
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--659
+Underfull \hbox (badness 10000) in paragraph at lines 655--656
 
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 662.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 664.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 660--667
+Underfull \hbox (badness 10000) in paragraph at lines 659--660
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 668--669
+Underfull \hbox (badness 10000) in paragraph at lines 661--662
 
  []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 673.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 665.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 673.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 667.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 675.
+Underfull \hbox (badness 10000) in paragraph at lines 663--671
+
+ []
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 675.
+Underfull \hbox (badness 10000) in paragraph at lines 663--671
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 672--673
+
+ []
 
 
 LaTeX Warning: Command \textdegree invalid in math mode on input line 677.
@@ -918,48 +924,65 @@ LaTeX Warning: Command \textdegree invalid in math mode on input line 677.
 LaTeX Warning: Command \textdegree invalid in math mode on input line 677.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 671--680
+LaTeX Warning: Command \textdegree invalid in math mode on input line 679.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 679.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 681.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 681.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 675--685
 
  []
 
-[28]
-Underfull \hbox (badness 10000) in paragraph at lines 706--707
+
+Underfull \hbox (badness 10000) in paragraph at lines 675--685
+
+ []
+
+[28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 711--712
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 708--709
+Underfull \hbox (badness 10000) in paragraph at lines 713--714
 
  []
 
-[29
+[30
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 715--716
+Underfull \hbox (badness 10000) in paragraph at lines 724--725
 []\OT1/cmr/m/it/12 https://www.itu.int/dms[]pubrec/itu-r/rec/bs/R-REC-BS.775-3-
 201208-I!!PDF-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 718--719
+Underfull \hbox (badness 10000) in paragraph at lines 727--728
 []\OT1/cmr/m/it/12 https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-a
 tmos-next-
  []
 
 
-Overfull \hbox (57.59508pt too wide) in paragraph at lines 719--720
+Overfull \hbox (57.59508pt too wide) in paragraph at lines 728--729
 []\OT1/cmr/m/it/12 http://www.etsi.org/deliver/etsi[]ts/103200[]103299/103223/0
 1.01.01[]60/ts[]103223v010101p.pdf 
  []
 
-[30
+[31
 
 ] (./tesi.aux) ) 
 Here is how much of TeX's memory you used:
- 3664 strings out of 495052
- 49664 string characters out of 1182205
- 104280 words of memory out of 3000000
- 6755 multiletter control sequences out of 15000+50000
+ 3665 strings out of 495052
+ 49689 string characters out of 1182205
+ 103292 words of memory out of 3000000
+ 6756 multiletter control sequences out of 15000+50000
  18527 words of font info for 74 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  27i,16n,24p,996b,598s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -981,9 +1004,9 @@ usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
 exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmti12.pfb>
-Output written on tesi.pdf (32 pages, 1114232 bytes).
+Output written on tesi.pdf (33 pages, 1116224 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
+ 211 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

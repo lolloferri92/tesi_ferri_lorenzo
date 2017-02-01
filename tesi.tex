@@ -1,3 +1,5 @@
+%!TEX encoding = UTF-8 Unicode
+
 \documentclass[12pt,a4paper]{report}
 \usepackage[italian]{babel}
 \usepackage{newlfont}
@@ -15,7 +17,7 @@
 % qui comincia il titolo
 \begin{titlepage}
 \begin{center}
-{\Large{\textsc{Università degli studi di Roma $\cdot$ Tor Vergata}}} 
+{\Large{\textsc{Universit\`a  degli studi di Roma $\cdot$ Tor Vergata}}} 
 \rule[0.1cm]{15.8cm}{0.1mm}
 \rule[0.5cm]{15.8cm}{0.6mm}
 \\\vspace{3mm}
@@ -94,9 +96,13 @@ Anno Accademico \textcolor{black}{2016/17}}}
 
 \chapter{Dai canali audio agli Oggetti sonori}
 
-Siamo all'inizio dello sviluppo di questa tesi, l'abstract ci ha permesso di capire qual'è il nostro scopo e i passaggi che percorrerà questa stesura, ora non rimane che cominciare.\\
+%Siamo all'inizio dello sviluppo di questa tesi, l'abstract ci ha permesso di capire qual è il nostro scopo e i passaggi che percorrer\`a  questa stesura, ora non rimane che cominciare.\\
 
-Nel mondo odierno l'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto, basti pensare a chi ha un hifi in casa, chi un'impianto per home theater o chi direttamente va al cinema; in tutte queste situazioni l'ascoltatore medio ha accesso a questi contenuti diciamo in modo "smart" cioè senza preoccuparsi tanto di tutto il lavoro e la progettazione che sta dietro alla realizzazione del contenuto e sulla sua successiva riproduzione, questo è possibile grazie a delle "regole" che stanno alla base di tutta questa catena; un esempio chiarirà meglio l'uso improprio della parola regola.\\
+%Nel mondo odierno l
+L'avanzamento tecnologico dei media dal secondo dopo guerra ad oggi ha permesso un notevole progresso non solo nel campo della produzione di contenuti ma soprattutto nei metodi di distribuzione. La scomparsa del supporto fisico come oggetto di transito, mezzo, ha completamente nascosto la tecnologia a favore della facilità di fruizione. Basti pensare che chi possiede un impianto \emph{HiFi} o \emph{Home Theater} in casa,
+%chi un'impianto per home theater o chi direttamente va al cinema; %%% NON HA SENSO PARLARE DI CINEMA QUI, NESSUNO HA MAI VOLUTO SAPERE COME FUNZIONA IL CINEMA // in tutte queste situazioni l'ascoltatore medio
+ha accesso ai contenuti in modo facilitato, senza preoccuparsi di tutto il lavoro di progettazione che sta dietro alla realizzazione del programma, sulla successiva tecnica di riproduzione.
+%questo è possibile grazie a delle "regole" che stanno alla base di tutta questa catena; un esempio chiarirà meglio l'uso improprio della parola regola.\\
 
 Consideriamo per esempio un cinema, sappiamo dall'acustica che il modo in cui sono progettati i diffusori e la sala di proiezione coloreranno \footnote{con il termine colorare nell'audio e in acustica si intende la tendenza di un sistema a modificare lo spettro in frequenza di un segnale audio che vive al suo interno} in qualche maniera il suono e quindi non faranno ascoltare lo stesso contenuto sonoro che è stato creato per quel film, è quindi obbligo per il cinema (almeno lo spero) tarare l'ascolto in modo che non ci sia questa colorazione, qui per esempio il fatto   di rendere non colorato il suono costituisce una regola, uno standard che è necessario affinchè si abbia un giusto ascolto del contenuto.\\
 
@@ -152,9 +158,9 @@ Per audio in due dimensioni si intende una riproduzione che pone l'ascoltatore a
 La più diffusa configurazione surround è sicuramente la \textbf{5.1} \footnote{dove la prima cifra sta per il numero di diffusori nel piano e la seconda cifra sta per il numero di LFE (canale audio dedicato al subwoofer)} usata principalmente dalla Dolby e dalla DTS per riproduzione di audio per film.
 
 
-Questa configurazione, come spiega da specifica \cite{5.1}, è composta da un canale LFE per il subwoofer e di 5 canali distribuiti in 5 satelliti disposti rispettivamente a 0°, $\pm$30° e $\pm$110/120°\\
+Questa configurazione, come spiega da specifica \cite{5.1}, è composta da un canale LFE per il subwoofer e di 5 canali distribuiti in 5 satelliti disposti rispettivamente a 0Â°, $\pm$30Â° e $\pm$110/120Â°\\
 
-Una successiva configurazione è la \textbf{7.1} che riporta angoli di 0°, $\pm$30°, $\pm$90/110° e $\pm$135/150°
+Una successiva configurazione è la \textbf{7.1} che riporta angoli di 0Â°, $\pm$30Â°, $\pm$90/110Â° e $\pm$135/150Â°
 
 \begin{figure}[htbp]
 	\centering
@@ -173,13 +179,13 @@ Ora capito quali sono i principali standard di riproduzione andremo a spiegare c
 \item nei casi più complessi ad ogni altoparlante sarà assegnato un mix di canali dato da una matrice di decodifica proprietaria (esempio si guardi il funzionamento del decoder Dolby Pro Logic), si veda \cite{prologic}.
 \end{itemize}
 
-Un'altra importante considerazione è il fatto che lo stesso stream che utilizzo in un sistema "di grado maggiore" per esempio un 5.1 posso "scalarlo in un sistema "di grado minore" esempio uno stereo, questo perchè essendo tutti questi degli standard è possibile fare un downgrade dello stream oppure un upgrade (solo però solto alcuni artifici" per essere adattato al sistema di riproduzione; allora viene da chiedersi perchè cambiare concenzione e approdare in uno stream object-oriented?\\
+Un'altra importante considerazione è il fatto che lo stesso stream che utilizzo in un sistema "di grado maggiore" per esempio un 5.1 posso "scalarlo in un sistema "di grado minore" esempio uno stereo, questo perchè essendo tutti questi degli standard è possibile fare un downgrade dello stream oppure un upgrade (solo perÃ² solto alcuni artifici" per essere adattato al sistema di riproduzione; allora viene da chiedersi perchè cambiare concenzione e approdare in uno stream object-oriented?\\
 
 La domanda trova facile risposta nel fatto che questi giochi di upgrade o downgrade si possono fare solo su sistemi che hanno una certo grado di compatibilità (ad esempio i sistemi Dolby) e se questo avvenisse dovrei comunque prendere uno stream, codificarlo in uno stream diciamo "generale" e riadattarlo decodificandolo nello stream che piloterà la mia riproduzione.\\
 
 Allora la domanda sorge spontanea, perchè non creare uno stream diciamo generale?
 
-La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello stream di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a parlare di come Dolby é riuscita incanalare gli oggetti e la relativa informazione spaziale dentro questo stream.\\
+La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello stream di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a parlare di come Dolby è riuscita incanalare gli oggetti e la relativa informazione spaziale dentro questo stream.\\
 
 Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix del prodotto per passare dal contenuto dei singoli canali allo stream di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello stream audio stereo con peso costituito dalla funzione di panpot deciso per ogni canale, questo succede anche in configurazioni più complicate come il 5.1 l'unica differenza è che panpot non sarà più in una dimensione ma in due\footnote{esiste una funzione di panpot standard per ogni configurazione di riproduzione}.\\
 
@@ -197,7 +203,7 @@ In questo capitolo andremo a spiegare concretamente come possiamo creare questo 
 
 Come accennato prima in fase di post-produzione non usiamo più il solito panner installato in banchi mixer o in sofware DAW in quanto essi sia che siano stereo o 5.1 o quello che vogliamo, non hanno una spazializzazione a oggetti quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri paramentri come grandezza, volume ecc...).\\
 
-Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come format\footnote{per format intendo lo stesso concetto che in procedenza ho usato con la parola stream} quello proprietario di Dolby Atmos ma il fatto è che essendo questa tecnica di spazializzazione soggetta a brevetto, essa é diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto format proprietari simili ma sempre vincolati al brevetto, format quali Auro3D per citarne uno.\\
+Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come format\footnote{per format intendo lo stesso concetto che in procedenza ho usato con la parola stream} quello proprietario di Dolby Atmos ma il fatto è che essendo questa tecnica di spazializzazione soggetta a brevetto, essa è diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto format proprietari simili ma sempre vincolati al brevetto, format quali Auro3D per citarne uno.\\
 
 Noi invece ricerchiamo qualcosa che sia un format open e libero in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un format open che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.\\
 
@@ -230,9 +236,9 @@ z=\rho sin(\phi)\\
 	\label{fig:coordinate}
 	\end{figure}
 	
-\item \textbf{Identificativo oggetto sonoro}: scritto come URI é un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
+\item \textbf{Identificativo oggetto sonoro}: scritto come URI è un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
 \item \textbf{Gain}: è un valore che indica la quantità di segnale che deve avere l'oggetto sonoro.
-\item \textbf{apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare(più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore è 180° allora si attiverebbero tutti i diffusori)
+\item \textbf{apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare(più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore è 180Â° allora si attiverebbero tutti i diffusori)
 \item \textbf{divergenza}: anch'essa indicata in gradi quantifica la grandezza che deve avere l'oggetto sonoro ma solo sul piano orizzontale, un esempio più esplicativo si ha in figura \ref{fig:apertura}.
 	
 	\begin{figure}[htbp]
@@ -277,7 +283,7 @@ Sostanzialmente abbiamo tre tipi di oggetti sonori in musica: oggetti fermi, ogg
 
 tutti questi oggetti possono essere pensati come oggetti statici quindi che hanno coordinate spaziali e dimensioni fisse, in questo caso si potrebbe alleggerire il format in quanto non avrebbe più senso parlare di object-fragment (ricordiamo che gli attributi di spazializzazione cambiano allora si avranno diversi object-fragment, uno per ogni configurazione spaziale) in quanto per l'intera esecuzione del brano si avrebbe solo un object-fragment che fissa la posizione e la grandezza dell'oggetto, quindi si possono direttamente assegnare queste due ultime all'oggetto sonoro senza passare per ulteriori sottodivisioni.\\
 
-per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per il riverbero per esempio basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza e apertura; per quanto riguarda gli oggetti "balzanti" (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto che l'intensità sonora $I'=\alpha I$ di un'oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ é l'intensità che dovrebbe avere originariamente l'oggetto).
+per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per il riverbero per esempio basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza e apertura; per quanto riguarda gli oggetti "balzanti" (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto che l'intensità sonora $I'=\alpha I$ di un'oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ è l'intensità che dovrebbe avere originariamente l'oggetto).
 
 \section{Spazializzatore 3D}
 
@@ -319,7 +325,7 @@ In questo capitolo parleremo di come invece da un format MDA posso passare a una
 
 \chapter{Metodo Wave Field Syntesis}
 
-Il metodo Wave Field Syntesis è un metodo diverso dai precedenti illustrati in quanto non si avvale della psicoacustica per "ingannare" la nostra mente e farci credere che stiamo ascoltando qualcosa che realmente non c'è, ma questa tecnica permette di ricreare fisicamente il fronte d'onda e quindi l'informazione sonora distribuita nello spazio acustico come se la sorgente che si vuole creare sia realmente collocata nel punto che vogliamo, per questo, forse anche impropriamente, catalogherò questo metodo come \textbf{AUDIO 3D}.\\
+Il metodo Wave Field Syntesis è un metodo diverso dai precedenti illustrati in quanto non si avvale della psicoacustica per "ingannare" la nostra mente e farci credere che stiamo ascoltando qualcosa che realmente non c'è, ma questa tecnica permette di ricreare fisicamente il fronte d'onda e quindi l'informazione sonora distribuita nello spazio acustico come se la sorgente che si vuole creare sia realmente collocata nel punto che vogliamo, per questo, forse anche impropriamente, catalogherÃ² questo metodo come \textbf{AUDIO 3D}.\\
 
 \section{Principio fisico alla base e algoritmo di implementazione}
 
@@ -327,7 +333,7 @@ Per riuscire a capire in fondo cosa sta alla base di questa tecnica bisognerà s
 
 \begin{itemize}
 
-\item \textbf{Principio di Huygens-Fresnel}: consideriamo una qualsiasi onda che abbia un fronte d'onda arbitrario, questa legge afferma che ogni punto del fronte d'onda in questione può essere visto come un'infinità di sorgenti secondarie puntiformi che generano un'infinità di fronti d'onda secondari in accordo in fase e in ampiezza e che sommando la totalità di questi ultimi si può ricostruire il fronte d'onda originale.
+\item \textbf{Principio di Huygens-Fresnel}: consideriamo una qualsiasi onda che abbia un fronte d'onda arbitrario, questa legge afferma che ogni punto del fronte d'onda in questione puÃ² essere visto come un'infinità di sorgenti secondarie puntiformi che generano un'infinità di fronti d'onda secondari in accordo in fase e in ampiezza e che sommando la totalità di questi ultimi si puÃ² ricostruire il fronte d'onda originale.
 
 
 

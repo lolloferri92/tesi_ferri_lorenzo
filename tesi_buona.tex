@@ -9,13 +9,13 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{setspace}
- 
+
 \begin{document}
 
 % qui comincia il titolo
 \begin{titlepage}
 \begin{center}
-{\Large{\textsc{Università degli studi di Roma $\cdot$ Tor Vergata}}} 
+{\Large{\textsc{Università degli studi di Roma $\cdot$ Tor Vergata}}}
 \rule[0.1cm]{15.8cm}{0.1mm}
 \rule[0.5cm]{15.8cm}{0.6mm}
 \\\vspace{3mm}
@@ -30,7 +30,7 @@
 \begin{spacing}{1.7}
 \textcolor{black}{
 \linespread{5}
-{\LARGE{\bf 
+{\LARGE{\bf
 Audio Object-Oriented e adattamento del Format Multi-Dimensional Audio MDA alla tecnica di spazializzazione Vector-Base Amplitude Panning VBAP.
 }}}
 
@@ -84,11 +84,21 @@ Anno Accademico \textcolor{black}{2016/17}}}
 
 \chapter*{Abstract}
 
-Nel corso di questa tesi si cercherà di rispondere ad una semplice domanda: posso svincolarmi dal fatto che un format audio possa essere usato solo dalla configurazione di riproduzione adatta?\\
+Nel corso di questa tesi si cercherà di rispondere ad una semplice domanda: posso svincolarmi dal fatto che un format audio possa essere usato solo dalla configurazione di riproduzione adatta? % \\ se usi la doppia interruzione di riga non hai bisogno del doppio slash
 
-La risposta è si, in quanto esistono già tecniche che trasformano un format in un altro adatto ad un'altra configurazione ma cercherò di introdurre, nella prima parte di questa tesi, un \textbf{format} ''generale'' che non ha bisogno di dover passare da questo stadio di trasformazione (in quanto esso stesso non è inizialmente adattato per nessun tipo di configurazione), sto parlando del format \textbf{Multi-Dimesional Audio MDA} orientato verso l'\textbf{audio ad oggetti} (object-oriented).\\
+% non sono sicuro che la tua assunzione a format come termine universale sia esatta.
+% cosa è un format? perché non parli di formato? e soprattutto se sai già che rispondi si non la mettere in forma di domanda ma in forma di spiegazione sperimentale.
 
-In una seconda parte invece cercherò di implementare l'MDA in alcune delle più comuni configurazioni di riproduzione servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.\\
+La risposta è si, in quanto esistono già tecniche che trasformano un format in un altro adatto ad un'altra configurazione ma cercherò di introdurre, nella prima parte di questa tesi, un \textbf{format} ''generale'' che non ha bisogno di dover passare da questo stadio di trasformazione (in quanto esso stesso non è inizialmente adattato per nessun tipo di configurazione), sto parlando del format \textbf{Multi-Dimesional Audio MDA} orientato verso l'\textbf{audio ad oggetti} (object-oriented).
+
+% secondo questa affermazione MDA non è un formato, ma dato che si porta dietro dei matadati che incapsulati in un formato specifico, sarebbe più corretto chiarire questa cosa.
+
+% credo che poi dai per scontato che una posizione MDA sia intercambiabile alla stessa posizone in un altro formato, che ne so, ambisonic del terzo ordine.
+% cosa che ritengo sia piuttosto errata. Uno stream ambisonico si porta dietro molte più informazioni della semplice posizone AED.
+% non mi sento di condividere la tua affermazione iniziale. Puoi passare dal dire che sono assolutamente equivalenti ed intercambiabili a
+% descrivere una tua pratica "personale" per fare le codifiche intermedie.
+
+In una seconda parte invece cercherò di implementare l'MDA in alcune delle più comuni configurazioni di riproduzione servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.
 
 Infine farò degli esempi adattando il format MDA nelle configurazioni quadrifonica, 5.1 e stereo.
 \addcontentsline{toc}{chapter}{Abstract}
@@ -96,11 +106,18 @@ Infine farò degli esempi adattando il format MDA nelle configurazioni quadrifon
 
 \chapter{Dai canali audio agli oggetti sonori}
 
-Siamo all'inizio di questa tesi, l'abstract ci ha permesso di capire qual'è il nostro scopo e i passaggi che percorrerà questa stesura, ora non rimane che cominciare.\\
+% non cominciare la tesi come se fosse un romanzo, vai dritto alla questione
+% Siamo all'inizio di questa tesi, l'abstract ci ha permesso di capire qual'è il nostro scopo e i passaggi che percorrerà questa stesura, ora non rimane che cominciare.\\
 
-Nel mondo odierno l'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto sonoro, basti pensare a chi ha un hi-fi in casa, chi un impianto per home-theater o chi direttamente va al cinema; in tutte queste situazioni l'ascoltatore ha accesso a questi contenuti diciamo in modo ''smart'' cioè senza preoccuparsi di tutto il lavoro e la progettazione che sta dietro alla realizzazione del contenuto e sulla sua successiva riproduzione, questo è possibile grazie a delle ''regole'' che stanno alla base di tutta questa catena; un esempio chiarirà meglio l'uso improprio della parola regola.\\
+%Nel mondo odierno l
+
+L'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto sonoro, basti pensare a chi ha un hi-fi in casa, chi un impianto per home-theater % o chi direttamente va al cinema; in tutte queste situazioni l'ascoltatore
+ha accesso a questi contenuti diciamo in modo ''smart'' cioè senza preoccuparsi di tutto il lavoro e la progettazione che sta dietro alla realizzazione del contenuto e sulla sua successiva riproduzione. %, questo è possibile grazie a delle ''regole'' che stanno alla base di tutta questa catena; un esempio chiarirà meglio l'uso improprio della parola regola.\\
 
 Consideriamo per esempio un cinema, sappiamo dall'acustica che il modo in cui sono progettati i diffusori e la sala di proiezione coloreranno\footnote{Con il termine colorare nell'audio e in acustica si intende la tendenza di un sistema a modificare lo spettro in frequenza di un segnale audio che vive al suo interno.} in qualche maniera il suono e quindi non faranno ascoltare lo stesso contenuto che è stato creato per quel film, è quindi d'obbligo per il cinema (almeno lo spero) tarare l'ascolto in modo che non ci sia questa colorazione, qui per esempio il fatto di rendere lineare il suono costituisce una regola, uno standard che è necessario affinché si abbia un giusto ascolto del contenuto.\\
+
+% stai semplificando TROPPO una cosa complicatissima. il cinema ha una catena precisa e standardizzata.
+% la procedura di taratura è prima in sala mix, che è un cinema a tutti gli effetti, e poi nelle sale, un motivo di vanto della catenza produttiva cinematografica e non un difetto. E non puoi parlare di coloratura, è una tesi a carattere scientifico, usa una terminologia più appropriata.
 
 Come quest'ultima ci sono diverse regole, diversi standard da rispettare per garantire che il produttore di contenuti e l'ascoltatore abbiano accesso alla stessa informazione, nel nostro caso siccome la tesi è mirata ad un solo aspetto dell'audio, faremo riferimento solo a quelle regole che stanno a base della spazializzazione sonora, quindi quegli standard che hanno a che fare in qualche modo con la geometria di riproduzione e i format audio.\\
 
@@ -113,16 +130,20 @@ Ora è d'obbligo fermarsi un attimo e ripercorrere brevemente alcuni degli stand
 
 Il primo metodo descritto (e forse il più importante) è lo \textbf{STEREO}\footnote{Qui c'è da fare una precisazione utilizzato la parola stereo, perché e comune utilizzarlo in casistiche sbagliate in quanto, formalmente, lo stereo è una modalità di riproduzione e di registrazione che oltre ad usare la IID utilizza anche la ITD ed è come se i due canali di questo standard conterrebbero esattamente quello che sentirebbero le nostre orecchie.}(configurazione 2.0) in cui avendo a disposizione due speaker la sensazione di spazialità viene data dalla differenza di potenza del segnale inviato agli speaker, infatti se il segnale risulta più forte in uno dei due, la sorgente fantasma risulterà più spostata verso quest'ultimo.\\
 
+% è assolutamente sbagliato collegare l'ascolto stereofonico alla necessità di avere due altoparlanti. Due altoparlanti non fanno lo stereo. Non necessariamente.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.30]{figures/stereo.jpg}
-	\caption {Configurazione stereo} 
+	\caption {Configurazione stereo}
 	\label{fig:stereo}
 	\end{figure}
 
 Parlando dello stereo cominciamo a parlare di standard in quanto la configurazione prevede di creare un triangolo equilatero con ai vertici i due altoparlanti e l'ascoltatore,  quindi se non si segue il collocamento delle casse a $\pm 30°$ non si avrà la giusta spazialità e collocazione dei suoni.\\
 
 L'ascolto di musica si ferma generalmente qui ma l'avvento dei film e dei cinema ha portato al concetto di audio in due dimensioni, in particolare al surround.
+
+% anche qui, non è vero che la musica si è fermata alle due casse. Se vuoi riferirti ad un ambiente pop o commerciale devi essere più esplicito e dirlo.
 
 \subsection{Audio in due dimensioni}
 
@@ -133,23 +154,28 @@ La più diffusa configurazione surround è sicuramente la \textbf{5.1}\footnote{
 
 Questa configurazione, come spiega da specifica \cite{5.1}, è composta da un canale LFE per il subwoofer e di 5 canali distribuiti in 5 satelliti disposti rispettivamente a 0°, $\pm30°$ e $\pm110/120°$.\\
 
+% il 5.1 di cui parli tu si chiama ITU ed è una configurazione specifica del 5.1
+% i 5 canali non sono satelliti, in quanto almeno L e R dovrebbero essere full range
+
 Una successiva configurazione è la \textbf{7.1} che riporta angoli di 0°, $\pm30°$, $\pm90/110°$ e $\pm135/150°$.\\
+
+% anche qui, non è vero. quello che tu analizzi è uno dei 7.1 possibili e nemmeno quello più sensato. di sicuro non è il 7.1 che si usa al cinema.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.18]{figures/5-1.png}\includegraphics[scale=0.34]{figures/7-1.png}
-	\caption {Configurazione 5.1 e 7.1} 
+	\caption {Configurazione 5.1 e 7.1}
 	\label{fig:5.1}
 	\end{figure}
-  
+
 In parallelo una configurazione che trova il suo utilizzo nel campo della ricerca musicale e in minor misura nell'ascolto di musica è la \textbf{quadrifonia}; questa tecnica prevede l'utilizzo di 4 speaker posti sui vertici di un quadrato (angoli di $\pm45°$ e $\pm135°$) con al centro l'ascoltatore, anche questa permette una ricostruzione totale sul piano orizzontale ma ha il vantaggio di avere gli angoli tra gli speaker uguali ($90°$) il che rende più semplice un'ipotetica elaborazione di segnale per pilotarla.\\
 
 Un successivo utilizzo di questa tecnica è stata sviluppata implementando otto altoparlanti ad angoli rispettivi di $45°$ il che pone questi ultimi a $\pm22,5°\ , \pm67,5°\ , \pm112,5°\ , \pm157,5°$ come in figura \ref{fig:quadrifonia}
- 
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.35]{figures/quad.jpg}\includegraphics[scale=0.55]{figures/ottofonia.png}
-	\caption {Configurazione quadrifonica e ottofonica} 
+	\caption {Configurazione quadrifonica e ottofonica}
 	\label{fig:quadrifonia}
 	\end{figure}
 
@@ -160,13 +186,13 @@ Per finire possiamo introdurre anche l'altezza nelle nostre configurazioni, infa
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.70]{figures/cubo4.png}
-	\caption {Configurazione ottofonica tridimensionale} 
+	\caption {Configurazione ottofonica tridimensionale}
 	\label{fig:ottofonia}
 	\end{figure}
 
 \section{Format audio object-oriented}
 
-Ora capito quali sono i principali standard di riproduzione andremo a spiegare come come queste configurazioni andranno pilotate, non ci interessa tanto il contenuto di ogni canale ma il fatto che: 
+Ora capito quali sono i principali standard di riproduzione andremo a spiegare come come queste configurazioni andranno pilotate, non ci interessa tanto il contenuto di ogni canale ma il fatto che:
 
 \begin{itemize}
 \item nel più semplice dei casi ad ogni speaker sarà assegnato un canale audio differente (esempio Dolby Digital 5.1 dove ad ogni altoparlante è pilotato da un segnale discreto indipendente), si veda \cite{digital}.
@@ -229,23 +255,23 @@ r = \sqrt{x^2 +y^2 +z^2 }\\
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.40]{figures/azimut.png}
-	\caption {Coordinate spaziali} 
+	\caption {Coordinate spaziali}
 	\label{fig:coordinate}
 	\end{figure}
-	
+
 \item \textbf{Identificativo oggetto sonoro}: scritto come URI é un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
 \item \textbf{Gain}: è un valore che indica la quantità di segnale che deve avere l'oggetto sonoro.
 \item \textbf{Apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare (più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore è 180° allora si attiverebbero tutti i diffusori).
 \item \textbf{Divergenza}: anch'essa indicata in gradi quantifica la grandezza che deve avere l'oggetto sonoro ma solo sul piano orizzontale, un esempio più esplicativo si ha in figura \ref{fig:apertura}
-	
+
 	\begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.35]{figures/apertura.png}
-	\caption {Parametri di apertura e divergenza} 
+	\caption {Parametri di apertura e divergenza}
 	\label{fig:apertura}
 	\end{figure}
-	
-	
+
+
 \end{itemize}
 
 Questi sono i principali parametri scritti nei metadati che ci servono per la spazializzazione, però è facile pensare che se l'oggetto si muove nello spazio o cambia dimensioni, il contenuto dei suoi metadati cambia anch'esso nel tempo, quindi il format prevede di racchiude in un nuovo oggetto chiamato ''\textbf{Object-Fragment}'' tutti i metadati descritti sopra (che per tutto lo svolgimento temporale del object fragment rimarranno inalterati) con più l'aggiunta di alcuni parametri come l'\textbf{ID} (identificativo oggetto) e i sample dell'oggetto sonoro da riprodurre.\\
@@ -258,15 +284,15 @@ Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di 
 	\includegraphics[scale=0.50]{figures/object1.png}\\
 	\includegraphics[scale=0.50]{figures/object2.png}\\
 	\includegraphics[scale=0.50]{figures/object3.png}
-	\caption {Schema esplicativo funzionamento format MDA} 
+	\caption {Schema esplicativo funzionamento format MDA}
 	\label{fig:object}
 	\end{figure}
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.50]{figures/timeline2.png}
-	
-	\caption {Azione di richiamo di un object-fragment} 
+
+	\caption {Azione di richiamo di un object-fragment}
 	\label{fig:time}
 	\end{figure}
 
@@ -299,8 +325,8 @@ Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di outpu
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.50]{figures/mdacreator.jpg}
-	
-	\caption {MDA Creator, DTS technology} 
+
+	\caption {MDA Creator, DTS technology}
 	\label{fig:mdacreator}
 	\end{figure}
 
@@ -309,7 +335,7 @@ Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di outpu
 In questo capitolo parleremo invece di come da un format MDA posso passare a una configurazione di riproduzione usuale, mediante la tecnica VBAP.\\
 
 \section{Tecnica VBAP}
- 
+
 Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione che permette di localizzare una sorgente sonora attraverso la differenza di intensità emessa tra due o più speaker, mi spiego meglio:
 
 uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepisca una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due speaker e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto spaziale previsto dalla IID.\\
@@ -319,12 +345,12 @@ Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazi
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
 
 \subsection{VBAP 2D}\label{c}
-Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\ 
+Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.48]{figures/matrix2d.png}
-	\caption {Composizione vettoriale delle sorgenti reali e virtuale} 
+	\caption {Composizione vettoriale delle sorgenti reali e virtuale}
 	\label{fig:vettori2d}
 	\end{figure}
 
@@ -347,20 +373,20 @@ l_{11} & l_{12}\\ l_{21} & l_{22}
 Ora trovando tutto in funzione $g$ abbiamo che:
 
 \begin{equation}
-\left[g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[\begin{matrix} 
+\left[g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[\begin{matrix}
 l_{11} & l_{12}\\ l_{21} & l_{22}
 \end{matrix} \right]}^{-1} \ \ \Rightarrow \ \ \ \boldsymbol{g}=\boldsymbol{p}^T {\boldsymbol{L_{12}}}^{-1}
 \label{eq:dddd}
 \end{equation}
 
-Logicamente assumo che la matrice $\boldsymbol{L_{12}}$ ammetta l'inversa, ora parametrizzo tutto in funzione di $\theta$ e $\theta_0$ nel modo seguente: 
+Logicamente assumo che la matrice $\boldsymbol{L_{12}}$ ammetta l'inversa, ora parametrizzo tutto in funzione di $\theta$ e $\theta_0$ nel modo seguente:
 
 \[ p_1=cos(\theta),\ p_2=sen(\theta),\ l_{11}=cos(\theta_0),\ l_{12}=sen(\theta_0),\ l_{21}=cos(-\theta_0),\ l_{22}=sen(-\theta_0) \]
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.45]{figures/angoli.png}
-	\caption {Angoli delle sorgenti reali e virtuale} 
+	\caption {Angoli delle sorgenti reali e virtuale}
 	\label{fig:angoli}
 	\end{figure}
 
@@ -376,29 +402,29 @@ g_2=\dfrac{cos(\theta) sen(\theta_0) - sen (\theta) cos(\theta_0)}{2 cos(\theta_
 Logicamente introduciamo un coefficiente $C$ che indica il gain complessivo (ci servirà per definire la distanza dell'oggetto) e che scalerà i nostri due gain in questo modo:
 
 \begin{equation}
-\left[g_1 \ g_2\right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \right]}{\sqrt{g_1^2 + g_2^2}} 
+\left[g_1 \ g_2\right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \right]}{\sqrt{g_1^2 + g_2^2}}
 \label{eq:ffff}
 \end{equation}
 
 Sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione stereo, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà ''selezionare'' solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:\\
 
-Consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\theta_{0,n}$ tali che $0°\leq \theta_{0,1},\ \theta_{0,2},\ \ldots,\ \theta_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\theta^{\prime}$ dovrà verificarsi che $\theta_{0,m}\leq \theta^{\prime} \leq \theta_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere: 
+Consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\theta_{0,n}$ tali che $0°\leq \theta_{0,1},\ \theta_{0,2},\ \ldots,\ \theta_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\theta^{\prime}$ dovrà verificarsi che $\theta_{0,m}\leq \theta^{\prime} \leq \theta_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere:
 
 \begin{equation}
 \theta_0 = \dfrac{\theta_{0,m+1}-\theta_{0,m}}{2} \ \ \ \ \ \theta=\theta^{\prime}-\dfrac{\theta_{0,m+1}+\theta_{0,m}}{2}
 \label{phidiverso}
 \end{equation}
 
-   
+
  \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.55]{figures/matrix5-1.png}
-	\caption {VBAP bidimensionale con più altoparlanti} 
+	\caption {VBAP bidimensionale con più altoparlanti}
 	\label{fig:angoli5}
 	\end{figure}
-  
-   
-   
+
+
+
 \subsection{VBAP 3D}
 
 Capito qual'è il modello e l'algoritmo di implementazione del VBAP in due dimensioni estenderemo il concetto in tre dimensioni.\\
@@ -408,7 +434,7 @@ La più piccola configurazione di tre altoparlanti consiste nel disporli ai vert
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.50]{figures/matrix3d.png}
-	\caption {Composizione vettoriale delle sorgenti reali e virtuale in tre dimensioni} 
+	\caption {Composizione vettoriale delle sorgenti reali e virtuale in tre dimensioni}
 	\label{fig:triangolo}
 	\end{figure}
 
@@ -422,7 +448,7 @@ E' logico anche che la sorgente virtuale potrà essere collocata soltanto nella 
 Quindi ribaltando l'equazione ci rimane che:
 
 \begin{equation}
-\left[g_1 \ g_2 \ g_3 \right] = \left[ p_1 \ p_2 \ p_3 \right]  {\left[\begin{matrix} 
+\left[g_1 \ g_2 \ g_3 \right] = \left[ p_1 \ p_2 \ p_3 \right]  {\left[\begin{matrix}
 l_{11} & l_{12} & l_{13}\\ l_{21} & l_{22} & l_{23} \\ l_{31} & l_{32} & l_{33}
 \end{matrix} \right]}^{-1} \ \ \Rightarrow \ \ \ \boldsymbol{g}=\boldsymbol{p}^T {\boldsymbol{L_{123}}}^{-1}
 \label{hhhh}
@@ -431,7 +457,7 @@ l_{11} & l_{12} & l_{13}\\ l_{21} & l_{22} & l_{23} \\ l_{31} & l_{32} & l_{33}
 Anche in questo caso possiamo calcolare i tre coefficienti scalati in questa maniera:
 
 \begin{equation}
-\left[g_1 \ g_2 \ g_3 \right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \ g_3 \right]}{\sqrt{g_1^2 + g_2^2 + g_3^2}} 
+\left[g_1 \ g_2 \ g_3 \right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \ g_3 \right]}{\sqrt{g_1^2 + g_2^2 + g_3^2}}
 \label{iiii}
 \end{equation}
 
@@ -442,14 +468,14 @@ Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.50 ]{figures/matrix3dfull.png}
-	\caption {Configurazione a più altoparlanti per la tecnica VBAP in tre dimensioni} 
+	\caption {Configurazione a più altoparlanti per la tecnica VBAP in tre dimensioni}
 	\label{fig:matrix3dfull}
 	\end{figure}
 
 
 \section{Integrazione del formato MDA con la tecnica VBAP}
 
-Ricapitolando siamo arrivati al punto di sapere cos'è il format MDA e che cos'è la tecnica di spazializzazione VBAP, 
+Ricapitolando siamo arrivati al punto di sapere cos'è il format MDA e che cos'è la tecnica di spazializzazione VBAP,
 il passo successivo è riuscire ad integrare i due insieme, la cosa non è difficile ma procediamo per gradi.\\
 
 N.B) nel corso di questo capitolo
@@ -473,7 +499,7 @@ se\ \  r_1 \geq r_0\ \ \Rightarrow \ \ r_n^{\prime} = r_n\\
 \end{matrix}\right.
 \label{jjjj}
 \end{equation}
- 
+
 fatto questo non ci rimane che intervenire sul fattore $C$ introdotto nel paragrafo \ref{c} in quanto esso contribuisce alla sensazione di lontananza, mi spiego meglio:
 
 principalmente sono quattro i fattori che intercorrono alla corretta ricostruzione in lontananza di un oggetto, essi sono l'intensità sonora, la colorazione timbrica, il rapporto riverbero/segnale diretto e il delay temporale \footnote{La spiegazione del perché di tutti questi parametri richiederebbe molto tempo quindi diamo per buone queste assunzioni.}, l'informazione relativa agli ultimi tre parametri possono essere contenute direttamente nel segnale audio dell'oggetto sonoro, invece noi dobbiamo considerare l'intensità sonora in quanto legata alla distanza dall'oggetto all'ascoltatore e quindi al suo raggio\footnote{In realtà ogni modifica del raggio si dovrebbe ripercuote anche sugli altri tre parametri cosa che nel nostro caso non avviene essendo questi ultimi tre contenuti nell'audio dell'oggetto sonoro, siamo quindi di fronte ad un'errore ma che possiamo considerare trascurabile visto l'entità ridotta delle trasformazioni sui raggi.}.\\
@@ -494,9 +520,9 @@ In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della di
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.60]{figures/distance.png}
-	\caption {Funzione distanza originale e funzione approssimata} 
+	\caption {Funzione distanza originale e funzione approssimata}
 	\label{fig:distance}
-	\end{figure} 
+	\end{figure}
 
 Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non in quanto bisogna tener conto della distanza degli speaker ed è molto difficile che si abbiano tutti gli oggetti alla stessa distanza.\\
 
@@ -520,7 +546,7 @@ Ma vediamo ora come faccio a selezionare gli oggetti ''buoni e cattivi'' per il 
 Successivamente, tracciando la proiettante dell'oggetto nel piano orizzontale, si può vedere che gli oggetti che soddisfano l'equazione \ref{zzz} possono essere riprodotti con il VBAP tralasciando l'angolo azimutale e considerando le formule del capitolo \ref{c}
 
 \begin{equation}
-r_{n,shadow}=r_n^{\prime} cos(\phi_{n,top}) \geq r_0     
+r_{n,shadow}=r_n^{\prime} cos(\phi_{n,top}) \geq r_0
 \label{zzz}
 \end{equation}
 
@@ -532,7 +558,7 @@ Sicuramente in letteratura una tecnica che risolva la situazione appena citata e
 
 \subsection{Adattamento MDA in configurazione lineare}
 
-Per ultimo vediamo come adattare il format alla configurazione monodimensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema stereo posto di fronte all'ascoltatore, bisogna qui stravolgere il format in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici.\\ 
+Per ultimo vediamo come adattare il format alla configurazione monodimensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema stereo posto di fronte all'ascoltatore, bisogna qui stravolgere il format in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici.\\
 
 Come prima cosa dovrò spostare tutti gli oggetti che originariamente sono posti dietro (quindi con angoli compresi tra $90°$ e $270°$) davanti all'ascoltatore operando una trasformazione sull'angolo azimutale:
 
@@ -543,7 +569,7 @@ Come prima cosa dovrò spostare tutti gli oggetti che originariamente sono posti
 
 In questo modo tutti gli angoli azimutali di ogni oggetto sarà posto tra $-90° \leq \theta_{n,front} \leq +90°$\\
 
-Abbiamo così ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma la configurazione stereo prevede al massimo una riproduzione di oggetti a $\pm 30°$ data dalla limitata ampiezza angolare $\pm \theta_0$ degli speaker, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0\ e \pm 30°$.\\ 
+Abbiamo così ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma la configurazione stereo prevede al massimo una riproduzione di oggetti a $\pm 30°$ data dalla limitata ampiezza angolare $\pm \theta_0$ degli speaker, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0\ e \pm 30°$.\\
 
 Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli angoli ma accade che gli oggetti posti sullo scenario frontale vengono schiacciati troppo verso l'origine, quindi ho optato per la funzione seno (usata come peso) che schiacciasse gli oggetti posti sui lati e che lasciasse il più inalterati possibile gli angoli degli oggetti posti di fronte, in più il tutto viene ulteriormente scalato per il coseno dell'angolo di elevazione per tenere conto di quest'ultimo e della proiezione del vettore sul piano orizzontale, in questo modo:
 
@@ -561,30 +587,30 @@ Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli
 Per tutti gli esempi che farò vorrò riprodurre tre oggetti con seguenti coordinate sferiche per far vedere ogni caso:\\
 
 \begin{tabular}{|c|c|c|c|c|}
-\hline 
-oggetto 1 & $\theta_1=15°$ & $\phi_1=0°$ & $r_1=1,5m$ & $C_1=1,3$ \\ 
-\hline 
-oggetto 2 & $\theta_2=275°$ & $\phi_2=0°$ & $r_2=2,5m$ & $C_2=1,6$ \\ 
-\hline 
-oggetto 3 & $\theta_3=160°$ & $\phi_3=45°$ & $r_3=3,0m$ & $C_1=0,8$ \\ 
-\hline 
+\hline
+oggetto 1 & $\theta_1=15°$ & $\phi_1=0°$ & $r_1=1,5m$ & $C_1=1,3$ \\
+\hline
+oggetto 2 & $\theta_2=275°$ & $\phi_2=0°$ & $r_2=2,5m$ & $C_2=1,6$ \\
+\hline
+oggetto 3 & $\theta_3=160°$ & $\phi_3=45°$ & $r_3=3,0m$ & $C_1=0,8$ \\
+\hline
 
 \end{tabular} \\ \\
- 
+
 N.B) ai fini dei calcoli conviene pensare $\theta_2=275°$ come $\theta_2=-85°$.\\
 
 Cominciamo con la quadrifonia, una possibile configurazione potrebbe essere questa:\\
 
 \begin{tabular}{|c|c|c|}
-\hline 
-speaker 1 & $\theta_{0,1}=45°$ & $r_0=2m$\\ 
-\hline  
-speaker 2 & $\theta_{0,2}=135°$ & $r_0=2m$\\ 
-\hline 
-speaker 3 & $\theta_{0,3}=-135°$ & $r_0=2m$\\ 
-\hline 
-speaker 4 & $\theta_{0,4}=-45°$ & $r_0=2m$\\ 
-\hline 
+\hline
+speaker 1 & $\theta_{0,1}=45°$ & $r_0=2m$\\
+\hline
+speaker 2 & $\theta_{0,2}=135°$ & $r_0=2m$\\
+\hline
+speaker 3 & $\theta_{0,3}=-135°$ & $r_0=2m$\\
+\hline
+speaker 4 & $\theta_{0,4}=-45°$ & $r_0=2m$\\
+\hline
 \end{tabular} \\
 \\
 
@@ -598,11 +624,11 @@ per entrambi gli oggetti, prima applico la formula \ref{phidiverso} in modo da t
 
 \begin{equation}
 \begin{matrix}
-g_{(1,obj\ 1)} = 0,87 & g_{(1,obj\ 1)scaled} = 0,861\\ 
+g_{(1,obj\ 1)} = 0,87 & g_{(1,obj\ 1)scaled} = 0,861\\
 g_{(4,obj\ 1)} = 0,50 & g_{(4,obj\ 1)scaled} = 0,733\\
 g_{(4,obj\ 2)} = 0,76 & g_{(4,obj\ 2)scaled} = 0,779\\
 g_{(3,obj\ 2)} = 0,64 & g_{(3,obj\ 2)scaled} = 0,651\\
-\end{matrix} 
+\end{matrix}
 \label{gscalatiesempio1}
 \end{equation}
 \\
@@ -611,17 +637,17 @@ Passiamo ora all'adattamento alla configurazione 5.1\\
 
 Una possibile configurazione di impianto 5.1 potrebbe essere la seguente:\\
 
-\begin{tabular}{|c|c|c|} 
-\hline 
-speaker 1 & $\theta_{0,1}=0°$ & $r_0=2m$\\ 
-\hline 
-speaker 2 & $\theta_{0,2}=30°$ & $r_0=2m$\\ 
-\hline 
-speaker 3 & $\theta_{0,3}=110°$ & $r_0=2m$\\ 
-\hline 
-speaker 4 & $\theta_{0,4}=-110°$ & $r_0=2m$\\ 
-\hline 
-speaker 5 & $\theta_{0,4}=-30°$ & $r_0=2m$\\ 
+\begin{tabular}{|c|c|c|}
+\hline
+speaker 1 & $\theta_{0,1}=0°$ & $r_0=2m$\\
+\hline
+speaker 2 & $\theta_{0,2}=30°$ & $r_0=2m$\\
+\hline
+speaker 3 & $\theta_{0,3}=110°$ & $r_0=2m$\\
+\hline
+speaker 4 & $\theta_{0,4}=-110°$ & $r_0=2m$\\
+\hline
+speaker 5 & $\theta_{0,4}=-30°$ & $r_0=2m$\\
 \hline
 \end{tabular} \\
 \\
@@ -630,12 +656,12 @@ Non ci rimane che operare nella stessa maniera utilizzata per la quadrifonia esp
 
 \begin{equation}
 \begin{matrix}
-g_{(2,obj\ 1)} = 0,52 & g_{(2,obj\ 1)scaled} = 0,806\\ 
+g_{(2,obj\ 1)} = 0,52 & g_{(2,obj\ 1)scaled} = 0,806\\
 g_{(1,obj\ 1)} = 0,52 & g_{(1,obj\ 1)scaled} = 0,806\\
 g_{(5,obj\ 2)} = 0,43 & g_{(5,obj\ 2)scaled} = 0,465\\
 g_{(4,obj\ 2)} = 0,83 & g_{(4,obj\ 2)scaled} = 0,898  \\
- 
-\end{matrix} 
+
+\end{matrix}
 \label{gscalatiesempio2}
 \end{equation} \\
 
@@ -644,13 +670,13 @@ Volutamente, per entrambe le configurazioni, ho tralasciato la riproduzione del 
 
 \begin{equation}
 \begin{matrix}
-g_{(3,obj\ 3)} = 0,42 & g_{(3,obj\ 3)scaled} = 0,266\\ 
-g_{(2,obj\ 3)} = 0,90 & g_{(2,obj\ 3)scaled} = 0,571\\ 
+g_{(3,obj\ 3)} = 0,42 & g_{(3,obj\ 3)scaled} = 0,266\\
+g_{(2,obj\ 3)} = 0,90 & g_{(2,obj\ 3)scaled} = 0,571\\
 \\
 g_{(4,obj\ 3)} = 1,19 & g_{(4,obj\ 3)scaled} = 0,383\\
 g_{(3,obj\ 3)} = 1,55 & g_{(3,obj\ 3)scaled} = 0,499\\
- 
-\end{matrix} 
+
+\end{matrix}
 \label{gscalatiesempiooggetto3}
 \end{equation} \\
 
@@ -661,11 +687,11 @@ Per ultimo esempio vediamo il risultato dell'adattamento alla configurazione ste
 Una configurazione possibile potrebbe essere la seguente:\\
 
 \begin{tabular}{|c|c|c|}
-\hline 
-speaker 1 & $\theta_{0,1}=30°$ & $r_0=2m$\\ 
-\hline 
-speaker 2 & $\theta_{0,2}=-30°$ & $r_0=2m$\\ 
-\hline 
+\hline
+speaker 1 & $\theta_{0,1}=30°$ & $r_0=2m$\\
+\hline
+speaker 2 & $\theta_{0,2}=-30°$ & $r_0=2m$\\
+\hline
 \end{tabular} \\
 \\
 
@@ -673,11 +699,11 @@ Applicando rispettivamente la formula \ref{llll} e la formula \ref{mmmm} ottengo
 
 
 \begin{tabular}{|c|c|}
-\hline 
-$\theta_{1,front} = 15°$     & $\theta_{1,remapped} =  8°  $   \\ 
-\hline 
+\hline
+$\theta_{1,front} = 15°$     & $\theta_{1,remapped} =  8°  $   \\
+\hline
 $\theta_{2,front} = -85°$     & $\theta_{2,remapped} = -29° $     \\
-\hline  
+\hline
 $\theta_{3,front} = 20°$    & $ \theta_{3,remapped} =  7° $    \\
 \hline
 \end{tabular} \\
@@ -687,13 +713,13 @@ Ora non ci rimane da trovare i gain degli oggetti tramite la formula \ref{eq:eee
 
 \begin{equation}
 \begin{matrix}
-g_{(1,obj\ 1)} = 0,71 & g_{(1,obj\ 1)scaled} = 0,975\\ 
+g_{(1,obj\ 1)} = 0,71 & g_{(1,obj\ 1)scaled} = 0,975\\
 g_{(2,obj\ 1)} = 0,43 & g_{(2,obj\ 1)scaled} = 0,590\\
 g_{(1,obj\ 2)} = 0,02 & g_{(1,obj\ 2)scaled} = 0,021\\
 g_{(2,obj\ 2)} = 0,99 & g_{(2,obj\ 2)scaled} = 1,011\\
 g_{(1,obj\ 3)} = 0,69 & g_{(1,obj\ 3)scaled} = 0,524\\
 g_{(2,obj\ 3)} = 0,46 & g_{(2,obj\ 3)scaled} = 0,349\\
-\end{matrix} 
+\end{matrix}
 \label{gscalatiesempio3}
 \end{equation}
 

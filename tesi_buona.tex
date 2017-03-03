@@ -31,7 +31,7 @@
 \textcolor{black}{
 \linespread{5}
 {\LARGE{\bf
-Audio Object-Oriented e adattamento del Format Multi-Dimensional Audio MDA alla tecnica di spazializzazione Vector-Base Amplitude Panning VBAP.
+Audio Object-Oriented e adattamento del formato Multi-Dimensional Audio MDA alle configurazioni 2.0, 5.1 e 4.0 attraverso la tecnica di spazializzazione Vector-Base Amplitude Panning VBAP.
 }}}
 
 \end{spacing}
@@ -84,117 +84,74 @@ Anno Accademico \textcolor{black}{2016/17}}}
 
 \chapter*{Abstract}
 
-Nel corso di questa tesi si cercherà di rispondere ad una semplice domanda: posso svincolarmi dal fatto che un format audio possa essere usato solo dalla configurazione di riproduzione adatta? % \\ se usi la doppia interruzione di riga non hai bisogno del doppio slash
+L'obbiettivo di questa tesi è quello di implementare un algoritmo che permetta di riprodurre un contenuto sonoro object-oriented su una configurazione di riproduzione facilmente riscontrabile in un ambiente domestico.
 
-% non sono sicuro che la tua assunzione a format come termine universale sia esatta.
-% cosa è un format? perché non parli di formato? e soprattutto se sai già che rispondi si non la mettere in forma di domanda ma in forma di spiegazione sperimentale.
+In un primo momento, infatti, andrò a spiegare che cosa sono le configurazioni multicanale $2.0, 4.0$ e $5.1$ inoltre introdurrò l'audio object-oriented con particolare riguardo al formato ad oggetti Multi-Dimensional Audio MDA, in un secondo momento invece cercherò di implementare l'MDA nelle configurazioni multicanale descritte servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.
 
-La risposta è si, in quanto esistono già tecniche che trasformano un format in un altro adatto ad un'altra configurazione ma cercherò di introdurre, nella prima parte di questa tesi, un \textbf{format} ''generale'' che non ha bisogno di dover passare da questo stadio di trasformazione (in quanto esso stesso non è inizialmente adattato per nessun tipo di configurazione), sto parlando del format \textbf{Multi-Dimesional Audio MDA} orientato verso l'\textbf{audio ad oggetti} (object-oriented).
+Infine farò degli esempi.
 
-% secondo questa affermazione MDA non è un formato, ma dato che si porta dietro dei matadati che incapsulati in un formato specifico, sarebbe più corretto chiarire questa cosa.
-
-% credo che poi dai per scontato che una posizione MDA sia intercambiabile alla stessa posizone in un altro formato, che ne so, ambisonic del terzo ordine.
-% cosa che ritengo sia piuttosto errata. Uno stream ambisonico si porta dietro molte più informazioni della semplice posizone AED.
-% non mi sento di condividere la tua affermazione iniziale. Puoi passare dal dire che sono assolutamente equivalenti ed intercambiabili a
-% descrivere una tua pratica "personale" per fare le codifiche intermedie.
-
-In una seconda parte invece cercherò di implementare l'MDA in alcune delle più comuni configurazioni di riproduzione servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.
-
-Infine farò degli esempi adattando il format MDA nelle configurazioni quadrifonica, 5.1 e stereo.
 \addcontentsline{toc}{chapter}{Abstract}
-
 
 \chapter{Dai canali audio agli oggetti sonori}
 
-% non cominciare la tesi come se fosse un romanzo, vai dritto alla questione
-% Siamo all'inizio di questa tesi, l'abstract ci ha permesso di capire qual'è il nostro scopo e i passaggi che percorrerà questa stesura, ora non rimane che cominciare.\\
+Nel mondo odierno l'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto sonoro in ambiente domestico in modo semplice, per esempio basti pensare a chi ascolta un disco musicale in un impianto hi-fi o a chi invece gode dell'ascolto surround\footnote{Con surround si intende quel tipo di ascolto in cui l'ascoltatore è immerso nella scena sonora, per fare questo tipicamente si collocano diffusori ai lati e/o dietro l'ascoltatore} di un film in un impianto home-theater, in questi casi la persona interessata riproduce il contenuto sonoro originale con un impianto compatibile alla sua riproduzione ma questo fatto non è da prendere come una verità assoluta, in questo capitolo spiegherò meglio il perché.
 
-%Nel mondo odierno l
+Consideriamo inizialmente il primo esempio in cui ho parlato di disco, nella maggior parte dei casi in cui della musica sia creata in studio di registrazione si opera in modo che per tutta la sua produzione si rispetti un certo standard nella collocazione dei monitor all'interno dello spazio sonoro dello studio, stessa cosa dovrebbe fare l'ascoltatore per usufruire della stessa informazione musicale che si vuol trasmettere con l'ascolto del disco, infatti in questo caso sia i fonici che l'ascoltatore dovrebbero rispettare la collocazione dei diffusori secondo una configurazione 2.0 data dalla specifica \cite{5.1} per rimanere nello standard più comune di produzione e ascolto di contenuti puramente musicali.
 
-L'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto sonoro, basti pensare a chi ha un hi-fi in casa, chi un impianto per home-theater % o chi direttamente va al cinema; in tutte queste situazioni l'ascoltatore
-ha accesso a questi contenuti diciamo in modo ''smart'' cioè senza preoccuparsi di tutto il lavoro e la progettazione che sta dietro alla realizzazione del contenuto e sulla sua successiva riproduzione. %, questo è possibile grazie a delle ''regole'' che stanno alla base di tutta questa catena; un esempio chiarirà meglio l'uso improprio della parola regola.\\
+Stesso discorso si può fare per il secondo esempio riguardante l'ascolto surround di contenuti sonori di un film solo che in questo caso, sia in studio che a casa, si a avrà una configurazione adatta rispettivamente alla creazione e alla riproduzione di un suono surround tipico di una pellicola cinematografica, una configurazione possibile e che è la maggiore impiegata in ambito domestico è la 5.1 data anch'essa dalla specifica \cite{5.1}.
 
-Consideriamo per esempio un cinema, sappiamo dall'acustica che il modo in cui sono progettati i diffusori e la sala di proiezione coloreranno\footnote{Con il termine colorare nell'audio e in acustica si intende la tendenza di un sistema a modificare lo spettro in frequenza di un segnale audio che vive al suo interno.} in qualche maniera il suono e quindi non faranno ascoltare lo stesso contenuto che è stato creato per quel film, è quindi d'obbligo per il cinema (almeno lo spero) tarare l'ascolto in modo che non ci sia questa colorazione, qui per esempio il fatto di rendere lineare il suono costituisce una regola, uno standard che è necessario affinché si abbia un giusto ascolto del contenuto.\\
+Ora per la giusta comprensione di quello scritto sopra è d'obbligo fermarsi un attimo e percorrere brevemente quali sono le specifiche degli standard appena citati e introdurre la configurazione $4.0$ che tratterò in questa tesi.
 
-% stai semplificando TROPPO una cosa complicatissima. il cinema ha una catena precisa e standardizzata.
-% la procedura di taratura è prima in sala mix, che è un cinema a tutti gli effetti, e poi nelle sale, un motivo di vanto della catenza produttiva cinematografica e non un difetto. E non puoi parlare di coloratura, è una tesi a carattere scientifico, usa una terminologia più appropriata.
+\section{Configurazioni di riproduzione 2.0, 5.1 e 4.0}\label{metodi}
 
-Come quest'ultima ci sono diverse regole, diversi standard da rispettare per garantire che il produttore di contenuti e l'ascoltatore abbiano accesso alla stessa informazione, nel nostro caso siccome la tesi è mirata ad un solo aspetto dell'audio, faremo riferimento solo a quelle regole che stanno a base della spazializzazione sonora, quindi quegli standard che hanno a che fare in qualche modo con la geometria di riproduzione e i format audio.\\
+Nell'audio, quando si parla di configurazione spaziale, è norma usare un codice numerico standard che sta ad indicare sinteticamente il numero di diffusori sonori usati e la loro funzione, questo codice è composto da tre numeri separati da punti nel formato $X.Y.Z$ dove $X$ sta ad indicare il numero di diffusori disposti orizzontalmente sul piano attorno l'ascoltatore, $Y$ sta ad indicare il numero di diffusori imputati alla riproduzione del canale LFE\footnote{l'LFE (acronimo di Low Frequency Effect) è quel canale imputato alla riproduzione degli effetti a bassa frequenza tipicamente riprodotti da uno o più subwoofer} e $Z$ sta per il numero di diffusori posti sopra l'ascoltatore per ampliare l'ascolto anche verticalmente.
 
-Ora è d'obbligo fermarsi un attimo e ripercorrere brevemente alcuni degli standard in modo da capire in che punto vogliamo intraprendere una strada concettualmente diversa, anche perché alla fine del ragionamento dovremo ricollegarci ad essi.
+La prima configurazione descritta è la \textbf{2.0} che come da specifica ITU-R BS.775-3\cite{5.1} prevede l'utilizzo di due diffusori (di norma full-range\footnote{In realtà si potrebbe usare anche un subwoofer in aiuto ai due diffusori per quanto riguarda la zona frequenziale bassa}) posti di fronte all'ascoltatore e con angoli di $\pm 30°$ come in figura \ref{fig:2.0}
 
+Tipicamente la sensazione di collocazione spaziale di una sorgente sonora in questa configurazione viene data dalla differenza di potenza del segnale inviato ai due speaker, infatti se il segnale risulta più forte in uno dei due, la sorgente fantasma risulterà più spostata verso quest'ultimo in accordo con le argomentazioni scritte in \cite{vbap}.
 
-\section{Standard di riproduzione}\label{metodi}
-
-\subsection{Audio in una dimensione}
-
-Il primo metodo descritto (e forse il più importante) è lo \textbf{STEREO}\footnote{Qui c'è da fare una precisazione utilizzato la parola stereo, perché e comune utilizzarlo in casistiche sbagliate in quanto, formalmente, lo stereo è una modalità di riproduzione e di registrazione che oltre ad usare la IID utilizza anche la ITD ed è come se i due canali di questo standard conterrebbero esattamente quello che sentirebbero le nostre orecchie.}(configurazione 2.0) in cui avendo a disposizione due speaker la sensazione di spazialità viene data dalla differenza di potenza del segnale inviato agli speaker, infatti se il segnale risulta più forte in uno dei due, la sorgente fantasma risulterà più spostata verso quest'ultimo.\\
-
-% è assolutamente sbagliato collegare l'ascolto stereofonico alla necessità di avere due altoparlanti. Due altoparlanti non fanno lo stereo. Non necessariamente.
+E' consuetudine indicare rispettivamente con L (left) ed R (right) lo speaker posto di fronte a sinistra e a destra dell'ascoltatore.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.30]{figures/stereo.jpg}
-	\caption {Configurazione stereo}
-	\label{fig:stereo}
+	\caption {Configurazione 2.0 (ITU-R BS.775-3)}
+	\label{fig:2.0}
 	\end{figure}
+	
+Per quanto riguarda un ascolto surround, invece, ci si riferisce a un tipo di riproduzione che pone l'ascoltatore al centro di un piano di diffusione in modo che si possano sentire suoni provenienti anche dai lati e da dietro; diverse sono le configurazioni possibili ma quella che interessa a noi è la 5.1 data dalla specifica ITU-R BS 775-3\cite{5.1}.
 
-Parlando dello stereo cominciamo a parlare di standard in quanto la configurazione prevede di creare un triangolo equilatero con ai vertici i due altoparlanti e l'ascoltatore,  quindi se non si segue il collocamento delle casse a $\pm 30°$ non si avrà la giusta spazialità e collocazione dei suoni.\\
+Questa configurazione spaziale (quasi sicuramente la più diffusa in ambito surround domestico) è composta da 5 canali distribuiti in 5 diffusori disposti rispettivamente a $0°$, $\pm30°$ e $\pm110/120°$ e un canale LFE riprodotto da un subwoofer posto tipicamente davanti l'ascoltatore (In realtà il collocamento del subwoofer non è strettamente indicato nelle specifiche in quanto la natura delle basse frequenze le rende omnidirezionali, invece nelle specifiche è riportato il fatto che il canale LFE deve avere un incremento del segnale di $+10dB$.
 
-L'ascolto di musica si ferma generalmente qui ma l'avvento dei film e dei cinema ha portato al concetto di audio in due dimensioni, in particolare al surround.
+In figura \ref{fig:5.1} possiamo vedere come sono disposti i 5 diffusori ma è da notare che non è riportata la posizione del subwoofer per il discorso appena affrontato.
 
-% anche qui, non è vero che la musica si è fermata alle due casse. Se vuoi riferirti ad un ambiente pop o commerciale devi essere più esplicito e dirlo.
-
-\subsection{Audio in due dimensioni}
-
-Per audio in due dimensioni si intende una riproduzione che pone l'ascoltatore al centro di un piano di diffusione in modo che si possano sentire suoni provenienti anche dai lati e da dietro; diverse sono le configurazioni possibili ma quelle che interessano a noi sono principalmente tre.\\
-
-La più diffusa configurazione surround è sicuramente la \textbf{5.1}\footnote{Dove la prima cifra sta per il numero di diffusori nel piano e la seconda cifra sta per il numero di LFE (canale audio dedicato agli effetti a bassa frequenza).} usata principalmente dalla Dolby e dalla DTS per riproduzione di audio per film.
-
-
-Questa configurazione, come spiega da specifica \cite{5.1}, è composta da un canale LFE per il subwoofer e di 5 canali distribuiti in 5 satelliti disposti rispettivamente a 0°, $\pm30°$ e $\pm110/120°$.\\
-
-% il 5.1 di cui parli tu si chiama ITU ed è una configurazione specifica del 5.1
-% i 5 canali non sono satelliti, in quanto almeno L e R dovrebbero essere full range
-
-Una successiva configurazione è la \textbf{7.1} che riporta angoli di 0°, $\pm30°$, $\pm90/110°$ e $\pm135/150°$.\\
-
-% anche qui, non è vero. quello che tu analizzi è uno dei 7.1 possibili e nemmeno quello più sensato. di sicuro non è il 7.1 che si usa al cinema.
+E' norma indicare i diffusori come C (center) per il diffusore centrale, L (left) ed R (right) per i diffusori rispettivamente a $\pm30°$ (è consuetudine poi usare casse full-range per la coppia L-R), LS (left-surround) ed RS (right-surround) per i diffusori rispettivamente a $\pm110/120°$ .
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=0.18]{figures/5-1.png}\includegraphics[scale=0.34]{figures/7-1.png}
-	\caption {Configurazione 5.1 e 7.1}
+	\includegraphics[scale=0.18]{figures/5-1.png}
+	\caption {Configurazione 5.1 (ITU-R BS.775-3)}
 	\label{fig:5.1}
 	\end{figure}
 
-In parallelo una configurazione che trova il suo utilizzo nel campo della ricerca musicale e in minor misura nell'ascolto di musica è la \textbf{quadrifonia}; questa tecnica prevede l'utilizzo di 4 speaker posti sui vertici di un quadrato (angoli di $\pm45°$ e $\pm135°$) con al centro l'ascoltatore, anche questa permette una ricostruzione totale sul piano orizzontale ma ha il vantaggio di avere gli angoli tra gli speaker uguali ($90°$) il che rende più semplice un'ipotetica elaborazione di segnale per pilotarla.\\
+In parallelo una configurazione che si potrebbe trovare in ambito domestico per la sua facilità di implementazione e la 4.0; questa tecnica prevede l'utilizzo di 4 speaker posti sui vertici di un quadrato (angoli di $\pm45°$ e $\pm135°$) con al centro l'ascoltatore.
 
-% la ricostruzione della quadrifonia è tutto fuorché totale, ti invito a rileggerti le dispense del corso e a cercare la farfalla della percezione in quadrifonia!
+Usualmente in letteratura si denominano la coppia di diffusori posti di fronte come LF (left-front) - RF (right-front) e la coppia posta dietro come LB (left-back) - RB (right-back), questi per riprodurre al meglio il contenuto sonoro dovrebbero essere full-range.
 
-Un successivo utilizzo di questa tecnica è stata sviluppata implementando otto altoparlanti ad angoli rispettivi di $45°$ il che pone questi ultimi a $\pm22,5°\ , \pm67,5°\ , \pm112,5°\ , \pm157,5°$ come in figura \ref{fig:quadrifonia}
-
-% l'ottofonia non è l'evoluzione della quadrifonia. 
+Per quanto riguarda questa configurazione c'è da dire che questo posizionamento crea dei problemi di percezione del contenuto spaziale in quanto il nostro udito è più sensibile a ciò che proviene di fronte a noi, questo costituisce un problema per i nostri scopi ma prenderemo lo stesso la configurazione in considerazione in quanto è possibile che in ambito domestico qualcuno possieda ancora un impianto 4.0 (anche se largamente in disuso).
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=0.35]{figures/quad.jpg}\includegraphics[scale=0.55]{figures/ottofonia.png}
-	\caption {Configurazione quadrifonica e ottofonica}
+	\includegraphics[scale=0.35]{figures/quad.jpg}%\includegraphics[scale=0.55]{figures/ottofonia.png}
+	\caption {Configurazione 4.0}
 	\label{fig:quadrifonia}
 	\end{figure}
 
-\subsection{Audio in tre dimensioni}
 
-Per finire possiamo introdurre anche l'altezza nelle nostre configurazioni, infatti sempre più spesso anche nell'uso commerciale (soprattutto nei cinema e ora anche negli home cinema) si cominciano ad utilizzare anche speaker posti sopra l'ascoltatore in modo da riprodurre oggetti sonori provenienti da quella direzione, un esempio commerciale che da bene l'idea è la tecnologia Dolby Atmos (si veda nel paragrafo \ref{dolby} la spiegazione di quest'ultimo) ma noi, per scopi accademici, prendiamo come esempio la disposizione ottofonica tridimensionale composta da 2 piani orizzontali quadrifonici con speaker posti al di sopra e al di sotto dell'ascoltatore ad angoli di $\pm45°$ e $\pm135°$ e con elevazione di $\pm 45°$ come in figura \ref{fig:ottofonia}
+Abbiamo visto quindi che lo stesso standard sulla sulla collocazione spaziale dei diffusori di solito viene mantenuta dalla fase di produzione a quella di ascolto ma prima ho accennato del fatto che non è sempre così, infatti è possibile ascoltare in un impianto configurato secondo una certa specifica un contenuto sonoro non creato per esso, questo perché esistono degli algoritmi che permettono di convertire un formato audio tipico di una configurazione in un altro
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[scale=0.70]{figures/cubo4.png}
-	\caption {Configurazione ottofonica tridimensionale}
-	\label{fig:ottofonia}
-	\end{figure}
-
-\section{Format audio object-oriented}
+Per fare un esempio, la specifica ITU-R BS775-3 definisce il modo in cui posso adattare 
+\section{Formato audio object-oriented}
 
 Ora capito quali sono i principali standard di riproduzione andremo a spiegare come come queste configurazioni andranno pilotate, non ci interessa tanto il contenuto di ogni canale ma il fatto che:
 
@@ -203,43 +160,43 @@ Ora capito quali sono i principali standard di riproduzione andremo a spiegare c
 \item nei casi più complessi ad ogni altoparlante sarà assegnato un mix di canali dato da una matrice di decodifica proprietaria (esempio si guardi il funzionamento del decoder Dolby Pro Logic), si veda \cite{prologic}.
 \end{itemize}
 
-Un'altra importante considerazione è il fatto che lo stesso format che utilizzo in un sistema ''di grado maggiore'' (per esempio un 5.1) posso ''scalarlo in un sistema ''di grado minore'' (esempio uno stereo), questo perché essendo tutti questi degli standard è possibile fare un downgrade del format oppure un upgrade (solo però sotto alcuni artifici) per essere adattato al sistema di riproduzione; allora viene da chiedersi perché cambiare concezione e approdare in uno format object-oriented?\\
+Un'altra importante considerazione è il fatto che lo stesso formato che utilizzo in un sistema ''di grado maggiore'' (per esempio un 5.1) posso ''scalarlo in un sistema ''di grado minore'' (esempio uno 2.0), questo perché essendo tutti questi degli standard è possibile fare un downgrade del formato oppure un upgrade (solo però sotto alcuni artifici) per essere adattato al sistema di riproduzione; allora viene da chiedersi perché cambiare concezione e approdare in uno formato object-oriented?
 
-La domanda trova facile risposta nel fatto che questi giochi di upgrade o downgrade si possono fare solo su sistemi che hanno una certo grado di compatibilità (ad esempio i sistemi Dolby) e se questo avvenisse dovrei comunque prendere un format, codificarlo in un format diciamo ''generale'' e riadattarlo decodificandolo nel format che piloterà la mia riproduzione.\\
+La domanda trova facile risposta nel fatto che questi giochi di upgrade o downgrade si possono fare solo su sistemi che hanno una certo grado di compatibilità (ad esempio i sistemi Dolby) e se questo avvenisse dovrei comunque prendere un formato, codificarlo in un formato diciamo ''generale'' e riadattarlo decodificandolo nel formato che piloterà la mia riproduzione.
 
-Allora la domanda sorge spontanea, perché non creare uno format audio generale?\\
+Allora la domanda sorge spontanea, perché non creare uno formato audio generale?
 
-La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello format di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a parlare di come Dolby é riuscita incanalare gli oggetti e la relativa informazione spaziale dentro questo format.\\
+La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello formato di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a parlare di come Dolby é riuscita incanalare gli oggetti e la relativa informazione spaziale dentro questo formato.
 
-Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix del prodotto per passare dal contenuto dei singoli canali al format di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello format audio stereo con peso costituito dalla funzione di panpot deciso per ogni canale, questo succede anche in configurazioni più complicate come il 5.1 l'unica differenza è che panpot non sarà più in una dimensione ma in due\footnote{Esiste una funzione di panpot standard per ogni configurazione di riproduzione.}.\\
+Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix del prodotto per passare dal contenuto dei singoli canali al formato di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello formato audio 2.0 con peso costituito dalla funzione di panpot deciso per ogni canale, questo succede anche in configurazioni più complicate come il 5.1 l'unica differenza è che panpot non sarà più in una dimensione ma in due\footnote{Esiste una funzione di panpot standard per ogni configurazione di riproduzione.}.
 
-L'idea della Dolby invece è stata quella di fermarsi prima della fase di downmix (almeno per quanto riguarda il contenuto degli oggetti sonori) e di intraprendere una strada diversa:\\
+L'idea della Dolby invece è stata quella di fermarsi prima della fase di downmix (almeno per quanto riguarda il contenuto degli oggetti sonori) e di intraprendere una strada diversa:
 
-Prima di tutto si devono preparare gli oggetti sonori esattamente come si vuole siano riprodotti, in secondo luogo si dispongono questi oggetti in uno spazio di riproduzione virtuale creato appositamente da un qualche software o plugin nel quale a ogni oggetto verrà assegnato un punto preciso nello spazio attraverso delle coordinate spaziali.\\
+Prima di tutto si devono preparare gli oggetti sonori esattamente come si vuole siano riprodotti, in secondo luogo si dispongono questi oggetti in uno spazio di riproduzione virtuale creato appositamente da un qualche software o plugin nel quale a ogni oggetto verrà assegnato un punto preciso nello spazio attraverso delle coordinate spaziali.
 
 Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come concretamente implementare questo nuovo procedimento.
 
 
 
-\chapter{Spazilizzatore 3D e Format MDA}\label{dolby}
+\chapter{Spazilizzatore 3D e Formato MDA}\label{dolby}
 
-In questo capitolo andremo a spiegare concretamente come possiamo creare questo format audio ad oggetti e come in fase di post produzione posso spazializzare il mio contenuto sonoro.\\
+In questo capitolo andremo a spiegare concretamente come possiamo creare questo formato audio ad oggetti e come in fase di post produzione posso spazializzare il mio contenuto sonoro.
 
-Come accennato prima in fase di post-produzione non usiamo più il solito panner installato in banchi mixer o in software DAW in quanto essi sia che siano stereo o 5.1 o quello che vogliamo, non hanno una spazializzazione a oggetti, quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).\\
+Come accennato prima in fase di post-produzione non usiamo più il solito panner installato in banchi mixer o in software DAW in quanto essi sia che siano 2.0 o 5.1 o quello che vogliamo, non hanno una spazializzazione a oggetti, quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).
 
-Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come format quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnica di spazializzazione soggetta a brevetto, essa é diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto format proprietari simili ma sempre vincolati al brevetto, format quali Auro3D per citarne uno.\\
+Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come formato quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnica di spazializzazione soggetta a brevetto, essa é diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto formato proprietari simili ma sempre vincolati al brevetto, formato quali Auro3D per citarne uno.
 
-Noi invece ricerchiamo qualcosa che sia un format open e libero in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un format open che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.\\
+Noi invece ricerchiamo qualcosa che sia un formato open e libero in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un formato open che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.
 
-\section{Format MDA}
+\section{Formato MDA}
 
-Si veda \cite{mda} per la documentazione riguardante questo paragrafo.\\
+Si veda \cite{mda} per la documentazione riguardante questo paragrafo.
 
-Il gioco che sta alla base di questo format è la scrittura di \textbf{metadati} contenenti gli attributi dell'oggetto sonoro da spazializzare, questo format essendo principalmente stato creato per il cinema avrà attributi che per la sola riproduzione musicale sono in eccesso ma di questo ne parleremo dopo.\\
+Il gioco che sta alla base di questo formato è la scrittura di \textbf{metadati} contenenti gli attributi dell'oggetto sonoro da spazializzare, questo formato essendo principalmente stato creato per il cinema avrà attributi che per la sola riproduzione musicale sono in eccesso ma di questo ne parleremo dopo.
 
 Questi attributi sono:
 \begin{itemize}\label{aaa}
-\item \textbf{Coordinate Sferiche}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).\\
+\item \textbf{Coordinate Sferiche}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).
 
 Come sistema di coordinate abbiamo l'asse $X$ posto di fronte all'ascoltatore, l'asse $Y$ posto di fianco e l'asse $Z$ posto verso l'alto, quindi definiti i valori $x,y$ e $z$ su queste rette possiamo ricavare un angolo di azimut $\theta$, un angolo di elevazione $\phi$ e un raggio $r$, posso quindi trasformare le coordinate cartesiane in sferiche in questo modo:
 
@@ -278,9 +235,9 @@ r = \sqrt{x^2 +y^2 +z^2 }\\
 
 \end{itemize}
 
-Questi sono i principali parametri scritti nei metadati che ci servono per la spazializzazione, però è facile pensare che se l'oggetto si muove nello spazio o cambia dimensioni, il contenuto dei suoi metadati cambia anch'esso nel tempo, quindi il format prevede di racchiude in un nuovo oggetto chiamato ''\textbf{Object-Fragment}'' tutti i metadati descritti sopra (che per tutto lo svolgimento temporale del object fragment rimarranno inalterati) con più l'aggiunta di alcuni parametri come l'\textbf{ID} (identificativo oggetto) e i sample dell'oggetto sonoro da riprodurre.\\
+Questi sono i principali parametri scritti nei metadati che ci servono per la spazializzazione, però è facile pensare che se l'oggetto si muove nello spazio o cambia dimensioni, il contenuto dei suoi metadati cambia anch'esso nel tempo, quindi il formato prevede di racchiude in un nuovo oggetto chiamato ''\textbf{Object-Fragment}'' tutti i metadati descritti sopra (che per tutto lo svolgimento temporale del object fragment rimarranno inalterati) con più l'aggiunta di alcuni parametri come l'\textbf{ID} (identificativo oggetto) e i sample dell'oggetto sonoro da riprodurre.
 
-Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di richiamare gli object-fragment quando servono, essa è suddivisa in segmenti temporali che sono dati da $\dfrac{1}{f_c}$ dove $f_c$ è la frequenza di campionamento impostata per la totalità degli oggetti sonori e dove a ogni segmento è associato una lista di ID che richiama object-fragment da riprodurre, un esempio esplicativo è dato dallo schema \ref{fig:object}\\
+Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di richiamare gli object-fragment quando servono, essa è suddivisa in segmenti temporali che sono dati da $\dfrac{1}{f_c}$ dove $f_c$ è la frequenza di campionamento impostata per la totalità degli oggetti sonori e dove a ogni segmento è associato una lista di ID che richiama object-fragment da riprodurre, un esempio esplicativo è dato dallo schema \ref{fig:object}
 
 \begin{figure}[htbp]
 	\centering
@@ -288,7 +245,7 @@ Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di 
 	\includegraphics[scale=0.50]{figures/object1.png}\\
 	\includegraphics[scale=0.50]{figures/object2.png}\\
 	\includegraphics[scale=0.50]{figures/object3.png}
-	\caption {Schema esplicativo funzionamento format MDA}
+	\caption {Schema esplicativo funzionamento formato MDA}
 	\label{fig:object}
 	\end{figure}
 
@@ -302,29 +259,29 @@ Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di 
 
 Da notare che è presente anche un LFE-Object in cui non è segnata la posizione, questo perché data la natura omnidirezionale delle basse frequenze non avrebbe senso collocarle spazialmente e anche perché solo il/i subwoofer sono in grado di riprodurre tali frequenze.
 
-\subsection{Format MDA per riproduzione audio}
+\subsection{Formato MDA per riproduzione audio}
 
-Qui faccio una piccola annotazione personale, nella maggior parte dei casi quando si fa musica in studio di registrazione è abbastanza difficile che abbiamo oggetti sonori in movimento e di dimensioni che variano nel tempo, quindi si potrebbe fare una piccola modifica al format in modo da alleggerire il successivo rendering per creare fisicamente lo spazio sonoro.\\
+Qui faccio una piccola annotazione personale, nella maggior parte dei casi quando si fa musica in studio di registrazione è abbastanza difficile che abbiamo oggetti sonori in movimento e di dimensioni che variano nel tempo, quindi si potrebbe fare una piccola modifica al formato in modo da alleggerire il successivo rendering per creare fisicamente lo spazio sonoro.
 
-Sostanzialmente abbiamo tre tipi di oggetti sonori in musica: oggetti fermi, oggetti che ''balzano'' tra due punti spaziali ed oggetti costituiti da effetti vari (il più importante per la spazializzazione è il riverbero e per questo ci occuperemo solo di questo); tutti questi oggetti possono essere pensati come oggetti statici quindi che hanno coordinate spaziali e dimensioni fisse, in questo caso si potrebbe alleggerire il format in quanto non avrebbe più senso parlare di object-fragment (ricordiamo che se gli attributi di spazializzazione cambiano allora si avranno diversi object-fragment, uno per ogni configurazione spaziale) in quanto per l'intera esecuzione del brano si avrebbe solo un object-fragment che fissa la posizione e la grandezza dell'oggetto, quindi si possono direttamente assegnare queste due ultime all'oggetto sonoro senza passare per ulteriori sottodivisioni.\\
+Sostanzialmente abbiamo tre tipi di oggetti sonori in musica: oggetti fermi, oggetti che ''balzano'' tra due punti spaziali ed oggetti costituiti da effetti vari (il più importante per la spazializzazione è il riverbero e per questo ci occuperemo solo di questo); tutti questi oggetti possono essere pensati come oggetti statici quindi che hanno coordinate spaziali e dimensioni fisse, in questo caso si potrebbe alleggerire il formato in quanto non avrebbe più senso parlare di object-fragment (ricordiamo che se gli attributi di spazializzazione cambiano allora si avranno diversi object-fragment, uno per ogni configurazione spaziale) in quanto per l'intera esecuzione del brano si avrebbe solo un object-fragment che fissa la posizione e la grandezza dell'oggetto, quindi si possono direttamente assegnare queste due ultime all'oggetto sonoro senza passare per ulteriori sottodivisioni.
 
 Per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per il riverbero per esempio basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza e apertura; per quanto riguarda gli oggetti ''balzanti'' (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto per il fatto che l'intensità sonora $I'=\alpha \ \ (0\leq \alpha \leq 1)$ di un oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ é l'intensità totale che dovrebbe avere originariamente l'oggetto).
 
 \section{Spazializzatore 3D}
 
-Precedentemente abbiamo visto come è costituito il format MDA ora non ci rimane di spiegare come produrre materiale compatibile con questo format.\\
+Precedentemente abbiamo visto come è costituito il formato MDA ora non ci rimane di spiegare come produrre materiale compatibile con questo formato.
 
-Come spiegato, nel workflow di produzione di materiale audio 3D bisognerà fermarsi prima del mixdown (sia che sia stereo, 5.1 ecc...) e bisognerà prendere un qualche software che sia in grado di sostituire il mio mixer e sostituirlo con uno 3D, diverse aziende stanno sviluppando software di questo tipo in quanto vogliono interfacciarsi a questo format ed in qualche modo creare un collegamento tra il loro format proprietario e l'MDA; per esempio la Dolby ha un panner 3D per Dolby Atmos che si interfaccia con l'MDA, anche la Auro Technologies ha adottato la stessa politica o in alternativa la casa Fairlight ha creato uno spazializzatore di nome 3DAW (secondo me molto interessante) che supporta anche essa l'MDA.\\
+Come spiegato, nel workflow di produzione di materiale audio 3D bisognerà fermarsi prima del mixdown (sia che sia 2.0, 5.1 ecc...) e bisognerà prendere un qualche software che sia in grado di sostituire il mio mixer e sostituirlo con uno 3D, diverse aziende stanno sviluppando software di questo tipo in quanto vogliono interfacciarsi a questo formato ed in qualche modo creare un collegamento tra il loro formato proprietario e l'MDA; per esempio la Dolby ha un panner 3D per Dolby Atmos che si interfaccia con l'MDA, anche la Auro Technologies ha adottato la stessa politica o in alternativa la casa Fairlight ha creato uno spazializzatore di nome 3DAW (secondo me molto interessante) che supporta anche essa l'MDA.
 
-Detto questo ho ricercato uno spazializzatore adatto e la mia scelta è ricaduta proprio sull'\textbf{MDA creator} proprietaria della DTS in quanto è la più intuitiva e la miglior scelta per integrazione (in quanto essa ha creato sia il panner che il format).\\
+Detto questo ho ricercato uno spazializzatore adatto e la mia scelta è ricaduta proprio sull'\textbf{MDA creator} proprietaria della DTS in quanto è la più intuitiva e la miglior scelta per integrazione (in quanto essa ha creato sia il panner che il formato).
 
-Tutte le informazioni su MDA creator verranno prese dal suo manuale \cite{creator}.\\
+Tutte le informazioni su MDA creator verranno prese dal suo manuale \cite{creator}.
 
-Questo plugin disponibile solo per Protools è di semplice comprensione, come da manuale bisogna mettere in insert in ogni traccia questo plugin (condizione necessaria è che tutte le tracce devono avere la stessa lunghezza), poi aprendo l'interfaccia del panner bisognerà posizionare ogni oggetto nel punto in cui si desidera e con divergenza e apertura voluta (si veda il paragrafo \ref{aaa} per sapere i parametri del format), logicamente questi parametri possono essere automatizzati per spostare e modificare l'oggetto nel tempo.
+Questo plugin disponibile solo per Protools è di semplice comprensione, come da manuale bisogna mettere in insert in ogni traccia questo plugin (condizione necessaria è che tutte le tracce devono avere la stessa lunghezza), poi aprendo l'interfaccia del panner bisognerà posizionare ogni oggetto nel punto in cui si desidera e con divergenza e apertura voluta (si veda il paragrafo \ref{aaa} per sapere i parametri del formato), logicamente questi parametri possono essere automatizzati per spostare e modificare l'oggetto nel tempo.
 
-Inoltre si possono creare dei ''Bed Object'' che sarebbero oggetti i quali potranno essere direttamente codificati nel sistema di riproduzione scelto (esempio classico è la colonna sonora in 5.1 nei film) ai quali verranno sommati gli oggetti veri e propri del format e l'LFE-Object per gli effetti a bassa frequenza.\\
+Inoltre si possono creare dei ''Bed Object'' che sarebbero oggetti i quali potranno essere direttamente codificati nel sistema di riproduzione scelto (esempio classico è la colonna sonora in 5.1 nei film) ai quali verranno sommati gli oggetti veri e propri del formato e l'LFE-Object per gli effetti a bassa frequenza.
 
-Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di output, quella che interessa a noi è la modalità di esportazione con mda file: questa scelta ci porta alla creazione dei file \textbf{.map, .mix} e \textbf{.mda} dove quest'ultimo è proprio il file contenente i metadati e gli oggetti sonori proposti in questo format.\\
+Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di output, quella che interessa a noi è la modalità di esportazione con mda file: questa scelta ci porta alla creazione dei file \textbf{.map, .mix} e \textbf{.mda} dove quest'ultimo è proprio il file contenente i metadati e gli oggetti sonori proposti in questo formato.
 
 \begin{figure}[htbp]
 	\centering
@@ -334,22 +291,22 @@ Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di outpu
 	\label{fig:mdacreator}
 	\end{figure}
 
-\chapter{Tecnica VBAP e relativa decodifica del format MDA}
+\chapter{Tecnica VBAP e relativa decodifica del formato MDA}
 
-In questo capitolo parleremo invece di come da un format MDA posso passare a una configurazione di riproduzione usuale, mediante la tecnica VBAP.\\
+In questo capitolo parleremo invece di come da un formato MDA posso passare a una configurazione di riproduzione usuale, mediante la tecnica VBAP.
 
 \section{Tecnica VBAP}
 
 Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione che permette di localizzare una sorgente sonora attraverso la differenza di intensità emessa tra due o più speaker, mi spiego meglio:
 
-uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepisca una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due speaker e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto spaziale previsto dalla IID.\\
+uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepisca una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due speaker e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto spaziale previsto dalla IID.
 
-Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due speaker, se invece vogliamo fare un 3D allora serviranno un minimo di 3 speaker posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate, per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.\\
+Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due speaker, se invece vogliamo fare un 3D allora serviranno un minimo di 3 speaker posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate, per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.
 
-E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).\\
+E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).
 
 \subsection{VBAP 2D}\label{c}
-Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.\\
+Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.
 
 \begin{figure}[htbp]
 	\centering
@@ -410,7 +367,7 @@ Logicamente introduciamo un coefficiente $C$ che indica il gain complessivo (ci 
 \label{eq:ffff}
 \end{equation}
 
-Sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione stereo, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà ''selezionare'' solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:\\
+Sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione 2.0, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà ''selezionare'' solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:
 
 Consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\theta_{0,n}$ tali che $0°\leq \theta_{0,1},\ \theta_{0,2},\ \ldots,\ \theta_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\theta^{\prime}$ dovrà verificarsi che $\theta_{0,m}\leq \theta^{\prime} \leq \theta_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere:
 
@@ -431,7 +388,7 @@ Consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad u
 
 \subsection{VBAP 3D}
 
-Capito qual'è il modello e l'algoritmo di implementazione del VBAP in due dimensioni estenderemo il concetto in tre dimensioni.\\
+Capito qual'è il modello e l'algoritmo di implementazione del VBAP in due dimensioni estenderemo il concetto in tre dimensioni.
 
 La più piccola configurazione di tre altoparlanti consiste nel disporli ai vertici di un triangolo equilatero come in figura \ref{fig:triangolo}, quindi ora basta prendere la formule usate sopra ed estenderle con la dimensione $\boldsymbol{Z}$ introducendo quindi l'angolo $\phi$ che indica l'elevazione dal piano orizzontale.
 
@@ -465,7 +422,7 @@ Anche in questo caso possiamo calcolare i tre coefficienti scalati in questa man
 \label{iiii}
 \end{equation}
 
-In questo caso fare un esempio non è possibile in quanto il VBAP in tre dimensioni è molto legato alla geometria di implementazione e la trigonometria sulla sfera è analiticamente pesante anche se possibile, quindi si preferisce lasciare al calcolatore il compito del calcolo vettoriale senza lasciare a noi il compito di tradurre il tutto in funzioni angolari, si veda per esempio il passaggio dalla formula \ref{eq:dddd} alla formula \ref{eq:eeee}\\
+In questo caso fare un esempio non è possibile in quanto il VBAP in tre dimensioni è molto legato alla geometria di implementazione e la trigonometria sulla sfera è analiticamente pesante anche se possibile, quindi si preferisce lasciare al calcolatore il compito del calcolo vettoriale senza lasciare a noi il compito di tradurre il tutto in funzioni angolari, si veda per esempio il passaggio dalla formula \ref{eq:dddd} alla formula \ref{eq:eeee}
 
 Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire tutto l'angolo solido, anche qui il nostro algoritmo dovrà ''selezionare'' gli altoparlanti che saranno imputati alla riproduzione del nostro oggetto sonoro, gli stessi che delimiteranno la calotta attiva che racchiude la sorgente virtuale.
 
@@ -477,21 +434,21 @@ Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire 
 	\end{figure}
 
 
-\section{Integrazione del formato MDA con la tecnica VBAP}
+\section{Integrazione del formatoo MDA con la tecnica VBAP}
 
-Ricapitolando siamo arrivati al punto di sapere cos'è il format MDA e che cos'è la tecnica di spazializzazione VBAP,
-il passo successivo è riuscire ad integrare i due insieme, la cosa non è difficile ma procediamo per gradi.\\
+Ricapitolando siamo arrivati al punto di sapere cos'è il formato MDA e che cos'è la tecnica di spazializzazione VBAP,
+il passo successivo è riuscire ad integrare i due insieme, la cosa non è difficile ma procediamo per gradi.
 
 N.B) nel corso di questo capitolo
-ricordiamo che il format MDA contiene oggetti sonori a cui vengono associati metadati contenenti posizione nelle tre dimensioni e grandezza, essi devono essere spacchettati e adattati in modo da essere letti dall'algoritmo del VBAP.\\
+ricordiamo che il formato MDA contiene oggetti sonori a cui vengono associati metadati contenenti posizione nelle tre dimensioni e grandezza, essi devono essere spacchettati e adattati in modo da essere letti dall'algoritmo del VBAP.
 
-Un concetto fondamentale da capire è che essendo le informazioni, nei metadati, relative a uno spazio tridimensionale, esse si adatteranno benissimo a una riproduzione VBAP tridimensionale con la somma delle calotte attive coprenti l'intera superficie sferica, se il tipo di riproduzione non è questo allora bisognerà adattare i metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.\\
+Un concetto fondamentale da capire è che essendo le informazioni, nei metadati, relative a uno spazio tridimensionale, esse si adatteranno benissimo a una riproduzione VBAP tridimensionale con la somma delle calotte attive coprenti l'intera superficie sferica, se il tipo di riproduzione non è questo allora bisognerà adattare i metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.
 
 Andremo ora a vedere come integrare le due cose per alcune delle le configurazioni del capitolo \ref{metodi}
 
 \subsection{Adattamento MDA in configurazioni tridimensionali}
 
-Per prima cosa facciamolo per le geometrie tridimensionali, per queste non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.\\
+Per prima cosa facciamolo per le geometrie tridimensionali, per queste non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.
 
 Introduciamo due raggi: $r_0$ che sarebbe la lunghezza del vettore congiungente l'ascoltatore con uno degli speaker (non importa quale dato che tutti gli speaker sono posizionati sulla superficie di una sfera quindi si avranno tutti raggi uguali) e definiamo $r_1$ come la lunghezza del vettore congiungente l'ascoltatore e il più vicino degli oggetti virtuali che si vuole creare, premettendo che io posso solo riprodurre sorgenti virtuali a partire dalla superficie della sfera verso l'esterno, allora qualsiasi di questi che avranno $r_n < r_0$ non sarò in grado di riprodurli nella maniera corretta, quindi dovrò attuare una trasformazione in modo da lasciare inalterata la distanza relativa fra le sorgenti virtuali in questo modo:
 
@@ -506,7 +463,7 @@ se\ \  r_1 \geq r_0\ \ \Rightarrow \ \ r_n^{\prime} = r_n\\
 
 fatto questo non ci rimane che intervenire sul fattore $C$ introdotto nel paragrafo \ref{c} in quanto esso contribuisce alla sensazione di lontananza, mi spiego meglio:
 
-principalmente sono quattro i fattori che intercorrono alla corretta ricostruzione in lontananza di un oggetto, essi sono l'intensità sonora, la colorazione timbrica, il rapporto riverbero/segnale diretto e il delay temporale \footnote{La spiegazione del perché di tutti questi parametri richiederebbe molto tempo quindi diamo per buone queste assunzioni.}, l'informazione relativa agli ultimi tre parametri possono essere contenute direttamente nel segnale audio dell'oggetto sonoro, invece noi dobbiamo considerare l'intensità sonora in quanto legata alla distanza dall'oggetto all'ascoltatore e quindi al suo raggio\footnote{In realtà ogni modifica del raggio si dovrebbe ripercuote anche sugli altri tre parametri cosa che nel nostro caso non avviene essendo questi ultimi tre contenuti nell'audio dell'oggetto sonoro, siamo quindi di fronte ad un'errore ma che possiamo considerare trascurabile visto l'entità ridotta delle trasformazioni sui raggi.}.\\
+principalmente sono quattro i fattori che intercorrono alla corretta ricostruzione in lontananza di un oggetto, essi sono l'intensità sonora, la colorazione timbrica, il rapporto riverbero/segnale diretto e il delay temporale \footnote{La spiegazione del perché di tutti questi parametri richiederebbe molto tempo quindi diamo per buone queste assunzioni.}, l'informazione relativa agli ultimi tre parametri possono essere contenute direttamente nel segnale audio dell'oggetto sonoro, invece noi dobbiamo considerare l'intensità sonora in quanto legata alla distanza dall'oggetto all'ascoltatore e quindi al suo raggio\footnote{In realtà ogni modifica del raggio si dovrebbe ripercuote anche sugli altri tre parametri cosa che nel nostro caso non avviene essendo questi ultimi tre contenuti nell'audio dell'oggetto sonoro, siamo quindi di fronte ad un'errore ma che possiamo considerare trascurabile visto l'entità ridotta delle trasformazioni sui raggi.}.
 
 Come detto sempre nel paragrafo \ref{c} il fattore $C$ è legato al gain complessivo dell'oggetto ma quest'ultimo posizionato sulla superficie della sfera, ora sappiamo dalla formula \ref{jjjj} che ogni oggetto è posizionato o sulla sfera o al suo esterno quindi possiamo prenderci la libertà di scalare il coefficiente $C$ in base alla distanza dell'oggetto dalla sfera in questo modo:
 
@@ -519,7 +476,7 @@ f^{\prime}=1 & per\ r_n^{\prime}=r_0
 \label{kkkk}
 \end{equation}
 
-In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della distanza e quindi nel nostro caso come $\frac{1}{r_n^{\prime}-r_0}$ ma facendo così avremmo dei problemi di divergenza per $r_n^{\prime}=r_0$ e valori sballati per la differenza $<1$, quindi in accordo con quanto scritto in \cite{distanza} introduco una funzione $f^{\prime}$ che approssima il più possibile la funzione originale ma che risolve totalmente i problemi nelle zone difficili (figura \ref{fig:distance}).\\
+In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della distanza e quindi nel nostro caso come $\frac{1}{r_n^{\prime}-r_0}$ ma facendo così avremmo dei problemi di divergenza per $r_n^{\prime}=r_0$ e valori sballati per la differenza $<1$, quindi in accordo con quanto scritto in \cite{distanza} introduco una funzione $f^{\prime}$ che approssima il più possibile la funzione originale ma che risolve totalmente i problemi nelle zone difficili (figura \ref{fig:distance}).
 
 \begin{figure}[htbp]
 	\centering
@@ -528,17 +485,17 @@ In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della di
 	\label{fig:distance}
 	\end{figure}
 
-Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non in quanto bisogna tener conto della distanza degli speaker ed è molto difficile che si abbiano tutti gli oggetti alla stessa distanza.\\
+Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non in quanto bisogna tener conto della distanza degli speaker ed è molto difficile che si abbiano tutti gli oggetti alla stessa distanza.
 
 \subsection{Adattamento MDA in configurazioni planari}
 
-Introduciamo ora un problema aggiuntivo: come faccio a riprodurre un programma sonoro tridimensionale in un impianto planare? questa domanda è di difficile risposta in quanto la riproduzione o meno tramite il VBAP in due dimensioni dipende dalla posizione dell'oggetto, mi spiego meglio:\\
+Introduciamo ora un problema aggiuntivo: come faccio a riprodurre un programma sonoro tridimensionale in un impianto planare? questa domanda è di difficile risposta in quanto la riproduzione o meno tramite il VBAP in due dimensioni dipende dalla posizione dell'oggetto, mi spiego meglio:
 
-Nei metadati del format MDA sono presenti gli angoli $\theta, \phi$ e il raggio $r$ che identificano la posizione, quello che ci da informazioni sull'altezza è l'angolo (appunto detto di elevazione) $\phi$, ponendo semplicemente $\phi=0°$ sulla carta elimineremmo la dimensione verticale ma comprometteremmo anche la percezione degli oggetti originariamente posti sopra l'ascoltatore.\\
+Nei metadati del formato MDA sono presenti gli angoli $\theta, \phi$ e il raggio $r$ che identificano la posizione, quello che ci da informazioni sull'altezza è l'angolo (appunto detto di elevazione) $\phi$, ponendo semplicemente $\phi=0°$ sulla carta elimineremmo la dimensione verticale ma comprometteremmo anche la percezione degli oggetti originariamente posti sopra l'ascoltatore.
 
-Per esempio, mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90° $ e un angolo $\phi=89°$, esso praticamente si trova quasi perfettamente al disopra della nostra testa, a primo acchito verrebbe da pensare di porre semplicemente quest'ultimo a $0$ ma si avrebbe uno spostamento netto dell'oggetto alla completa sinistra dell'ascoltatore il che è incongruente con la scelta iniziale del produttore, quindi si capisce che questa strada è concettualmente sbagliata.\\
+Per esempio, mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90° $ e un angolo $\phi=89°$, esso praticamente si trova quasi perfettamente al disopra della nostra testa, a primo acchito verrebbe da pensare di porre semplicemente quest'ultimo a $0$ ma si avrebbe uno spostamento netto dell'oggetto alla completa sinistra dell'ascoltatore il che è incongruente con la scelta iniziale del produttore, quindi si capisce che questa strada è concettualmente sbagliata.
 
-Contrariamente un oggetto posto a $	\theta= 90° $ con un angolo $\phi=45°$ e $r=6m$ posso tranquillamente pensarlo come proveniente solamente da sinistra visto la sua distanza dall'ascoltatore, quindi riproducibile con un VBAP in due dimensioni.\\
+Contrariamente un oggetto posto a $	\theta= 90° $ con un angolo $\phi=45°$ e $r=6m$ posso tranquillamente pensarlo come proveniente solamente da sinistra visto la sua distanza dall'ascoltatore, quindi riproducibile con un VBAP in due dimensioni.
 
 Ma vediamo ora come faccio a selezionare gli oggetti ''buoni e cattivi'' per il discorso appena fatto: per prima cosa sposto tutti gli oggetti della semisfera inferiore sopra l'ascoltatore in questo modo:
 
@@ -554,15 +511,15 @@ r_{n,shadow}=r_n^{\prime} cos(\phi_{n,top}) \geq r_0
 \label{zzz}
 \end{equation}
 
-Tutti gli altri oggetti invece no, ma una soluzione a questi ultimi potrebbe essere di creare un ascolto immersivo per questi sfruttando tutti gli speaker del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano orizzontale, per esempio, nel primo caso sopra, la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due speaker a sinistra dovrebbero riprodurre la metà più un poco di potenza sonora attribuita all'oggetto, invece gli speaker a destra la differenza per arrivare ad uno.\\
+Tutti gli altri oggetti invece no, ma una soluzione a questi ultimi potrebbe essere di creare un ascolto immersivo per questi sfruttando tutti gli speaker del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano orizzontale, per esempio, nel primo caso sopra, la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due speaker a sinistra dovrebbero riprodurre la metà più un poco di potenza sonora attribuita all'oggetto, invece gli speaker a destra la differenza per arrivare ad uno.
 
-Un oggetto invece posto esattamente sopra l'ascoltatore potrebbe essere ricreato inviando un segnale a tutti gli $n$ speaker scalato come $\frac{1}{\sqrt{n}}$\\
+Un oggetto invece posto esattamente sopra l'ascoltatore potrebbe essere ricreato inviando un segnale a tutti gli $n$ speaker scalato come $\frac{1}{\sqrt{n}}$
 
 Sicuramente in letteratura una tecnica che risolva la situazione appena citata esiste già, ma non essendo inerente alla spiegazione della tecnica VBAP verrà data già per assodata, quindi non discussa in questo testo.
 
 \subsection{Adattamento MDA in configurazione lineare}
 
-Per ultimo vediamo come adattare il format alla configurazione monodimensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema stereo posto di fronte all'ascoltatore, bisogna qui stravolgere il format in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici.\\
+Per ultimo vediamo come adattare il formato alla configurazione monodimensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema 2.0 posto di fronte all'ascoltatore, bisogna qui stravolgere il formato in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici.
 
 Come prima cosa dovrò spostare tutti gli oggetti che originariamente sono posti dietro (quindi con angoli compresi tra $90°$ e $270°$) davanti all'ascoltatore operando una trasformazione sull'angolo azimutale:
 
@@ -571,9 +528,9 @@ Come prima cosa dovrò spostare tutti gli oggetti che originariamente sono posti
 \label{llll}
 \end{equation}
 
-In questo modo tutti gli angoli azimutali di ogni oggetto sarà posto tra $-90° \leq \theta_{n,front} \leq +90°$\\
+In questo modo tutti gli angoli azimutali di ogni oggetto sarà posto tra $-90° \leq \theta_{n,front} \leq +90°$
 
-Abbiamo così ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma la configurazione stereo prevede al massimo una riproduzione di oggetti a $\pm 30°$ data dalla limitata ampiezza angolare $\pm \theta_0$ degli speaker, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0\ e \pm 30°$.\\
+Abbiamo così ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma la configurazione 2.0 prevede al massimo una riproduzione di oggetti a $\pm 30°$ data dalla limitata ampiezza angolare $\pm \theta_0$ degli speaker, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0\ e \pm 30°$.
 
 Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli angoli ma accade che gli oggetti posti sullo scenario frontale vengono schiacciati troppo verso l'origine, quindi ho optato per la funzione seno (usata come peso) che schiacciasse gli oggetti posti sui lati e che lasciasse il più inalterati possibile gli angoli degli oggetti posti di fronte, in più il tutto viene ulteriormente scalato per il coseno dell'angolo di elevazione per tenere conto di quest'ultimo e della proiezione del vettore sul piano orizzontale, in questo modo:
 
@@ -586,7 +543,7 @@ Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli
 
 
 
-\subsection{Esempio di integrazione con sistemi quadrifonico, 5.1 e stereo}
+\subsection{Esempio di integrazione con sistemi quadrifonico, 5.1 e 2.0}
 
 Per tutti gli esempi che farò vorrò riprodurre tre oggetti con seguenti coordinate sferiche per far vedere ogni caso:\\
 
@@ -637,9 +594,9 @@ g_{(3,obj\ 2)} = 0,64 & g_{(3,obj\ 2)scaled} = 0,651\\
 \end{equation}
 \\
 
-Passiamo ora all'adattamento alla configurazione 5.1\\
+Passiamo ora all'adattamento alla configurazione 5.1
 
-Una possibile configurazione di impianto 5.1 potrebbe essere la seguente:\\
+Una possibile configurazione di impianto 5.1 potrebbe essere la seguente:
 
 \begin{tabular}{|c|c|c|}
 \hline
@@ -656,7 +613,7 @@ speaker 5 & $\theta_{0,4}=-30°$ & $r_0=2m$\\
 \end{tabular} \\
 \\
 
-Non ci rimane che operare nella stessa maniera utilizzata per la quadrifonia esposta appena sopra (infatti si applicheranno esattamente le stesse formule con l'unica differenza di avere dei $\theta_{0,n}$ visibilmente diversi), ricavo così i gain e i gain scalati degli speaker 2 e 1 (imputati alla riproduzione del primo oggetto) e 5 e 4 (imputati alla riproduzione del secondo):\\
+Non ci rimane che operare nella stessa maniera utilizzata per la quadrifonia esposta appena sopra (infatti si applicheranno esattamente le stesse formule con l'unica differenza di avere dei $\theta_{0,n}$ visibilmente diversi), ricavo così i gain e i gain scalati degli speaker 2 e 1 (imputati alla riproduzione del primo oggetto) e 5 e 4 (imputati alla riproduzione del secondo):
 
 \begin{equation}
 \begin{matrix}
@@ -686,9 +643,9 @@ g_{(3,obj\ 3)} = 1,55 & g_{(3,obj\ 3)scaled} = 0,499\\
 
 
 
-Per ultimo esempio vediamo il risultato dell'adattamento alla configurazione stereo.\\
+Per ultimo esempio vediamo il risultato dell'adattamento alla configurazione 2.0.
 
-Una configurazione possibile potrebbe essere la seguente:\\
+Una configurazione possibile potrebbe essere la seguente:
 
 \begin{tabular}{|c|c|c|}
 \hline
@@ -699,7 +656,7 @@ speaker 2 & $\theta_{0,2}=-30°$ & $r_0=2m$\\
 \end{tabular} \\
 \\
 
-Applicando rispettivamente la formula \ref{llll} e la formula \ref{mmmm} ottengo i seguenti risultati:\\
+Applicando rispettivamente la formula \ref{llll} e la formula \ref{mmmm} ottengo i seguenti risultati:
 
 
 \begin{tabular}{|c|c|}
@@ -738,11 +695,11 @@ g_{(2,obj\ 3)} = 0,46 & g_{(2,obj\ 3)scaled} = 0,349\\
 
 \chapter*{Conclusioni}
 
-Sviluppando questa tesi quindi, è stata affrontata bene la filosofia di implementazione dell'audio a oggetti e si è visto la sua utilità e versatilità nel campo del audio-video e del solo audio implementandola nelle più conosciute configurazioni di riproduzione.\\
+Sviluppando questa tesi quindi, è stata affrontata bene la filosofia di implementazione dell'audio a oggetti e si è visto la sua utilità e versatilità nel campo del audio-video e del solo audio implementandola nelle più conosciute configurazioni di riproduzione.
 
-Questo sviluppo però getta solo le basi per un suo impiego, si dovrò approfondire di più l'argomento per raffinarlo e renderlo anch'esso uno standard fruibile a tutti.\\
+Questo sviluppo però getta solo le basi per un suo impiego, si dovrò approfondire di più l'argomento per raffinarlo e renderlo anch'esso uno standard fruibile a tutti.
 
-Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del Format MDA in alcune configurazioni attraverso il VBAP, ma per la sua malleabilità l'audio ad oggetti si presta benissimo anche all'implementazione con la tecnica ambisonic, binaurale (nonché ambiophonic) e soprattutto con la tecnica WFS che potrà magari in futuro prendere piede nell'audio consumer, ma tutte queste sono storie in un'altra lettura.
+Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del formato MDA in alcune configurazioni attraverso il VBAP, ma per la sua malleabilità l'audio ad oggetti si presta benissimo anche all'implementazione con la tecnica ambisonic, binaurale (nonché ambiophonic) e soprattutto con la tecnica WFS che potrà magari in futuro prendere piede nell'audio consumer, ma tutte queste sono storie in un'altra lettura.
 
 
 
@@ -751,6 +708,7 @@ Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del Format
 \begin{thebibliography}{}
 
 \bibitem{5.1} \textit{https://www.itu.int/dms\_pubrec/itu-r/rec/bs/R-REC-BS.775-3-201208-I!!PDF-E.pdf}
+\bibitem{quadraphonic} \textit{http://www.dith.it/listing/master/dispense\%20Schiavoni/CSE10-08.pdf}
 \bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_Digital}
 \bibitem{prologic} \textit{https://it.wikipedia.org/wiki/Dolby\_Surround\_Pro\_Logic}
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}

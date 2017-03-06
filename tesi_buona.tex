@@ -84,7 +84,7 @@ Anno Accademico \textcolor{black}{2016/17}}}
 
 \chapter*{Abstract}
 
-L'obbiettivo di questa tesi è quello di implementare un algoritmo che permetta di riprodurre un contenuto sonoro object-oriented su una configurazione di riproduzione facilmente riscontrabile in un ambiente domestico.
+L'obbiettivo di questa tesi è quello di implementare un algoritmo che permetta di riprodurre un contenuto sonoro orientato agli oggetti su una configurazione di riproduzione facilmente riscontrabile in un ambiente domestico.
 
 In un primo momento, infatti, andrò a spiegare che cosa sono le configurazioni multicanale $2.0, 4.0$ e $5.1$ inoltre introdurrò l'audio object-oriented con particolare riguardo al formato ad oggetti Multi-Dimensional Audio MDA, in un secondo momento invece cercherò di implementare l'MDA nelle configurazioni multicanale descritte servendomi della tecnica di spazializzazione \textbf{Vector-Base Amplitude Panning VBAP} di cui spiegherò anche il funzionamento.
 
@@ -94,13 +94,23 @@ Infine farò degli esempi.
 
 \chapter{Dai canali audio agli oggetti sonori}
 
-Nel mondo odierno l'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto sonoro in ambiente domestico in modo semplice, per esempio basti pensare a chi ascolta un disco musicale in un impianto hi-fi o a chi invece gode dell'ascolto surround\footnote{Con surround si intende quel tipo di ascolto in cui l'ascoltatore è immerso nella scena sonora, per fare questo tipicamente si collocano diffusori ai lati e/o dietro l'ascoltatore} di un film in un impianto home-theater, in questi casi la persona interessata riproduce il contenuto sonoro originale con un impianto compatibile alla sua riproduzione ma questo fatto non è da prendere come una verità assoluta, in questo capitolo spiegherò meglio il perché.
+Premetto che in questo testo non affronterò tutti gli aspetti della produzione sonora e dell'ascolto, toccherò invece solo quegli aspetti che riguardano la collocazione spaziale degli oggetti sonori\footnote{Con oggetto sonoro intendo quell'entità che contiene l'informazione sonora registrata da un microfono o creata virtualmente che viene elaborata in fase di produzione singolarmente} trattando, quindi, le configurazioni spaziali dei diffusori in fase di produzione in studio e di ascolto a casa.
 
-Consideriamo inizialmente il primo esempio in cui ho parlato di disco, nella maggior parte dei casi in cui della musica sia creata in studio di registrazione si opera in modo che per tutta la sua produzione si rispetti un certo standard nella collocazione dei monitor all'interno dello spazio sonoro dello studio, stessa cosa dovrebbe fare l'ascoltatore per usufruire della stessa informazione musicale che si vuol trasmettere con l'ascolto del disco, infatti in questo caso sia i fonici che l'ascoltatore dovrebbero rispettare la collocazione dei diffusori secondo una configurazione 2.0 data dalla specifica \cite{5.1} per rimanere nello standard più comune di produzione e ascolto di contenuti puramente musicali.
+Nel mondo odierno l'avanzamento tecnologico ha permesso a tutti coloro che ne hanno voglia la possibilità di poter ascoltare un contenuto sonoro in ambiente domestico in modo semplice, basti pensare a chi ascolta un disco musicale in un impianto hi-fi o a chi invece gode dell'ascolto surround\footnote{Con surround si intende quel tipo di ascolto in cui l'ascoltatore è immerso nella scena sonora, per fare questo tipicamente si collocano diffusori ai lati e/o dietro l'ascoltatore} di un film in un impianto home-theater, in tutti questi casi la persona interessata possiede un prodotto sonoro che viene ascoltato attraverso l'impianto audio posseduto in casa, questo è possibile grazie ad una complessa catena di produzione e di ascolto sonoro che da la possibilità a tutti di poter ascoltare il contenuto esattamente come è stato creato.
 
-Stesso discorso si può fare per il secondo esempio riguardante l'ascolto surround di contenuti sonori di un film solo che in questo caso, sia in studio che a casa, si a avrà una configurazione adatta rispettivamente alla creazione e alla riproduzione di un suono surround tipico di una pellicola cinematografica, una configurazione possibile e che è la maggiore impiegata in ambito domestico è la 5.1 data anch'essa dalla specifica \cite{5.1}.
+Quello che sta alla base di tutta questa catena è il produttore, esso per riuscire a creare al meglio il contenuto e per dare la giusta collocazione spaziale agli oggetti sonori deve essere a conoscenza del modo in cui l'ascoltatore ascolta il suo prodotto, infatti esso adotterà un metodo di lavoro che prevede l'allestimento di un impianto audio in studio con le stesse specifiche spaziali (posizione e numero di diffusori) di quello che normalmente adotterebbe l'ascoltatore in casa per l'ascolto di quel contenuto, adottando questa soluzione è sicuro di creare un prodotto che ha la giusta collocazione spaziale di ogni oggetto sonoro e che l'ascoltatore senta la medesima cosa.
 
-Ora per la giusta comprensione di quello scritto sopra è d'obbligo fermarsi un attimo e percorrere brevemente quali sono le specifiche degli standard appena citati e introdurre la configurazione $4.0$ che tratterò in questa tesi.
+Successivamente, il produttore riverserà il contenuto sonoro codificato in certo formato\footnote{Con formato audio intendo il protocollo e le specifiche con cui è creato e memorizzato un contenuto sonoro all'interno di un supporto} all'interno di un supporto che verrà poi acquistato dall'ascoltatore e riprodotto in casa dal suo impianto, logicamente l'impianto deve avere un lettore in grado di poter supportare il formato e in grado (attraverso specifiche decodifiche) di associare a ogni diffusore un canale audio da riprodurre.
+
+Per fare un esempio consideriamo l'ascolto di un disco in un impianto hi-fi, nella maggior parte dei casi in cui della musica sia creata in studio di registrazione si opera in modo che per tutta la sua produzione si rispetti un certo standard nella collocazione dei monitor all'interno dello studio, stessa cosa dovrebbe fare l'ascoltatore a casa per usufruire della stessa informazione musicale, infatti in questo caso sia i fonici che l'ascoltatore dovrebbero rispettare lo standard dato dalla configurazione 2.0 contenuta nella specifica \cite{5.1} per rientrare nel modo più comune di produzione ed ascolto di contenuti puramente musicali.
+
+Stesso discorso si può fare per l'ascolto surround di contenuti sonori di un film solo che in questo caso, sia in studio che a casa, si a avrà una configurazione adatta rispettivamente alla creazione e alla riproduzione di un suono surround tipico di una pellicola cinematografica, una configurazione possibile e che è la maggiore impiegata in ambito domestico è la 5.1 data anch'essa dalla specifica \cite{5.1}.
+
+In tutti due i casi il produttore e l'ascoltatore seguono lo stesso standard di collocazione spaziale dei diffusori , quindi di conseguenza quest'ultimo ascolterà esattamente quello che il produttore vuole che si senta (si parlerà sempre di collocazione degli oggetti sonori); spesso però capita che l'ascoltatore non è in possesso un impianto in grado di riprodurre spazialmente il contenuto di un prodotto sonoro (per esempio basti pensare a chi vuole sentire un audio surround di un film in un comune hi-fi) e che quindi non in grado di rispettare lo standard della catena sopra proposta.
+
+In questi casi esistono degli algoritmi che a patto di sacrificare la corretta ricostruzione dell'ambiente sonoro, riescono a far riprodurre in un impianto configurato spazialmente in una certa maniera un prodotto musicale non destinato nativamente ad esso.
+
+Ora, prima di trattare un esempio di uno di questi algoritmi, è d'obbligo fermarsi un attimo e percorrere brevemente quali sono le specifiche degli standard appena citati e introdurre la configurazione $4.0$ che tratterò in questa tesi.
 
 \section{Configurazioni di riproduzione 2.0, 5.1 e 4.0}\label{metodi}
 
@@ -142,47 +152,57 @@ Per quanto riguarda questa configurazione c'è da dire che questo posizionamento
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=0.35]{figures/quad.jpg}%\includegraphics[scale=0.55]{figures/ottofonia.png}
+	\includegraphics[scale=0.35]{figures/quad.jpg}
 	\caption {Configurazione 4.0}
 	\label{fig:quadrifonia}
 	\end{figure}
 
+\[\thicksim\blacklozenge \thicksim \]
 
-Abbiamo visto quindi che lo stesso standard sulla sulla collocazione spaziale dei diffusori di solito viene mantenuta dalla fase di produzione a quella di ascolto ma prima ho accennato del fatto che non è sempre così, infatti è possibile ascoltare in un impianto configurato secondo una certa specifica un contenuto sonoro non creato per esso, questo perché esistono degli algoritmi che permettono di convertire un formato audio tipico di una configurazione in un altro
+Abbiamo visto quindi che lo stesso standard sulla collocazione spaziale dei diffusori di viene mantenuta dalla fase di produzione a quella di ascolto ma prima ho accennato del fatto che non è sempre così, infatti è possibile ascoltare in un impianto configurato secondo una certa specifica un contenuto sonoro non creato per esso con l'ausilio di algoritmi che permettono di rendere le configurazioni spaziali dei diffusori intercambiabili.
 
-Per fare un esempio, la specifica ITU-R BS775-3 definisce il modo in cui posso adattare 
+Per fare un esempio, la specifica ITU-R BS.775-3 definisce il modo in cui posso adattare un prodotto sonoro in una configurazione 2.0 ma che originariamente è stato creato per un 5.1.
+
+l'algoritmo si basa sul fatto che la decodifica da una configurazione all'altra la ottengo combinando linearmente i canali della configurazione di partenza per ottenere quelli di arrivo, infatti nel testo è presente una matrice di decodifica dove in ingresso abbiamo 5 dei canali del 5.1 ed in uscita abbiamo i 2 canali del 2.0,infatti risulta che L' ed R' sono combinazione lineare di L, R, C, LS, RB secondo i coefficienti tabulati sotto.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.5]{figures/5-1to2-0.png}
+	\caption {matrice di decodifica da 5.1 a 2.0}
+	\label{fig:decodifica}
+	\end{figure}
+
+Per quanto riguarda il canale LFE esso va aumentato di $+10dB$ prima di ripartirlo nei due canali L ed R (ad ogni ripartizione poi va scalato di $-6dB$ per controbilanciare il raddoppio del segnale).
+
+Abbiamo visto quindi un esempio di algoritmo che rende un contenuto sonoro adatto ad una riproduzione 5.1 intercambiabile con un 2.0.
+
 \section{Formato audio object-oriented}
 
-Ora capito quali sono i principali standard di riproduzione andremo a spiegare come come queste configurazioni andranno pilotate, non ci interessa tanto il contenuto di ogni canale ma il fatto che:
+Ora capito quali sono i principali standard di riproduzione ci interessa capire il legame che c'è tra formato audio, canale audio e riproduzione in un impianto. 
 
-\begin{itemize}
-\item nel più semplice dei casi ad ogni speaker sarà assegnato un canale audio differente (esempio Dolby Digital 5.1 dove ad ogni altoparlante è pilotato da un segnale discreto indipendente), si veda \cite{digital}.
-\item nei casi più complessi ad ogni altoparlante sarà assegnato un mix di canali dato da una matrice di decodifica proprietaria (esempio si guardi il funzionamento del decoder Dolby Pro Logic), si veda \cite{prologic}.
-\end{itemize}
+Abbiamo detto in precedenza che il produttore riversa in un supporto il contenuto sonoro in certo formato, non ci interessano tanto le specifiche che stanno alla base di quest'ultimo ma ci interessa capire che ogni formato prevede al suo interno l'esistenza di un certo numero flussi di segnale, questi ultimi andranno a costituire, con o senza opportune codifiche, i canali audio per poter pilotare l'impianto, faccio un esempio.
 
-Un'altra importante considerazione è il fatto che lo stesso formato che utilizzo in un sistema ''di grado maggiore'' (per esempio un 5.1) posso ''scalarlo in un sistema ''di grado minore'' (esempio uno 2.0), questo perché essendo tutti questi degli standard è possibile fare un downgrade del formato oppure un upgrade (solo però sotto alcuni artifici) per essere adattato al sistema di riproduzione; allora viene da chiedersi perché cambiare concezione e approdare in uno formato object-oriented?
+Il formato Dolby Digital 5.1 (si veda \cite{digital}) prevede al suo interno 6 flussi di segnali indipendenti dove ognuno di questi andrà a costituire un canale audio differente, invece il formato Dolby Surround (si veda \cite{surround}) prevede al suo interno 2 flussi di segnale che con un opportuna codifica andranno a costituire i 4 canali audio per pilotare l'impianto. 
 
-La domanda trova facile risposta nel fatto che questi giochi di upgrade o downgrade si possono fare solo su sistemi che hanno una certo grado di compatibilità (ad esempio i sistemi Dolby) e se questo avvenisse dovrei comunque prendere un formato, codificarlo in un formato diciamo ''generale'' e riadattarlo decodificandolo nel formato che piloterà la mia riproduzione.
+Detto questo non è difficile capire il fatto che i flussi di segnale all'interno di un formato sono in stretto contatto con i canali audio e con la configurazione spaziale di un impianto in quanto possiamo pensare, in un certo senso, che ogni flusso contiene l'informazione da far riprodurre a ogni singolo diffusore, cosa che non avviene nell'audio orientato agli oggetti.
 
-Allora la domanda sorge spontanea, perché non creare uno formato audio generale?
+Da un po di tempo l'avanzamento tecnologico nel campo dell'intrattenimento del grande schermo ha cercato di soddisfare una sempre più tendenza a creare un audio avvolgente ed a effetto all'interno delle sale, cominciando con l'introduzione dell'audio surround fino ad arrivare ai giorni nostri a introdurre oggetti sonori in movimento all'interno del cinema di cui l'ascoltatore può distintamente riconoscere la provenienza.
 
-La Dolby laboratories ha già implementato una tecnologia che risponde in questa domanda, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nello formato di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a parlare di come Dolby é riuscita incanalare gli oggetti e la relativa informazione spaziale dentro questo formato.
+Per esempio la Dolby laboratories ha già implementato una tecnologia in grado di fare questo, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nel formato di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a come si possono incanalare gli oggetti e la relativa informazione spaziale dentro un formato object-oriented.
 
-Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix del prodotto per passare dal contenuto dei singoli canali al formato di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello formato audio 2.0 con peso costituito dalla funzione di panpot deciso per ogni canale, questo succede anche in configurazioni più complicate come il 5.1 l'unica differenza è che panpot non sarà più in una dimensione ma in due\footnote{Esiste una funzione di panpot standard per ogni configurazione di riproduzione.}.
+Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix per passare dal contenuto dei singoli canali a un prodotto con un certo formato di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello formato audio 2.0 con peso costituito dal controllo di panpot deciso per ogni canale per ricreare la sensazione di provenienza di ogni oggetto sonoro.
 
-L'idea della Dolby invece è stata quella di fermarsi prima della fase di downmix (almeno per quanto riguarda il contenuto degli oggetti sonori) e di intraprendere una strada diversa:
+L'idea dell'audio ad oggetti è quella di fermarsi prima della fase di downmix e di intraprendere una strada diversa; prima di tutto si devono preparare gli oggetti sonori esattamente con l'informazione sonora voluta, in secondo luogo si dispongono questi oggetti in uno spazio di riproduzione virtuale creato appositamente da un qualche software o plugin nel quale a ogni oggetto verrà assegnato un punto preciso nello spazio attraverso delle coordinate spaziali, infine le informazioni sonore di ogni oggetto sonoro e le relative coordinate spaziali verranno memorizzate nel supporto attraverso un opportuno format standardizzato adatto al nostro scopo.
 
-Prima di tutto si devono preparare gli oggetti sonori esattamente come si vuole siano riprodotti, in secondo luogo si dispongono questi oggetti in uno spazio di riproduzione virtuale creato appositamente da un qualche software o plugin nel quale a ogni oggetto verrà assegnato un punto preciso nello spazio attraverso delle coordinate spaziali.
+Per quanto riguarda la riproduzione invece si dovrà avere un sistema di diffusori disposti secondo una certa configurazione standardizzata e si dovrà avere un dispositivo che processi, con algoritmi in funzione dalle coordinate spaziali di ogni oggetto, il segnale costituente ogni oggetto sonoro
 
-Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come concretamente implementare questo nuovo procedimento.
+quest'ultimo inoltre dovrà  pilotare i giusti diffusori che daranno l'impressione all'ascoltatore della provenienza dell'oggetto sonoro esattamente nel punto scelto dal produttore.
 
+Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come implementare concretamente questo procedimento.
 
+\chapter{Formato MDA e Spazializzatore 3D}\label{dolby}
 
-\chapter{Spazilizzatore 3D e Formato MDA}\label{dolby}
-
-In questo capitolo andremo a spiegare concretamente come possiamo creare questo formato audio ad oggetti e come in fase di post produzione posso spazializzare il mio contenuto sonoro.
-
-Come accennato prima in fase di post-produzione non usiamo più il solito panner installato in banchi mixer o in software DAW in quanto essi sia che siano 2.0 o 5.1 o quello che vogliamo, non hanno una spazializzazione a oggetti, quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).
+Come accennato prima in fase di produzione  non usiamo più il solito panner installato in banchi mixer o in software DAW in quanto non non hanno una spazializzazione a oggetti, quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).
 
 Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come formato quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnica di spazializzazione soggetta a brevetto, essa é diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto formato proprietari simili ma sempre vincolati al brevetto, formato quali Auro3D per citarne uno.
 
@@ -710,7 +730,7 @@ Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del format
 \bibitem{5.1} \textit{https://www.itu.int/dms\_pubrec/itu-r/rec/bs/R-REC-BS.775-3-201208-I!!PDF-E.pdf}
 \bibitem{quadraphonic} \textit{http://www.dith.it/listing/master/dispense\%20Schiavoni/CSE10-08.pdf}
 \bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_Digital}
-\bibitem{prologic} \textit{https://it.wikipedia.org/wiki/Dolby\_Surround\_Pro\_Logic}
+\bibitem{surround} \textit{http://www.dith.it/listing/master/dispense\%20Schiavoni/CSE10-08.pdf}
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
 \bibitem{mda}\textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
 \bibitem{creator}\textit{//digitalcommons.calpoly.edu/cgi/viewcontent.cgi?article=1049}\&\textit{context=laessp}

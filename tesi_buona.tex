@@ -44,10 +44,6 @@ Audio Object-Oriented e adattamento del formato Multi-Dimensional Audio MDA alle
 {\large{\bf Relatore: \vspace{2mm}\\\textcolor{black}{
 Prof. Giuseppe Silvi}\\\\
 
-%\textcolor{red}{
-%\bf Correlatore: (eventuale)
-%\vspace{2mm}\\
-%Prof./Dott . Nome Cognome\\\\}
 }
 }
 \end{minipage}
@@ -124,12 +120,12 @@ E' consuetudine indicare rispettivamente con L (left) ed R (right) lo speaker po
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=0.30]{figures/stereo.jpg}
+	\includegraphics[scale=0.30]{figures/2-0.jpg}
 	\caption {Configurazione 2.0 (ITU-R BS.775-3)}
 	\label{fig:2.0}
 	\end{figure}
 	
-Per quanto riguarda un ascolto surround, invece, ci si riferisce a un tipo di riproduzione che pone l'ascoltatore al centro di un piano di diffusione in modo che si possano sentire suoni provenienti anche dai lati e da dietro; diverse sono le configurazioni possibili ma quella che interessa a noi è la 5.1 data dalla specifica ITU-R BS 775-3\cite{5.1}.
+Per quanto riguarda un ascolto surround, invece, diverse sono le configurazioni possibili ma quella che interessa a noi è la 5.1 data dalla specifica ITU-R BS 775-3\cite{5.1}.
 
 Questa configurazione spaziale (quasi sicuramente la più diffusa in ambito surround domestico) è composta da 5 canali distribuiti in 5 diffusori disposti rispettivamente a $0°$, $\pm30°$ e $\pm110/120°$ e un canale LFE riprodotto da un subwoofer posto tipicamente davanti l'ascoltatore (In realtà il collocamento del subwoofer non è strettamente indicato nelle specifiche in quanto la natura delle basse frequenze le rende omnidirezionali, invece nelle specifiche è riportato il fatto che il canale LFE deve avere un incremento del segnale di $+10dB$.
 
@@ -148,7 +144,7 @@ In parallelo una configurazione che si potrebbe trovare in ambito domestico per 
 
 Usualmente in letteratura si denominano la coppia di diffusori posti di fronte come LF (left-front) - RF (right-front) e la coppia posta dietro come LB (left-back) - RB (right-back), questi per riprodurre al meglio il contenuto sonoro dovrebbero essere full-range.
 
-Per quanto riguarda questa configurazione c'è da dire che questo posizionamento crea dei problemi di percezione del contenuto spaziale in quanto il nostro udito è più sensibile a ciò che proviene di fronte a noi, questo costituisce un problema per i nostri scopi ma prenderemo lo stesso la configurazione in considerazione in quanto è possibile che in ambito domestico qualcuno possieda ancora un impianto 4.0 (anche se largamente in disuso).
+Per quanto riguarda questa configurazione (si veda \cite{surround}) c'è da dire che questa disposizione crea dei problemi di percezione del contenuto spaziale in quanto il nostro udito è più sensibile a ciò che proviene di fronte a noi, questo costituisce un problema per i nostri scopi ma prenderemo lo stesso la configurazione in considerazione in quanto è possibile che in ambito domestico qualcuno possieda ancora un impianto 4.0 (anche se largamente in disuso).
 
 \begin{figure}[htbp]
 	\centering
@@ -182,31 +178,47 @@ Ora capito quali sono i principali standard di riproduzione ci interessa capire 
 
 Abbiamo detto in precedenza che il produttore riversa in un supporto il contenuto sonoro in certo formato, non ci interessano tanto le specifiche che stanno alla base di quest'ultimo ma ci interessa capire che ogni formato prevede al suo interno l'esistenza di un certo numero flussi di segnale, questi ultimi andranno a costituire, con o senza opportune codifiche, i canali audio per poter pilotare l'impianto, faccio un esempio.
 
-Il formato Dolby Digital 5.1 (si veda \cite{digital}) prevede al suo interno 6 flussi di segnali indipendenti dove ognuno di questi andrà a costituire un canale audio differente, invece il formato Dolby Surround (si veda \cite{surround}) prevede al suo interno 2 flussi di segnale che con un opportuna codifica andranno a costituire i 4 canali audio per pilotare l'impianto. 
+Il formato Dolby Digital 5.1 (si veda \cite{digital}) prevede al suo interno 6 flussi di segnali indipendenti dove ognuno andrà a costituire un canale audio differente, invece il formato Dolby Surround (si veda \cite{surround}) prevede al suo interno 2 flussi di segnale che con un opportuna codifica (sistema matriciale) andranno a costituire i 4 canali audio per pilotare l'impianto. 
 
-Detto questo non è difficile capire il fatto che i flussi di segnale all'interno di un formato sono in stretto contatto con i canali audio e con la configurazione spaziale di un impianto in quanto possiamo pensare, in un certo senso, che ogni flusso contiene l'informazione da far riprodurre a ogni singolo diffusore, cosa che non avviene nell'audio orientato agli oggetti.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.5]{figures/pellicola.png} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \includegraphics[scale=0.5]{figures/dolbysurround.png}
+	\caption {pellicola in dolby digital 5.1 e catena del segnale di dolby surround}
+	\label{fig:decodifica}
+	\end{figure}
+
+Detto questo non è difficile capire il fatto che i flussi di segnale all'interno di un formato sono in stretto contatto con i canali audio e con la configurazione spaziale di un impianto in quanto possiamo pensare, in un certo senso, che ogni flusso contiene l'informazione da far riprodurre a ogni singolo diffusore, quindi il produttore deve sapere già dalla fase iniziale cosa far riprodurre a quale diffusore, cosa che non non avviene nell'\textbf{audio orientato agli oggetti}.
 
 Da un po di tempo l'avanzamento tecnologico nel campo dell'intrattenimento del grande schermo ha cercato di soddisfare una sempre più tendenza a creare un audio avvolgente ed a effetto all'interno delle sale, cominciando con l'introduzione dell'audio surround fino ad arrivare ai giorni nostri a introdurre oggetti sonori in movimento all'interno del cinema di cui l'ascoltatore può distintamente riconoscere la provenienza.
 
-Per esempio la Dolby laboratories ha già implementato una tecnologia in grado di fare questo, infatti nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nel formato di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la creazione di 128 oggetti indipendenti nello spazio sonoro 3D che vengono riprodotti grazie anche all'ausilio di speaker posti al di sopra dell'ascoltatore, ma non ci soffermeremo troppo su questa configurazione, piuttosto spenderemo tempo a come si possono incanalare gli oggetti e la relativa informazione spaziale dentro un formato object-oriented.
+Per esempio la Dolby laboratories ha già implementato una tecnologia in grado di fare questo, nel suo ultimo brevetto \textbf{Dolby Atmos} (si veda documentazione \cite{atmos}) ha implementato nel formato di riproduzione anche una parte dedicata agli oggetti sonori, infatti oltre ad avere un tappeto sonoro dato dalla configurazione 7.1, la configurazione dolby atmos permette la memorizzazione di 128 oggetti indipendenti collocati nello spazio sonoro 3D tramite coordinate spaziali, sarà poi il DSP a valle che in questo farà parte della catena Dolby Atmos che, conoscendo le coordinate di ogni oggetto, farà riprodurre ai diffusori il giusto segnale per far si che l'ascoltatore senta l'oggetto sonoro proveniente da un punto preciso.
 
-Normalmente quando si crea un prodotto in fase di post-produzione si fa un down-mix per passare dal contenuto dei singoli canali a un prodotto con un certo formato di riproduzione, per esempio chiudendo un mix in uno studio di registrazione classico miscelo i vari canali nello formato audio 2.0 con peso costituito dal controllo di panpot deciso per ogni canale per ricreare la sensazione di provenienza di ogni oggetto sonoro.
+Logicamente anche in questa catena qualcuno o qualcosa dovrà conoscere la disposizione dei diffusori ed è qui la differenza fondamentale, nell'audio standard è il produttore che crea il contenuto a conoscere la configurazione dell'impianto in cui verrà riprodotto quindi vincolato da esse, invece nell'audio ad oggetti il produttore è molto più slegato dalla configurazione spaziale in quanto nei formati object-oriented non c'è nessun riferimento a quale diffusore andrà riprodurre cosa, sarà poi il DSP dell'impianto di riproduzione ad occuparsi di questo compito.
 
-L'idea dell'audio ad oggetti è quella di fermarsi prima della fase di downmix e di intraprendere una strada diversa; prima di tutto si devono preparare gli oggetti sonori esattamente con l'informazione sonora voluta, in secondo luogo si dispongono questi oggetti in uno spazio di riproduzione virtuale creato appositamente da un qualche software o plugin nel quale a ogni oggetto verrà assegnato un punto preciso nello spazio attraverso delle coordinate spaziali, infine le informazioni sonore di ogni oggetto sonoro e le relative coordinate spaziali verranno memorizzate nel supporto attraverso un opportuno format standardizzato adatto al nostro scopo.
-
-Per quanto riguarda la riproduzione invece si dovrà avere un sistema di diffusori disposti secondo una certa configurazione standardizzata e si dovrà avere un dispositivo che processi, con algoritmi in funzione dalle coordinate spaziali di ogni oggetto, il segnale costituente ogni oggetto sonoro
-
-quest'ultimo inoltre dovrà  pilotare i giusti diffusori che daranno l'impressione all'ascoltatore della provenienza dell'oggetto sonoro esattamente nel punto scelto dal produttore.
-
+Per il discorso appena fatto si veda l'articolo \cite{object}.
 Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come implementare concretamente questo procedimento.
 
 \chapter{Formato MDA e Spazializzatore 3D}\label{dolby}
 
-Come accennato prima in fase di produzione  non usiamo più il solito panner installato in banchi mixer o in software DAW in quanto non non hanno una spazializzazione a oggetti, quindi la cosa da fare è implementare un software apposito che, sotto forma di stand-alone o di plug-in, dia in uscita gli oggetti sonori con la loro relativa posizione (in realtà oltre che alla posizione bisognerà tener conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).
+L'idea per la realizzazione pratica dell'audio ad oggetti comincia in fase di produzione, bisogna scordarsi della fase di downmix\footnote{Con downmix intendo quel procedimento all'interno della catena produttiva musicale in cui passo dalla totalità dei canali formanti un progetto ai canali previsti nel formato di riproduzione} e scordarsi del panner installato in banchi mixer o in software DAW classici intraprendendo una strada diversa, vediamo i passaggi:
 
-Parlando fino ad ora di Dolby è plausibile che prenderemo come panner 3D e come formato quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnica di spazializzazione soggetta a brevetto, essa é diciamo chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno prodotto formato proprietari simili ma sempre vincolati al brevetto, formato quali Auro3D per citarne uno.
+ \begin{enumerate}
+ 
+\item Si devono preparare e disporre degli oggetti sonori esattamente con l'informazione sonora voluta, questo passaggio non sarebbe altro che il risultato della pre-produzione di ogni oggetto.
+\item Si crea attraverso un software apposito (sotto forma di stand-alone o di plug-in) uno spazio di riproduzione virtuale e si dispongono questi oggetti in esso attraverso delle coordinate spaziali (chiamerò questo software panner 3D).
+\item Le informazioni sonore di ogni oggetto e le relative coordinate spaziali verranno memorizzate nel supporto attraverso un opportuno format a oggetti standardizzato adatto al nostro scopo (in realtà oltre che alla posizione il format terrà conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).
+ \end{enumerate}
 
-Noi invece ricerchiamo qualcosa che sia un formato open e libero in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un formato open che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.
+Parlando fino ad ora di Dolby è plausibile che analizzeremo come formato e come software di spazializzazione 3D quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnica di spazializzazione soggetta a brevetto, essa é chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno cercato di produrre formati proprietari simili ma sempre vincolati da brevetto, marchi quali Auro3D per citarne uno.
+
+Noi invece ricerchiamo qualcosa che sia un formato open in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un formato libero che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.
+
+
+
+
+
+% da qui devo cominciare a ricontrollare
+
 
 \section{Formato MDA}
 
@@ -218,7 +230,7 @@ Questi attributi sono:
 \begin{itemize}\label{aaa}
 \item \textbf{Coordinate Sferiche}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).
 
-Come sistema di coordinate abbiamo l'asse $X$ posto di fronte all'ascoltatore, l'asse $Y$ posto di fianco e l'asse $Z$ posto verso l'alto, quindi definiti i valori $x,y$ e $z$ su queste rette possiamo ricavare un angolo di azimut $\theta$, un angolo di elevazione $\phi$ e un raggio $r$, posso quindi trasformare le coordinate cartesiane in sferiche in questo modo:
+Come sistema di coordinate abbiamo l'asse $X$ posto di fronte all'ascoltatore, l'asse $Y$ posto di fianco e l'asse $Z$ posto verso l'alto, quindi definiti i valori $x,y$ e $z$ su queste rette possiamo ricavare un angolo di azimut $\theta$, un angolo di elevazione $\phi$ e un raggio $r$, all'occorrenza una relativa trasformazione da coordinate cartesiane a sferiche posso attuarla in questo modo:
 
 \begin{equation}
 	\left\{\begin{matrix}
@@ -236,13 +248,13 @@ r = \sqrt{x^2 +y^2 +z^2 }\\
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.40]{figures/azimut.png}
-	\caption {Coordinate spaziali}
+	\caption {Coordinate spaziali sferiche}
 	\label{fig:coordinate}
 	\end{figure}
 
-\item \textbf{Identificativo oggetto sonoro}: scritto come URI é un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
+\item \textbf{Identificativo oggetto sonoro}: definito con la sigla URI é un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
 \item \textbf{Gain}: è un valore che indica la quantità di segnale che deve avere l'oggetto sonoro.
-\item \textbf{Apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare (più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore è 180° allora si attiverebbero tutti i diffusori).
+\item \textbf{Apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare (più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore fosse 180° allora si attiverebbero tutti i diffusori).
 \item \textbf{Divergenza}: anch'essa indicata in gradi quantifica la grandezza che deve avere l'oggetto sonoro ma solo sul piano orizzontale, un esempio più esplicativo si ha in figura \ref{fig:apertura}
 
 	\begin{figure}[htbp]
@@ -289,11 +301,13 @@ Per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per
 
 \section{Spazializzatore 3D}
 
-Precedentemente abbiamo visto come è costituito il formato MDA ora non ci rimane di spiegare come produrre materiale compatibile con questo formato.
+Precedentemente abbiamo visto le specifiche a noi utili del formato MDA, ora non ci rimane introdurre il software di spazializzazione 3D.
 
-Come spiegato, nel workflow di produzione di materiale audio 3D bisognerà fermarsi prima del mixdown (sia che sia 2.0, 5.1 ecc...) e bisognerà prendere un qualche software che sia in grado di sostituire il mio mixer e sostituirlo con uno 3D, diverse aziende stanno sviluppando software di questo tipo in quanto vogliono interfacciarsi a questo formato ed in qualche modo creare un collegamento tra il loro formato proprietario e l'MDA; per esempio la Dolby ha un panner 3D per Dolby Atmos che si interfaccia con l'MDA, anche la Auro Technologies ha adottato la stessa politica o in alternativa la casa Fairlight ha creato uno spazializzatore di nome 3DAW (secondo me molto interessante) che supporta anche essa l'MDA.
+Come spiegato, nel workflow di produzione, bisognerà fermarsi prima del mixdown e bisognerà prendere un qualche software di spazializzazione 3D che sia in grado di interfacciarsi con il mondo object-oriented dell'MDA, diverse aziende stanno sviluppando soluzioni di questo tipo in quanto vogliono interfacciarsi a questo formato open ed in qualche modo creare un collegamento tra il loro formato proprietario e l'MDA.
 
-Detto questo ho ricercato uno spazializzatore adatto e la mia scelta è ricaduta proprio sull'\textbf{MDA creator} proprietaria della DTS in quanto è la più intuitiva e la miglior scelta per integrazione (in quanto essa ha creato sia il panner che il formato).
+Per esempio la Dolby utilizza un panner 3D per Dolby Atmos che supporta anche il riversamento del contenuto il formato MDA, anche la Auro Technologies ha adottato la stessa politica o in alternativa anche la software-house Fairlight ha creato uno spazializzatore di nome 3DAW (secondo me molto interessante) che supporta anche esso l'MDA.
+
+Detto questo, ricercando uno spazializzatore adatto, la mia scelta è ricaduta sull'\textbf{MDA creator} proprietario della DTS in quanto è la scelta più intuitiva e la miglior scelta per integrazione in quanto DTS è l'ideatrice sia del panner 3D che del formato.
 
 Tutte le informazioni su MDA creator verranno prese dal suo manuale \cite{creator}.
 
@@ -306,27 +320,39 @@ Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di outpu
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.50]{figures/mdacreator.jpg}
-
 	\caption {MDA Creator, DTS technology}
 	\label{fig:mdacreator}
 	\end{figure}
 
 \chapter{Tecnica VBAP e relativa decodifica del formato MDA}
 
-In questo capitolo parleremo invece di come da un formato MDA posso passare a una configurazione di riproduzione usuale, mediante la tecnica VBAP.
+In questo capitolo parleremo invece di come da un formato MDA posso passare alle configurazioni di riproduzione 2.0, 5.1 e 4.0 mediante la tecnica VBAP.
+
+% qui finisce la prima parte da ricontrollare
 
 \section{Tecnica VBAP}
 
-Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione che permette di localizzare una sorgente sonora attraverso la differenza di intensità emessa tra due o più speaker, mi spiego meglio:
+Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione audio che permette la localizzazione di  una sorgente sonora nello spazio attraverso la differenza di intensità di un dato segnale emesso tra due o più diffusori.
 
-uno dei due parametri con cui il nostro cervello discrimina la direzione di una sorgente è la IID (si veda \cite{iid}) che indica la differenza di intensità che le nostre orecchie devono percepire per far si che si percepisca una sorgente fantasma in un punto dello spazio, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due speaker e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto spaziale previsto dalla IID.
+Immaginiamo di ascoltare una sorgente sonora posta da un lato di fronte a noi, lo stesso segnale sonoro emesso verrà captato da entrambe le nostre orecchie in modo diverso ed è proprio questa diversità che ci permette di capire la provenienza di un suono, infatti studi sull'apparato uditivo hanno definito la trasformazione che subisce il segnale sonoro captato da entrambe le orecchie in base all'angolo di provenienza questa trasformazione si chiama Head Related Transfer Function HRTF.
+
+La HRTF pone le sue basi su tre fattori diversi:
+
+\begin{itemize}
+\item \textit{Interaural Intencity Difference IID} (si veda \cite{iid}) indica la differenza di intensità dello stesso segnale acustico che le nostre orecchie percepiscono in base all'angolo azimutale di provenienza del fronte sonoro.
+\item \textit{Interaural Time  Difference ITD} indica il delay temporale che le nostre orecchie percepiscono in base all'angolo azimutale di provenienza.
+
+% sono arrivato qua -------------------_____----------------
+
+, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due speaker e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto spaziale previsto dalla IID.
 
 Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due speaker, se invece vogliamo fare un 3D allora serviranno un minimo di 3 speaker posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate, per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.
 
 E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).
 
 \subsection{VBAP 2D}\label{c}
-Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, ora conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.
+
+Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.
 
 \begin{figure}[htbp]
 	\centering
@@ -728,9 +754,9 @@ Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del format
 \begin{thebibliography}{}
 
 \bibitem{5.1} \textit{https://www.itu.int/dms\_pubrec/itu-r/rec/bs/R-REC-BS.775-3-201208-I!!PDF-E.pdf}
-\bibitem{quadraphonic} \textit{http://www.dith.it/listing/master/dispense\%20Schiavoni/CSE10-08.pdf}
 \bibitem{digital} \textit{https://it.wikipedia.org/wiki/Dolby\_Digital}
 \bibitem{surround} \textit{http://www.dith.it/listing/master/dispense\%20Schiavoni/CSE10-08.pdf}
+\bibitem{object} \textit{http://archive.afsi.eu/download/sites/default/files/uploads/mda\_white\_paper.pdf}
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
 \bibitem{mda}\textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
 \bibitem{creator}\textit{//digitalcommons.calpoly.edu/cgi/viewcontent.cgi?article=1049}\&\textit{context=laessp}

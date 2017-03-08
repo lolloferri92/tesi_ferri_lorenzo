@@ -31,7 +31,7 @@
 \textcolor{black}{
 \linespread{5}
 {\LARGE{\bf
-Audio Object-Oriented e adattamento del formato Multi-Dimensional Audio MDA alle configurazioni 2.0, 5.1 e 4.0 attraverso la tecnica di spazializzazione Vector-Base Amplitude Panning VBAP.
+Audio Object-Oriented e introduzione all'adattamento del formato Multi-Dimensional Audio MDA alle configurazioni 2.0, 5.1 e 4.0 attraverso la tecnica di spazializzazione Vector-Base Amplitude Panning VBAP.
 }}}
 
 \end{spacing}
@@ -114,9 +114,9 @@ Nell'audio, quando si parla di configurazione spaziale, è norma usare un codice
 
 La prima configurazione descritta è la \textbf{2.0} che come da specifica ITU-R BS.775-3\cite{5.1} prevede l'utilizzo di due diffusori (di norma full-range\footnote{In realtà si potrebbe usare anche un subwoofer in aiuto ai due diffusori per quanto riguarda la zona frequenziale bassa}) posti di fronte all'ascoltatore e con angoli di $\pm 30°$ come in figura \ref{fig:2.0}
 
-Tipicamente la sensazione di collocazione spaziale di una sorgente sonora in questa configurazione viene data dalla differenza di potenza del segnale inviato ai due speaker, infatti se il segnale risulta più forte in uno dei due, la sorgente fantasma risulterà più spostata verso quest'ultimo in accordo con le argomentazioni scritte in \cite{vbap}.
+Tipicamente la sensazione di collocazione spaziale di una sorgente sonora in questa configurazione viene data dalla differenza di potenza del segnale inviato ai due diffusori, infatti se il segnale risulta più forte in uno dei due, la sorgente fantasma risulterà più spostata verso quest'ultimo in accordo con le argomentazioni scritte in \cite{vbap}.
 
-E' consuetudine indicare rispettivamente con L (left) ed R (right) lo speaker posto di fronte a sinistra e a destra dell'ascoltatore.
+E' consuetudine indicare rispettivamente con L (left) ed R (right) lo diffusori posto di fronte a sinistra e a destra dell'ascoltatore.
 
 \begin{figure}[htbp]
 	\centering
@@ -140,7 +140,7 @@ E' norma indicare i diffusori come C (center) per il diffusore centrale, L (left
 	\label{fig:5.1}
 	\end{figure}
 
-In parallelo una configurazione che si potrebbe trovare in ambito domestico per la sua facilità di implementazione e la 4.0; questa tecnica prevede l'utilizzo di 4 speaker posti sui vertici di un quadrato (angoli di $\pm45°$ e $\pm135°$) con al centro l'ascoltatore.
+In parallelo una configurazione che si potrebbe trovare in ambito domestico per la sua facilità di implementazione e la 4.0; questa tecnica prevede l'utilizzo di 4 diffusori posti sui vertici di un quadrato (angoli di $\pm45°$ e $\pm135°$) con al centro l'ascoltatore.
 
 Usualmente in letteratura si denominano la coppia di diffusori posti di fronte come LF (left-front) - RF (right-front) e la coppia posta dietro come LB (left-back) - RB (right-back), questi per riprodurre al meglio il contenuto sonoro dovrebbero essere full-range.
 
@@ -334,25 +334,23 @@ In questo capitolo parleremo invece di come da un formato MDA posso passare alle
 
 Il \textbf{Vector Base Amplitude Panning VBAP} è una tecnica di spazializzazione audio che permette la localizzazione di  una sorgente sonora nello spazio attraverso la differenza di intensità di un dato segnale emesso tra due o più diffusori.
 
-Immaginiamo di ascoltare una sorgente sonora posta da un lato di fronte a noi, lo stesso segnale sonoro emesso verrà captato da entrambe le nostre orecchie in modo diverso ed è proprio questa diversità che ci permette di capire la provenienza di un suono, infatti studi sull'apparato uditivo hanno definito la trasformazione che subisce il segnale sonoro captato da entrambe le orecchie in base all'angolo di provenienza questa trasformazione si chiama Head Related Transfer Function HRTF.
+Immaginiamo di ascoltare una sorgente sonora posta da un lato di fronte a noi, lo stesso segnale sonoro emesso verrà captato da entrambe le nostre orecchie in modo diverso ed è proprio questa diversità che ci permette di capire la provenienza di un suono, infatti studi hanno definito la trasformazione che subisce il segnale sonoro captato da entrambe le orecchie in base all'angolo di provenienza del suono, questa trasformazione si chiama Head Related Transfer Function HRTF.
 
 La HRTF pone le sue basi su tre fattori diversi:
 
 \begin{itemize}
 \item \textit{Interaural Intencity Difference IID} (si veda \cite{iid}) indica la differenza di intensità dello stesso segnale acustico che le nostre orecchie percepiscono in base all'angolo azimutale di provenienza del fronte sonoro.
 \item \textit{Interaural Time  Difference ITD} indica il delay temporale che le nostre orecchie percepiscono in base all'angolo azimutale di provenienza.
+\item \textit{frequency modification} indica come lo spettro in frequenza del segnale cambia anch'esso in base all'angolo di incidenza, a concorrere a questo fenomeno sta la presenza fisica della testa e del torso dell'ascoltatore (molta importanza ha la pinna dell'orecchio)
+\end{itemize}
 
-% sono arrivato qua -------------------_____----------------
+Per avere una ricostruzione sonora realistica (come avviene nell'ascolto binaurale) si dovrebbero usare tutti e tre questi fattori ma la tecnica vbap prevede l'utilizzo solo della IID, in quanto la tecnica prevede di riprodurre lo stesso segnale sonoro coerentemente\footnote{con ''coerentemente'' intendo il fatto che il segnale deve essere emesso da tutti i diffusori nello stesso istante, non ci devono essere quindi slittamenti di fase} da un minimo di 2 diffusori ma con intensità differente.
 
-, quindi se riproduciamo un segnale coerente (cioè in fase fra gli altoparlanti) con minimo di due speaker e gli riproduciamo con intensità diverse, allora ci sembrerà di sentire il segnale proveniente da un punto spaziale previsto dalla IID.
+Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due diffusori, se invece vogliamo fare un 3D allora serviranno un minimo di 3 diffusori posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate, per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.
 
-Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due speaker, se invece vogliamo fare un 3D allora serviranno un minimo di 3 speaker posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate, per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.
-
-E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 speaker affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).
+E' d'obbligo affrontare un po di matematica per riuscire poi ad adattare il VBAP alle configurazioni esposte in \ref{metodi}, partiamo subito con il caso bidimensionale con 2 diffusori affrontando la cosa direttamente con calcolo matriciale (all'inizio più difficile ma meglio generalizzabile per dopo).
 
 \subsection{VBAP 2D}\label{c}
-
-Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la porzione di circonferenza compresa tra i due speaker, conoscendo la posizione della nostra sorgente virtuale collocata in punto dell'arco attivo (cosa che si adatta esattamente al nostro caso) l'unica cosa che non sappiamo sono i gain $g_1$ e $g_2$ da applicare ad ogni segnale che vanno rispettivamente alle due casse per ricostruire esattamente lo spazio sonoro, quindi definendo un sistema di riferimento cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ definirò come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.
 
 \begin{figure}[htbp]
 	\centering
@@ -361,14 +359,18 @@ Consideriamo un sistema fatto da due speaker, definiamo ora ''arco attivo'' la p
 	\label{fig:vettori2d}
 	\end{figure}
 
-Il trucco ora sta nel fatto che posso riscrivere il vettore $\boldsymbol{p}$ in funzione del vettore contenente i due gain $\boldsymbol{g}= \left[ g_1 \ g_2 \right]$ come:
+Consideriamo un sistema cartesiano $ \boldsymbol{X},\boldsymbol{Y}$ in cui sono collocati due diffusori di cui conosciamo la posizione, definiamo come ''arco attivo'' la porzione di circonferenza compresa tra i due diffusori in cui vogliamo localizzare la sorgente virtuale, definisco poi $\boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \right]}^T \ \  \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \right]}^T$ i vettori unitari che puntano verso i due altoparlanti e $\boldsymbol{p}= {\left[ p_1 \ p_2 \right]}^T$ il vettore unitario che punta verso la sorgente virtuale.
+
+Come possiamo vedere dalla figura \ref{fig:vettori2d}, risulta semplicemente che $\boldsymbol{p}$ è combinazione lineare di $\boldsymbol{l_{1}}, \boldsymbol{l_{2}}$ con pesi rispettivamente 2 coefficienti che chiamerò $g_1$ e $g_2$, questi due valori non sono altro che i gain da applicare rispettivamente ai due diffusori per localizzare la sorgente virtuale nel punto indicato dal vettore $\boldsymbol{p}$.
+
+Ora, conoscendo la posizione della nostra sorgente virtuale tramite $\boldsymbol{p}$ e conoscendo i due vettori dei due diffusori $\boldsymbol{l_{1}}, \boldsymbol{l_{2}}$ le uniche incognite rimaste sono i 2 gain, ma è possibile trovare il loro valore in quanto è corretto definire la relazione: %definendo il vettore $\boldsymbol{g}= \left[ g_1 \ g_2 \right]$ posso scrivere la relazione:
 
 \begin{equation}
-\boldsymbol{p}= \boldsymbol{g} \cdot \boldsymbol{l} = \left[g_1 \ g_2 \right] \left[\boldsymbol{l_{1}} \ \boldsymbol{l_{2}} \right]^T = g_1 \boldsymbol{l_{1}} + g_2 \boldsymbol{l_{2}}
+\boldsymbol{p}= g_1 \boldsymbol{l_{1}} + g_2 \boldsymbol{l_{2}} %= \left[g_1 \ g_2 \right] \left[\boldsymbol{l_{1}} \ \boldsymbol{l_{2}} \right]^T 
 \label{eq:bbbb}
 \end{equation}
 
-In questo caso però possiamo ulteriormente compattare la scrittura in quanto:
+In questo caso però possiamo scompattare la scrittura in quanto:
 
 \begin{equation}
 \boldsymbol{p}=g_1 {\left[ l_{11} \ l_{12} \right]}^T + g_2 {\left[ l_{21} \ l_{22} \right]}^T= \left[ g_1 \ g_2 \right] \left[\begin{matrix}
@@ -377,7 +379,7 @@ l_{11} & l_{12}\\ l_{21} & l_{22}
 \label{eq:cccc}
 \end{equation}
 
-Ora trovando tutto in funzione $g$ abbiamo che:
+Ora trovando tutto in funzione dei due gain abbiamo che:
 
 \begin{equation}
 \left[g_1 \ g_2\right] = \left[ p_1 \ p_2 \right]  {\left[\begin{matrix}
@@ -386,7 +388,9 @@ l_{11} & l_{12}\\ l_{21} & l_{22}
 \label{eq:dddd}
 \end{equation}
 
-Logicamente assumo che la matrice $\boldsymbol{L_{12}}$ ammetta l'inversa, ora parametrizzo tutto in funzione di $\theta$ e $\theta_0$ nel modo seguente:
+Con $\boldsymbol{g}= \left[ g_1 \ g_2 \right]$ il vettore contenente i due gain e $\boldsymbol{L_{12}}$ la matrice $\left[\begin{matrix}
+l_{11} & l_{12}\\ l_{21} & l_{22}
+\end{matrix}\right]$ Logicamente assumo che la matrice $\boldsymbol{L_{12}}$ di cui assumo anche che ammetta inversa\footnote{per far si che la matrice ammetta inversa dovrà verificarsi che $\theta_0\neq 0°,90°$} , ora introducendo l'angolo $\theta_0$ e l'angolo $\theta$ come in figura \ref{fig:angoli} parametrizzo i vettori in funzione di essi nel modo seguente:
 
 \[ p_1=cos(\theta),\ p_2=sen(\theta),\ l_{11}=cos(\theta_0),\ l_{12}=sen(\theta_0),\ l_{21}=cos(-\theta_0),\ l_{22}=sen(-\theta_0) \]
 
@@ -397,7 +401,16 @@ Logicamente assumo che la matrice $\boldsymbol{L_{12}}$ ammetta l'inversa, ora p
 	\label{fig:angoli}
 	\end{figure}
 
-Fatto questo, essendo il nostro spazio ortogonale, posso calcolare direttamente i coefficienti dei due gain invertendo prima la matrice, il risultato è il seguente:
+Fatto questo, essendo il nostro spazio ortogonale (cosa che giustifica la combinazione lineare scritta sopra), posso calcolare direttamente i coefficienti dei due gain invertendo prima la matrice e risolvendo la seguente equazione: 
+
+\begin{equation}
+\left[g_1 \ g_2\right] = \left[ cos(\theta) \ sen(\theta) \right]  {\left[\begin{matrix}
+cos(\theta_0) & sen(\theta_0)\\ cos(-\theta_0) & sen(-\theta_0)
+\end{matrix} \right]}^{-1} 
+\label{eq:trigonometricmatrix}
+\end{equation}
+
+I due gain quindi risultano funzione dei due angoli in questo modo:
 
 \begin{equation}\begin{split}
 g_1=\dfrac{cos(\theta) sen(\theta_0) + sen (\theta) cos(\theta_0)}{2 cos(\theta_0) sen(\theta_0)}\\ \\
@@ -406,23 +419,23 @@ g_2=\dfrac{cos(\theta) sen(\theta_0) - sen (\theta) cos(\theta_0)}{2 cos(\theta_
 \label{eq:eeee}
 \end{equation}
 
-Logicamente introduciamo un coefficiente $C$ che indica il gain complessivo (ci servirà per definire la distanza dell'oggetto) e che scalerà i nostri due gain in questo modo:
+Questi due coefficienti $g_1, g_2$ danno indicazioni su quanto segnale inviare a un diffusore rispetto all'altro ma non danno indicazioni su quale intensità sonora della sorgente virtuale percepiamo in quanto legata alle caratteristiche di diffusione, quindi introduciamo un coefficiente $C$ che indica il gain complessivo da applicare alla sorgente virtuale per ascoltare quest'ultimo con l'intensità sonora voluta, con l'accortezza però di riprodurre questo segnale con un solo diffusore posto sull'arco attivo, questo coefficiente andrà integrato in questo modo:
 
 \begin{equation}
 \left[g_1 \ g_2\right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \right]}{\sqrt{g_1^2 + g_2^2}}
 \label{eq:ffff}
 \end{equation}
 
-Sarebbe molto limitativo usare questa tecnica per ricreare una riproduzione 2.0, infatti con qualche accorgimento nulla ci vieta di poter estendere ad $n$ diffusori questa tecnica, l'unica accortezza è che il nostro procedimento dovrà ''selezionare'' solo due speaker alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dell'oggetto infatti quest'ultimo potrà essere messo solo in un arco attivo (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco saranno la coppia imputata a svolgere la riproduzione; faccio un piccolo esempio:
+Spiegato il tutto nulla ci vieta poter estendere, con qualche accorgimento, questa tecnica ad $n$ diffusori, l'unica accortezza è che il nostro procedimento ne dovrà ''selezionare'' solo due per volta alla quale attribuire la realizzazione della sorgente virtuale, questa scelta si basa sulla posizione dei diffusori e dell'oggetto virtuale infatti quest'ultimo potrà essere messo solo in un arco attivo per volta (l'intero arco giro è suddiviso in archi attivi che non si sovrappongono) quindi le due casse che delimitano questo arco saranno la coppia imputata a svolgere la riproduzione.
 
-Consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\theta_{0,n}$ tali che $0°\leq \theta_{0,1},\ \theta_{0,2},\ \ldots,\ \theta_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\theta^{\prime}$ dovrà verificarsi che $\theta_{0,m}\leq \theta^{\prime} \leq \theta_{0,m+1}$ dove $m$ sta per il numero dello speaker adiacente alla sorgente virtuale ma con angolazione minore, quindi in questo caso la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettivo il metodo descritto nel caso di due speaker dovremo fare una piccola modifica in quanto dovremo assumere:
+Consideriamo un numero $n$ arbitrario di casse consecutive $a_n$ disposte ad un angolo $\theta_{0,n}$ tali che $0°\leq \theta_{0,1},\ \theta_{0,2},\ \ldots,\ \theta_{0,n} <360°$, posizionando un qualsiasi oggetto virtuale in un qualsiasi angolo $\theta^{\prime}$ dovrà verificarsi che $\theta_{0,m}\leq \theta^{\prime} \leq \theta_{0,m+1}$ dove $m$ sta per il numero del diffusore adiacente alla sorgente virtuale ma con angolazione minore, quindi la coppia di casse da selezionare saranno $a_m$ e $a_{m+1}$, quindi per rendere effettive le formule \ref{eq:eeee} ed \ref{eq:ffff} dovremo fare una piccola modifica in quanto dovremo assumere:
 
 \begin{equation}
 \theta_0 = \dfrac{\theta_{0,m+1}-\theta_{0,m}}{2} \ \ \ \ \ \theta=\theta^{\prime}-\dfrac{\theta_{0,m+1}+\theta_{0,m}}{2}
 \label{phidiverso}
 \end{equation}
 
-
+Detto questo $g_{1,scaled}$ e $g_{2,scaled}$ non saranno altro che i gain da applicare rispettivamente alla coppia di diffusori $a_{m} , a_{m+1}$.
  \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.55]{figures/matrix5-1.png}
@@ -434,9 +447,9 @@ Consideriamo come numero $n$ arbitrario di casse consecutive $a_n$ disposte ad u
 
 \subsection{VBAP 3D}
 
-Capito qual'è il modello e l'algoritmo di implementazione del VBAP in due dimensioni estenderemo il concetto in tre dimensioni.
+Capito qual'è il modello e l'algoritmo di implementazione del VBAP in due dimensioni ne estenderemo il concetto a tre.(non mi soffermerò troppo su questa estensione in quanto non servirà ai fini della continuazione della tesi).
 
-La più piccola configurazione di tre altoparlanti consiste nel disporli ai vertici di un triangolo equilatero come in figura \ref{fig:triangolo}, quindi ora basta prendere la formule usate sopra ed estenderle con la dimensione $\boldsymbol{Z}$ introducendo quindi l'angolo $\phi$ che indica l'elevazione dal piano orizzontale.
+Il modo più semplice per realizzare questa tecnica in 3D è disporre tre diffusori ai vertici di un triangolo equilatero come in figura \ref{fig:triangolo} e per analogia prendere i procedimenti e le formule esposte nel paragrafo \ref{c} integrandole la dimensione $\boldsymbol{Z}$, per fare questo introduciamo l'angolo $\phi$ che indica l'elevazione dal piano orizzontale.
 
 \begin{figure}[htbp]
 	\centering
@@ -445,10 +458,10 @@ La più piccola configurazione di tre altoparlanti consiste nel disporli ai vert
 	\label{fig:triangolo}
 	\end{figure}
 
-E' logico anche che la sorgente virtuale potrà essere collocata soltanto nella calotta\footnote{Con calotta si intende una porzione di superficie di una sfera.} delimitata dalle rette congiungenti gli altoparlanti a due a due,	 quindi esattamente come sopra se definiamo i vettori unitari che puntano alle tre casse come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \ l_{13} \right]}^T \ \ \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \ l_{23} \right]}^T \ \ \boldsymbol{l_{3}}= {\left[ l_{31} \ l_{32} \ l_{33} \right]}^T$ e il vettore della sorgente virtuale $\boldsymbol{p}= {\left[ p_{1} \ p_{2} \ p_{3} \right]}^T$ risulta che:
+Cominciamo col non considerare più il concetto di arco attivo ma penseremo invece che che la sorgente virtuale potrà essere collocata nella calotta\footnote{Con calotta si intende una porzione di superficie di una sfera.} attiva delimitata dalle rette congiungenti gli altoparlanti a due a due,	 quindi esattamente come sopra se definiamo i vettori unitari che puntano alle tre casse come $ \boldsymbol{l_{1}}= {\left[ l_{11} \ l_{12} \ l_{13} \right]}^T \ \ \boldsymbol{l_{2}}= {\left[ l_{21} \ l_{22} \ l_{23} \right]}^T \ \ \boldsymbol{l_{3}}= {\left[ l_{31} \ l_{32} \ l_{33} \right]}^T$ e il vettore della sorgente virtuale $\boldsymbol{p}= {\left[ p_{1} \ p_{2} \ p_{3} \right]}^T$ risulta che:
 
 \begin{equation}
-\boldsymbol{p} = \boldsymbol{g} \cdot \boldsymbol{l} = \left[ g_1 \ g_2 \ g_3 \right] \left[ \boldsymbol{l_{1}} \ \boldsymbol{l_{2}} \ \boldsymbol{l_{3}} \right]^T
+\boldsymbol{p} = \left[ g_1 \ g_2 \ g_3 \right] \left[ \boldsymbol{l_{1}} \ \boldsymbol{l_{2}} \ \boldsymbol{l_{3}} \right]^T
 \label{gggg}
 \end{equation}
 
@@ -461,7 +474,7 @@ l_{11} & l_{12} & l_{13}\\ l_{21} & l_{22} & l_{23} \\ l_{31} & l_{32} & l_{33}
 \label{hhhh}
 \end{equation}
 
-Anche in questo caso possiamo calcolare i tre coefficienti scalati in questa maniera:
+Anche in questo caso possiamo calcolare i tre coefficienti scalati, analogamente a sopra, in questa maniera:
 
 \begin{equation}
 \left[g_1 \ g_2 \ g_3 \right]_{scaled} = \dfrac{\sqrt{C} \left[ g_1 \ g_2 \ g_3 \right]}{\sqrt{g_1^2 + g_2^2 + g_3^2}}
@@ -480,23 +493,20 @@ Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire 
 	\end{figure}
 
 
-\section{Integrazione del formatoo MDA con la tecnica VBAP}
+\section{Introduzione all'adattamento del formato MDA con la tecnica VBAP}
 
 Ricapitolando siamo arrivati al punto di sapere cos'è il formato MDA e che cos'è la tecnica di spazializzazione VBAP,
-il passo successivo è riuscire ad integrare i due insieme, la cosa non è difficile ma procediamo per gradi.
+il passo successivo è riuscire ad integrare il formato MDA alle configurazioni 2.0, 5.1 e 4.0 con la tecnica sopra proposta.
 
-N.B) nel corso di questo capitolo
-ricordiamo che il formato MDA contiene oggetti sonori a cui vengono associati metadati contenenti posizione nelle tre dimensioni e grandezza, essi devono essere spacchettati e adattati in modo da essere letti dall'algoritmo del VBAP.
+Un concetto fondamentale da ricordare è che dentro il formato a oggetti le informazioni riguardanti la posizione relative agli oggetti sonori fanno riferimento ad uno spazio tridimensionale, quindi esse si adatteranno benissimo a una riproduzione VBAP tridimensionale, se però il tipo di riproduzione è svolto in un piano come nel nostro caso, allora bisognerà adattare le informazioni contenute nei metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.
 
-Un concetto fondamentale da capire è che essendo le informazioni, nei metadati, relative a uno spazio tridimensionale, esse si adatteranno benissimo a una riproduzione VBAP tridimensionale con la somma delle calotte attive coprenti l'intera superficie sferica, se il tipo di riproduzione non è questo allora bisognerà adattare i metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.
-
-Andremo ora a vedere come integrare le due cose per alcune delle le configurazioni del capitolo \ref{metodi}
+Anche qui salta all'occhio la potenza dell'audio ad oggetti, nell'audio channel-oriented per adattare un tipo di riproduzione ad un altro dovevamo attuare trasformazioni direttamente ai segnali contenenti le informazioni sonore, nell'audio object-oriented invece dobbiamo solo fare delle trasformazioni delle coordinate degli oggetti sonori.
 
 \subsection{Adattamento MDA in configurazioni tridimensionali}
 
-Per prima cosa facciamolo per le geometrie tridimensionali, per queste non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.
+Per quanto riguarda l'adattamento alle geometrie tridimensionali non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.
 
-Introduciamo due raggi: $r_0$ che sarebbe la lunghezza del vettore congiungente l'ascoltatore con uno degli speaker (non importa quale dato che tutti gli speaker sono posizionati sulla superficie di una sfera quindi si avranno tutti raggi uguali) e definiamo $r_1$ come la lunghezza del vettore congiungente l'ascoltatore e il più vicino degli oggetti virtuali che si vuole creare, premettendo che io posso solo riprodurre sorgenti virtuali a partire dalla superficie della sfera verso l'esterno, allora qualsiasi di questi che avranno $r_n < r_0$ non sarò in grado di riprodurli nella maniera corretta, quindi dovrò attuare una trasformazione in modo da lasciare inalterata la distanza relativa fra le sorgenti virtuali in questo modo:
+Introduciamo due raggi: $r_0$ che sarebbe la lunghezza del vettore congiungente l'ascoltatore con uno degli diffusori (non importa quale dato che tutti gli diffusori sono posizionati sulla superficie di una sfera quindi si avranno tutti raggi uguali) e definiamo $r_1$ come la lunghezza del vettore congiungente l'ascoltatore e il più vicino degli oggetti virtuali che si vuole riprodurre, premettendo che con la tecnica vbap posso solo creare sorgenti virtuali a partire dalla superficie della sfera verso l'esterno, allora qualsiasi di questi che avranno $r_n < r_0$ non sarò in grado di riprodurli nella maniera corretta, quindi dovrò attuare una trasformazione in modo da lasciare inalterata la distanza relativa fra le sorgenti virtuali in questo modo:
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -507,11 +517,11 @@ se\ \  r_1 \geq r_0\ \ \Rightarrow \ \ r_n^{\prime} = r_n\\
 \label{jjjj}
 \end{equation}
 
-fatto questo non ci rimane che intervenire sul fattore $C$ introdotto nel paragrafo \ref{c} in quanto esso contribuisce alla sensazione di lontananza, mi spiego meglio:
+Così facendo traslo la posizione virtuale di tutti gli oggetti al di fuori (o al massimo nella) sfera creata sommando le calotte attive.
 
-principalmente sono quattro i fattori che intercorrono alla corretta ricostruzione in lontananza di un oggetto, essi sono l'intensità sonora, la colorazione timbrica, il rapporto riverbero/segnale diretto e il delay temporale \footnote{La spiegazione del perché di tutti questi parametri richiederebbe molto tempo quindi diamo per buone queste assunzioni.}, l'informazione relativa agli ultimi tre parametri possono essere contenute direttamente nel segnale audio dell'oggetto sonoro, invece noi dobbiamo considerare l'intensità sonora in quanto legata alla distanza dall'oggetto all'ascoltatore e quindi al suo raggio\footnote{In realtà ogni modifica del raggio si dovrebbe ripercuote anche sugli altri tre parametri cosa che nel nostro caso non avviene essendo questi ultimi tre contenuti nell'audio dell'oggetto sonoro, siamo quindi di fronte ad un'errore ma che possiamo considerare trascurabile visto l'entità ridotta delle trasformazioni sui raggi.}.
+Fatte le trasformazioni sui raggi, non ci rimane che introdurre degli aspetti che ci giustifichino la sensazione di lontananza dell'oggetto; questi aspetti sono l'intensità sonora, l'attenuazione delle alte frequenze, il rapporto riverbero/segnale diretto e il delay temporale. 
 
-Come detto sempre nel paragrafo \ref{c} il fattore $C$ è legato al gain complessivo dell'oggetto ma quest'ultimo posizionato sulla superficie della sfera, ora sappiamo dalla formula \ref{jjjj} che ogni oggetto è posizionato o sulla sfera o al suo esterno quindi possiamo prenderci la libertà di scalare il coefficiente $C$ in base alla distanza dell'oggetto dalla sfera in questo modo:
+Volendo partire dall'intensità sonora riprendiamo ciò che è stato detto nel paragrafo \ref{c}: il fattore $C$ è legato al gain complessivo dell'oggetto ma quest'ultimo posizionato sulla superficie della sfera, ora sappiamo dalla formula \ref{jjjj} che ogni oggetto è posizionato o sulla sfera o al suo esterno quindi possiamo prenderci la libertà di moltiplicare $C$ per un coefficiente $f^{\prime}$ che ne scali il contenuto in base alla distanza dell'oggetto, in questo modo:
 
 \begin{equation}
 \boldsymbol{g_{n\ scaled}} = \dfrac{\sqrt{C_n \ f^{\prime}}\ \boldsymbol{g_n}}{\sqrt{g_1^2 +g_2^2 + g_3^2}} \ \ \ con \ \ \ \left\{\begin{matrix}
@@ -522,7 +532,7 @@ f^{\prime}=1 & per\ r_n^{\prime}=r_0
 \label{kkkk}
 \end{equation}
 
-In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della distanza e quindi nel nostro caso come $\frac{1}{r_n^{\prime}-r_0}$ ma facendo così avremmo dei problemi di divergenza per $r_n^{\prime}=r_0$ e valori sballati per la differenza $<1$, quindi in accordo con quanto scritto in \cite{distanza} introduco una funzione $f^{\prime}$ che approssima il più possibile la funzione originale ma che risolve totalmente i problemi nelle zone difficili (figura \ref{fig:distance}).
+In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della distanza e quindi nel nostro caso come $f=\frac{1}{r_n^{\prime}-r_0}$ ma facendo così avremmo dei problemi di divergenza per $r_n^{\prime}=r_0$ e valori sovrastimati per la differenza $r_n^{\prime}-r_0<1$, quindi in accordo con quanto scritto in \cite{distanza} introduco la funzione $f^{\prime}$ che approssima il più possibile la funzione originale ma che risolve totalmente i problemi nelle zone difficili (figura \ref{fig:distance}).
 
 \begin{figure}[htbp]
 	\centering
@@ -531,41 +541,50 @@ In teoria l'ampiezza di un segnale sonoro dovrebbe calare con l'inverso della di
 	\label{fig:distance}
 	\end{figure}
 
-Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non in quanto bisogna tener conto della distanza degli speaker ed è molto difficile che si abbiano tutti gli oggetti alla stessa distanza.
+Logicamente quanto detto qui sopra dovrà essere applicato in tutti casi di VBAP sia tridimensionale che non.
+
+Per quanto riguarda le informazioni relative agli ultimi tre aspetti descritti sopra, possiamo dire che si possono optare due strade: la prima è di inserirli direttamente negli oggetti sonori nella fase di produzione operando delle trasformazioni del segnale e memorizzando nel formato gli oggetti già modificati\footnote{In realtà in questa maniera ogni operazione sui raggi si ripercuoterebbe negativamente su questi tre fattori introducendo un'errore ma che possiamo considerare trascurabile visto l'entità ridotta delle trasformazioni data dalla ridotta dimensione spaziale di un impianto casalingo.} oppure una seconda strada può essere di lasciare direttamente al DSP dell'impianto il compito di operare le trasformazioni sui sugli oggetti sonori lasciati precedentemente inalterati dal produttore.
+
+Se si seguisse quest'ultima via, il DSP dovrebbe avere al suo interno alcuni algoritmi che si occupino del riverbero e del filtraggio delle alte frequenze entrambi in funzione del parametro spaziale $r_n^{\prime}=r_0$  \footnote{non indico semplicemente il parametro spaziale $r_n^{\prime}$ in quanto già il comportamento acustico che si verifica tra l'ascoltatore e la distanza $r_0$ concorre al verificarsi di questi effetti} e che si occupi del delay temporale   con un $\tau$ dato dalla formula \ref{eq:tau}, con $c$ velocità del suono in aria.
+
+\begin{equation}
+\tau_{n} = \dfrac{r_n^{\prime}-r_0}{c}
+\label{eq:tau}
+\end{equation}
 
 \subsection{Adattamento MDA in configurazioni planari}
 
-Introduciamo ora un problema aggiuntivo: come faccio a riprodurre un programma sonoro tridimensionale in un impianto planare? questa domanda è di difficile risposta in quanto la riproduzione o meno tramite il VBAP in due dimensioni dipende dalla posizione dell'oggetto, mi spiego meglio:
+Introduciamo ora la riproduzione di un programma sonoro tridimensionale in un impianto planare.  questo aspetto va preso con i guanti in quanto la riproduzione o meno tramite il VBAP in due dimensioni dipende dalla posizione dell'oggetto, mi spiego meglio:
 
-Nei metadati del formato MDA sono presenti gli angoli $\theta, \phi$ e il raggio $r$ che identificano la posizione, quello che ci da informazioni sull'altezza è l'angolo (appunto detto di elevazione) $\phi$, ponendo semplicemente $\phi=0°$ sulla carta elimineremmo la dimensione verticale ma comprometteremmo anche la percezione degli oggetti originariamente posti sopra l'ascoltatore.
+Nei metadati del formato MDA sono presenti gli angoli $\theta, \phi$ e il raggio $r$ che identificano la posizione sul piano di ascolto bidimensionale, quello che ci da informazioni sull'altezza è l'angolo (appunto detto di elevazione) $\phi$, ponendo semplicemente $\phi=0°$ elimineremmo la dimensione verticale ma comprometteremmo anche la percezione degli oggetti originariamente posti sopra l'ascoltatore.
 
 Per esempio, mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90° $ e un angolo $\phi=89°$, esso praticamente si trova quasi perfettamente al disopra della nostra testa, a primo acchito verrebbe da pensare di porre semplicemente quest'ultimo a $0$ ma si avrebbe uno spostamento netto dell'oggetto alla completa sinistra dell'ascoltatore il che è incongruente con la scelta iniziale del produttore, quindi si capisce che questa strada è concettualmente sbagliata.
 
-Contrariamente un oggetto posto a $	\theta= 90° $ con un angolo $\phi=45°$ e $r=6m$ posso tranquillamente pensarlo come proveniente solamente da sinistra visto la sua distanza dall'ascoltatore, quindi riproducibile con un VBAP in due dimensioni.
+Contrariamente un oggetto posto, per esempio, a $\theta= 90°$ con un angolo $\phi=45°$ e $r$ abbastanza grande comparato con il raggio $r_0$, posso tranquillamente pensarlo come proveniente solamente da sinistra visto la sua distanza dall'ascoltatore, quindi riproducibile con un VBAP in due dimensioni.
 
-Ma vediamo ora come faccio a selezionare gli oggetti ''buoni e cattivi'' per il discorso appena fatto: per prima cosa sposto tutti gli oggetti della semisfera inferiore sopra l'ascoltatore in questo modo:
+Vediamo ora come faccio a selezionare gli oggetti non posti su piano orizzontale adatti alla riproduzione con la tecnica vbap 2D: per prima cosa sposto tutti gli oggetti della semisfera inferiore sopra l'ascoltatore in questo modo:
 
 \begin{equation}
 \phi_{n,top} = arctg  \left( \dfrac{\vert sen(\phi_n) \vert}{ cos(\phi_n) } \right)
 \label{  b}
 \end{equation}
 
-Successivamente, tracciando la proiettante dell'oggetto nel piano orizzontale, si può vedere che gli oggetti che soddisfano l'equazione \ref{zzz} possono essere riprodotti con il VBAP tralasciando l'angolo azimutale e considerando le formule del capitolo \ref{c}
+Successivamente, tracciando la proiettante dell'oggetto nel piano orizzontale, si può vedere che quelli che soddisfano l'equazione \ref{zzz} possono essere riprodotti con il VBAP tralasciando l'angolo azimutale e considerando le formule del capitolo \ref{c}
 
 \begin{equation}
 r_{n,shadow}=r_n^{\prime} cos(\phi_{n,top}) \geq r_0
 \label{zzz}
 \end{equation}
 
-Tutti gli altri oggetti invece no, ma una soluzione a questi ultimi potrebbe essere di creare un ascolto immersivo per questi sfruttando tutti gli speaker del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano orizzontale, per esempio, nel primo caso sopra, la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due speaker a sinistra dovrebbero riprodurre la metà più un poco di potenza sonora attribuita all'oggetto, invece gli speaker a destra la differenza per arrivare ad uno.
+Tutti gli altri oggetti invece no, ma una soluzione a questi ultimi potrebbe essere di creare un ascolto immersivo per questi sfruttando tutti i diffusori del piano di ascolto e scalando il segnale da inviare a tutti questi ultimi in base alla posizione della proiettante dell'oggetto sul piano, per esempio, nel primo caso sopra, la proiettante dell'oggetto sarebbe un punto molto vicino all'ascoltatore immediatamente alla sua sinistra, quindi i due diffusori a sinistra dovrebbero riprodurre con la metà più un poco di intensità il segnale attribuito all'oggetto, invece gli diffusori a destra dovrebbero riprodurre il segnale con la differenza di intensità per arrivare al totale.
 
-Un oggetto invece posto esattamente sopra l'ascoltatore potrebbe essere ricreato inviando un segnale a tutti gli $n$ speaker scalato come $\frac{1}{\sqrt{n}}$
+Un oggetto invece posto esattamente sopra l'ascoltatore potrebbe essere ricreato inviando un segnale a tutti gli $n$ diffusori scalato come $\frac{1}{\sqrt{n}}$
 
-Sicuramente in letteratura una tecnica che risolva la situazione appena citata esiste già, ma non essendo inerente alla spiegazione della tecnica VBAP verrà data già per assodata, quindi non discussa in questo testo.
+Sicuramente in letteratura una tecnica che risolva la situazione appena citata esiste già, ma non essendo inerente alla spiegazione della tecnica VBAP non verrà discussa in questo testo.
 
 \subsection{Adattamento MDA in configurazione lineare}
 
-Per ultimo vediamo come adattare il formato alla configurazione monodimensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema 2.0 posto di fronte all'ascoltatore, bisogna qui stravolgere il formato in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici.
+Per ultimo vediamo come adattare il formato alla configurazione monodimensionale, ho parlato al singolare in quanto a meno di configurazioni esoteriche si utilizzerà sempre il sistema con due diffusori posti di fronte all'ascoltatore\footnote{al contrario del surround in cui è più facile trovare diverse configurazioni}, bisogna qui stravolgere il formato in maniera pesante in quanto si devono sottrarre ben due dimensioni ma paradossalmente i passaggi da fare sono più semplici.
 
 Come prima cosa dovrò spostare tutti gli oggetti che originariamente sono posti dietro (quindi con angoli compresi tra $90°$ e $270°$) davanti all'ascoltatore operando una trasformazione sull'angolo azimutale:
 
@@ -576,7 +595,7 @@ Come prima cosa dovrò spostare tutti gli oggetti che originariamente sono posti
 
 In questo modo tutti gli angoli azimutali di ogni oggetto sarà posto tra $-90° \leq \theta_{n,front} \leq +90°$
 
-Abbiamo così ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma la configurazione 2.0 prevede al massimo una riproduzione di oggetti a $\pm 30°$ data dalla limitata ampiezza angolare $\pm \theta_0$ degli speaker, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0\ e \pm 30°$.
+Abbiamo così ottenuto oggetti posti al massimo perfettamente ai nostri fianchi ma le configurazioni planari prevedono al massimo una riproduzione di oggetti a $\pm \theta_0$ data dalla limitata ampiezza angolare dei diffusori, quindi dovrò rimappare gli angoli appena ottenuti in modo da essere compresi tra $0\ e \pm \theta_0$.
 
 Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli angoli ma accade che gli oggetti posti sullo scenario frontale vengono schiacciati troppo verso l'origine, quindi ho optato per la funzione seno (usata come peso) che schiacciasse gli oggetti posti sui lati e che lasciasse il più inalterati possibile gli angoli degli oggetti posti di fronte, in più il tutto viene ulteriormente scalato per il coseno dell'angolo di elevazione per tenere conto di quest'ultimo e della proiezione del vettore sul piano orizzontale, in questo modo:
 
@@ -589,7 +608,9 @@ Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli
 
 
 
-\subsection{Esempio di integrazione con sistemi quadrifonico, 5.1 e 2.0}
+\subsection{Esempio di integrazione con sistemi 4.0, 5.1 e 2.0}
+
+Ora praticamente l'adattamento è fatto, nel capitolo precedente si è visto come rimappare le coordinate degli oggetti in modo scalare da una configurazione tridimensionale a una planare e lineare, poi conoscendo come si usa la tecnica VBAP posso tranquillamente riprodurre nelle configurazioni 2.0, 5.1 3 4.0, rimane ora solo da impostare di volta in volta gli angoli $\theta_{0,n}$ nelle configurazioni considerate ed applicare il tipo di vbap adatto (bi o tridimensionale).
 
 Per tutti gli esempi che farò vorrò riprodurre tre oggetti con seguenti coordinate sferiche per far vedere ogni caso:\\
 
@@ -606,17 +627,17 @@ oggetto 3 & $\theta_3=160°$ & $\phi_3=45°$ & $r_3=3,0m$ & $C_1=0,8$ \\
 
 N.B) ai fini dei calcoli conviene pensare $\theta_2=275°$ come $\theta_2=-85°$.\\
 
-Cominciamo con la quadrifonia, una possibile configurazione potrebbe essere questa:\\
+Cominciamo con la configurazione 4.0, una possibile disposizione di diffusori potrebbe essere questa:\\
 
 \begin{tabular}{|c|c|c|}
 \hline
-speaker 1 & $\theta_{0,1}=45°$ & $r_0=2m$\\
+diffusori 1 & $\theta_{0,1}=45°$ & $r_0=2m$\\
 \hline
-speaker 2 & $\theta_{0,2}=135°$ & $r_0=2m$\\
+diffusori 2 & $\theta_{0,2}=135°$ & $r_0=2m$\\
 \hline
-speaker 3 & $\theta_{0,3}=-135°$ & $r_0=2m$\\
+diffusori 3 & $\theta_{0,3}=-135°$ & $r_0=2m$\\
 \hline
-speaker 4 & $\theta_{0,4}=-45°$ & $r_0=2m$\\
+diffusori 4 & $\theta_{0,4}=-45°$ & $r_0=2m$\\
 \hline
 \end{tabular} \\
 \\
@@ -625,9 +646,9 @@ Come prima cosa applichiamo la formula \ref{jjjj} in modo da scalare i raggi deg
 
 \[r_1^{\prime}=2m \ \  r_2^{\prime}=3m \ \ r_3^{\prime}=3,5m  \]
 
-Ora è facile trovare i gain e i gain scalati del primo e del secondo oggetto in quanto il primo è riprodotto dagli speaker 4 e 1 invece il secondo dagli speaker 3 e 4 in questo modo:
+Ora è facile trovare i gain e i gain scalati del primo e del secondo oggetto in quanto il primo è riprodotto dagli diffusori 4 e 1 invece il secondo dagli diffusori 3 e 4 in questo modo:
 
-per entrambi gli oggetti, prima applico la formula \ref{phidiverso} in modo da trovare i nuovi angoli da mettere nella formula \ref{eq:eeee} poi considerando i coefficienti $C_n$ e i raggi $r_n^{\prime}$ ricavo dalla formula \ref{kkkk} i gain scalati per entrambi gli oggetti che in questo caso saranno:
+per entrambi gli oggetti, prima applico la formula \ref{phidiverso} in modo da trovare i nuovi angoli da mettere nella formula \ref{eq:eeee}, poi considerando i coefficienti $C_n$ e i raggi $r_n^{\prime}$ ricavo dalla formula \ref{kkkk} i gain scalati per entrambi gli oggetti che in questo caso saranno:
 
 \begin{equation}
 \begin{matrix}
@@ -646,20 +667,20 @@ Una possibile configurazione di impianto 5.1 potrebbe essere la seguente:
 
 \begin{tabular}{|c|c|c|}
 \hline
-speaker 1 & $\theta_{0,1}=0°$ & $r_0=2m$\\
+diffusore 1 & $\theta_{0,1}=0°$ & $r_0=2m$\\
 \hline
-speaker 2 & $\theta_{0,2}=30°$ & $r_0=2m$\\
+diffusore 2 & $\theta_{0,2}=30°$ & $r_0=2m$\\
 \hline
-speaker 3 & $\theta_{0,3}=110°$ & $r_0=2m$\\
+diffusore 3 & $\theta_{0,3}=110°$ & $r_0=2m$\\
 \hline
-speaker 4 & $\theta_{0,4}=-110°$ & $r_0=2m$\\
+diffusore 4 & $\theta_{0,4}=-110°$ & $r_0=2m$\\
 \hline
-speaker 5 & $\theta_{0,4}=-30°$ & $r_0=2m$\\
+diffusori 5 & $\theta_{0,4}=-30°$ & $r_0=2m$\\
 \hline
 \end{tabular} \\
 \\
 
-Non ci rimane che operare nella stessa maniera utilizzata per la quadrifonia esposta appena sopra (infatti si applicheranno esattamente le stesse formule con l'unica differenza di avere dei $\theta_{0,n}$ visibilmente diversi), ricavo così i gain e i gain scalati degli speaker 2 e 1 (imputati alla riproduzione del primo oggetto) e 5 e 4 (imputati alla riproduzione del secondo):
+Non ci rimane che operare nella stessa maniera utilizzata per la configurazione 4.0 esposta appena sopra (infatti si applicheranno esattamente le stesse formule con l'unica differenza di avere dei $\theta_{0,n}$ visibilmente diversi), ricavo così i gain e i gain scalati degli diffusori 2 e 1 (imputati alla riproduzione del primo oggetto) e 5 e 4 (imputati alla riproduzione del secondo):
 
 \begin{equation}
 \begin{matrix}
@@ -673,7 +694,7 @@ g_{(4,obj\ 2)} = 0,83 & g_{(4,obj\ 2)scaled} = 0,898  \\
 \end{equation} \\
 
 
-Volutamente, per entrambe le configurazioni, ho tralasciato la riproduzione del terzo oggetto in modo da riprenderlo qui, infatti per prima bisogna vedere se esso verifica l'equazione \ref{zzz} cosa che avviene, poi si provvede a calcolare normalmente i gain e i gain scalati della oggetto rispettivamente nella configurazione quadrifonica e 5.1 dando i seguenti risultati:
+Volutamente, per entrambe le configurazioni, ho tralasciato la riproduzione del terzo oggetto in modo da riprenderlo qui, infatti per prima cosa bisogna vedere se esso verifica l'equazione \ref{zzz} cosa che avviene, poi si provvede a calcolare normalmente i gain e i gain scalati della oggetto rispettivamente nelle configurazioni 4.0 e 5.1 dando i seguenti risultati:
 
 \begin{equation}
 \begin{matrix}
@@ -695,9 +716,9 @@ Una configurazione possibile potrebbe essere la seguente:
 
 \begin{tabular}{|c|c|c|}
 \hline
-speaker 1 & $\theta_{0,1}=30°$ & $r_0=2m$\\
+diffusori 1 & $\theta_{0,1}=30°$ & $r_0=2m$\\
 \hline
-speaker 2 & $\theta_{0,2}=-30°$ & $r_0=2m$\\
+diffusori 2 & $\theta_{0,2}=-30°$ & $r_0=2m$\\
 \hline
 \end{tabular} \\
 \\
@@ -741,11 +762,11 @@ g_{(2,obj\ 3)} = 0,46 & g_{(2,obj\ 3)scaled} = 0,349\\
 
 \chapter*{Conclusioni}
 
-Sviluppando questa tesi quindi, è stata affrontata bene la filosofia di implementazione dell'audio a oggetti e si è visto la sua utilità e versatilità nel campo del audio-video e del solo audio implementandola nelle più conosciute configurazioni di riproduzione.
+Sviluppando questa tesi quindi, è stata affrontata la filosofia di implementazione dell'audio a oggetti e si è visto la sua utilità e versatilità nel campo del audio-video e del solo audio implementandola nelle più conosciute configurazioni di riproduzione.
 
 Questo sviluppo però getta solo le basi per un suo impiego, si dovrò approfondire di più l'argomento per raffinarlo e renderlo anch'esso uno standard fruibile a tutti.
 
-Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del formato MDA in alcune configurazioni attraverso il VBAP, ma per la sua malleabilità l'audio ad oggetti si presta benissimo anche all'implementazione con la tecnica ambisonic, binaurale (nonché ambiophonic) e soprattutto con la tecnica WFS che potrà magari in futuro prendere piede nell'audio consumer, ma tutte queste sono storie in un'altra lettura.
+%Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del formato MDA in alcune configurazioni attraverso il VBAP, ma per la sua malleabilità l'audio ad oggetti si presta benissimo.
 
 
 

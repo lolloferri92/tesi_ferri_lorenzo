@@ -198,7 +198,7 @@ Logicamente anche in questa catena qualcuno o qualcosa dovrà conoscere la dispo
 Per il discorso appena fatto si veda l'articolo \cite{object}.
 Questo sostanzialmente sta alla base dell'audio ad oggetti, nel prossimo capitolo vedremo come implementare concretamente questo procedimento.
 
-\chapter{Formato MDA e Spazializzatore 3D}\label{dolby}
+\chapter{Formato MDA e Spazializzatore 3D} \label{dolby}
 
 L'idea per la realizzazione pratica dell'audio ad oggetti comincia in fase di produzione, bisogna scordarsi della fase di downmix\footnote{Con downmix intendo quel procedimento all'interno della catena produttiva musicale in cui passo dalla totalità dei canali formanti un progetto ai canali previsti nel formato di riproduzione} e scordarsi del panner installato in banchi mixer o in software DAW classici intraprendendo una strada diversa, vediamo i passaggi:
 
@@ -209,38 +209,34 @@ L'idea per la realizzazione pratica dell'audio ad oggetti comincia in fase di pr
 \item Le informazioni sonore di ogni oggetto e le relative coordinate spaziali verranno memorizzate nel supporto attraverso un opportuno format a oggetti standardizzato adatto al nostro scopo (in realtà oltre che alla posizione il format terrà conto anche di altri parametri come grandezza, volume ecc... ma noi non ce ne occuperemo).
  \end{enumerate}
 
-Parlando fino ad ora di Dolby è plausibile che analizzeremo come formato e come software di spazializzazione 3D quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnica di spazializzazione soggetta a brevetto, essa é chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno cercato di produrre formati proprietari simili ma sempre vincolati da brevetto, marchi quali Auro3D per citarne uno.
-
-Noi invece ricerchiamo qualcosa che sia un formato open in grado di adattarsi e a diventare uno standard; la \textbf{Digital Theater System DTS} (storica rivale di Dolby) anche lei interessata all'audio ad oggetti ha creato un formato libero che fa al caso nostro: questo si chiama \textbf{Multi-Dimesional Audio MDA}.
-
-
-
-
-
-% da qui devo cominciare a ricontrollare
-
+Parlando fino ad ora di Dolby è plausibile che analizzeremo come formato e come software di spazializzazione 3D quello proprietario di Dolby Atmos ma il fatto è che, essendo questa tecnologia soggetta a brevetto, essa é chiusa a sole applicazioni che riguardano il mondo Dolby, altri marchi hanno cercato di produrre formati proprietari simili ma sempre vincolati da brevetto, marchi quali Auro3D per citarne uno, ma noi ricerchiamo qualcosa che sia un formato open in grado di adattarsi e a diventare uno standard. 
 
 \section{Formato MDA}
 
 Si veda \cite{mda} per la documentazione riguardante questo paragrafo.
 
-Il gioco che sta alla base di questo formato è la scrittura di \textbf{metadati} contenenti gli attributi dell'oggetto sonoro da spazializzare, questo formato essendo principalmente stato creato per il cinema avrà attributi che per la sola riproduzione musicale sono in eccesso ma di questo ne parleremo dopo.
+l'azienda californiana \textbf{Digital Theater System DTS} (storica rivale di Dolby per quanto riguarda le tecnologie di riproduzione di audio per film) anche lei interessata all'audio ad oggetti ha creato un formato libero che fa esattamente al caso nostro, questo formato prende il nome di Multi-Dimensional Audio, o abbreviato, MDA.
 
-Questi attributi sono:
+Questo si compone al suo interno di una parte dedicata alla riproduzione multicanale classica che permette la creazione di un tappeto sonoro in una configurazione surround voluta e di una parte dedicata agli oggetti sonori nella quale contenere le informazioni necessarie alla loro successiva riproduzione, infatti possiamo trovare memorizzati all'interno del formato una serie di segnali costituenti gli oggetti sonori e dei \textbf{metadati} in cui sono incapsulati dei parametri necessari al loro corretto posizionamento spaziale.
+
+Principalmente i parametri contenuti nei metadati sono:
+
 \begin{itemize}\label{aaa}
-\item \textbf{Coordinate Sferiche}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).
+\item \textbf{Position}: sono un set di 3 valori che indicano la posizione dell'oggetto sonoro in relazione con la posizione dell'ascoltatore che avrà come valori la terna (0,0,0).
 
-Come sistema di coordinate abbiamo l'asse $X$ posto di fronte all'ascoltatore, l'asse $Y$ posto di fianco e l'asse $Z$ posto verso l'alto, quindi definiti i valori $x,y$ e $z$ su queste rette possiamo ricavare un angolo di azimut $\theta$, un angolo di elevazione $\phi$ e un raggio $r$, all'occorrenza una relativa trasformazione da coordinate cartesiane a sferiche posso attuarla in questo modo:
+Considerando lo spazio virtuale costruito sull'asse $X$ posto di fronte all'ascoltatore, l'asse $Y$ posto di fianco e l'asse $Z$ posto verso l'alto come in figura \ref{fig:coordinate}, nei metadati sono inseriti i valori relativi all'angolo di azimut $\theta$, l'angolo di elevazione $\phi$ e il raggio $r$ costituenti le coordinate sferiche.
+
+All'occorrenza una relativa trasformazione a coordinate cartesiane posso farla in questo modo:
 
 \begin{equation}
-	\left\{\begin{matrix}
-x= r\ cos(\theta) cos(\phi) \\
-y= r\ sin(\theta) cos(\phi)\\
-z= r\ sin(\phi)\\
-\end{matrix}\right. \ \ \Rightarrow \ \  \left\{\begin{matrix}
+\left\{\begin{matrix}
 \theta = arctg \left(\dfrac{y}{x} \right) \\
 \phi   = arctg \left(\dfrac{\sqrt{x^2 + y^2 }}{z} \right) \\
 r = \sqrt{x^2 +y^2 +z^2 }\\
+\end{matrix}\right.	 \ \ \Rightarrow \ \  \left\{\begin{matrix}
+x= r\ cos(\theta) cos(\phi) \\
+y= r\ sin(\theta) cos(\phi)\\
+z= r\ sin(\phi)\\
 \end{matrix}\right.
 	\label{eq:coordinatepolari}
 \end{equation}
@@ -252,10 +248,22 @@ r = \sqrt{x^2 +y^2 +z^2 }\\
 	\label{fig:coordinate}
 	\end{figure}
 
-\item \textbf{Identificativo oggetto sonoro}: definito con la sigla URI é un numero (int) che identifica l'oggetto sonoro, sarebbe come un indirizzo.
-\item \textbf{Gain}: è un valore che indica la quantità di segnale che deve avere l'oggetto sonoro.
-\item \textbf{Apertura}: scritta in gradi indicherebbe la grandezza dell'oggetto sonoro da ricreare (più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore fosse 180° allora si attiverebbero tutti i diffusori).
-\item \textbf{Divergenza}: anch'essa indicata in gradi quantifica la grandezza che deve avere l'oggetto sonoro ma solo sul piano orizzontale, un esempio più esplicativo si ha in figura \ref{fig:apertura}
+\item \textbf{Uniform Resource Identifier}\cite{uri} definito con la sigla URI é un indirizzo che identifica il bitstream\footnote{Con bitstream si intende le sequenza binaria che contiene un'informazione} dell'oggetto sonoro in maniera univoca (lo stesso uri non può riferirsi a due bitstream).
+
+\item \textit{ID} è un indirizzo che identifica in modo univoco un object nella timeline (anche qui lo stesso URI non può riferirsi allo stesso oggetto).
+
+\item \textbf{Gain}: è un coefficiente numerico con un range di valori compreso tra $[-411,100]/4 \ dB$, esso  collegato alla quantità di segnale dell'oggetto riprodotto in quanto tramite la trasformazione sul segnale data dalla formula \ref{db} possiamo vedere come viene scalato o incrementato il segnale dell'oggetto per la sua successiva riproduzione.
+
+\begin{equation}
+sgn_{post\_gain}(t)= sgn_{pre\_gain}(t) \cdot 10^{\frac{g[dB]}{20}}
+\label{db}
+\end{equation}
+
+Da notare che si possono riscontrare due valori di gain nei metadati, questo descritto sopra è riferito alla sorgente monofonica che costituisce un singolo oggetto sonoro (monosource-fragment), l'altro invece è riferito all object fragment che definirò in seguito, quest'ultimo però avendo un range di valori con valore massimo di $0\ dB$ non permette un aumento del segnale complessivo dell'object fragment.
+ 
+\item \textbf{Aperture}: è un parametro che indicherebbe l'estensione dell'oggetto sonoro da ricreare , ha un range di valori compreso tra $[0,255]*(180/255)\ °$ (più l'oggetto è grande più gli altoparlanti posti marginalmente della sorgente fantasma si attivano, esempio se il valore fosse $225$ allora si attiverebbero tutti i diffusori). 
+
+\item \textbf{Divergence}: anch'esso espressa in gradi quantifica la grandezza che deve avere l'oggetto sonoro ma solo sul piano orizzontale, ha un range di valori di $[0,255]*(180/255)\ °$ dove il valore indica l'estensione in gradi di metà dell'arco costituente l'oggetto esteso, un esempio più esplicativo si ha in figura \ref{fig:apertura}
 
 	\begin{figure}[htbp]
 	\centering
@@ -264,12 +272,33 @@ r = \sqrt{x^2 +y^2 +z^2 }\\
 	\label{fig:apertura}
 	\end{figure}
 
+\item \textbf{Coherent}: è un valore che può definire la riproduzione in modo coerente (value=0) o incoerente (value=1) dell'oggetto sonoro se quest'ultimo viene esteso a più diffusori tramite i parametri divergence e aperture .
 
 \end{itemize}
 
-Questi sono i principali parametri scritti nei metadati che ci servono per la spazializzazione, però è facile pensare che se l'oggetto si muove nello spazio o cambia dimensioni, il contenuto dei suoi metadati cambia anch'esso nel tempo, quindi il formato prevede di racchiude in un nuovo oggetto chiamato ''\textbf{Object-Fragment}'' tutti i metadati descritti sopra (che per tutto lo svolgimento temporale del object fragment rimarranno inalterati) con più l'aggiunta di alcuni parametri come l'\textbf{ID} (identificativo oggetto) e i sample dell'oggetto sonoro da riprodurre.
+Questi sono i principalmente i parametri scritti nei metadati che ci servono per la spazializzazione, bisogna ora affrontare il concetto di object-fragment.
 
-Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di richiamare gli object-fragment quando servono, essa è suddivisa in segmenti temporali che sono dati da $\dfrac{1}{f_c}$ dove $f_c$ è la frequenza di campionamento impostata per la totalità degli oggetti sonori e dove a ogni segmento è associato una lista di ID che richiama object-fragment da riprodurre, un esempio esplicativo è dato dallo schema \ref{fig:object}
+Consideriamo un oggetto sonoro, l'informazione sonora che lo descrive vive nel nel suo bitstream, all'interno del formato la più piccola entità che tiene conto di questo flusso di dati si chiama monosource-fragment, infatti in quest'ultimo è presente un riferimento ai sample attraverso il parametro URI con in aggiunta il gain sopra proposto in modo da caratterizzare staticamente l'oggetto (cioè l'oggetto è caratterizzato solo da informazione che non tengono conto del suo spostamento o variazione).
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.50]{figures/monosource-fragment.png}
+	\caption {Monosource-fragment}
+	\label{fig:msf}
+	\end{figure}
+
+Consideriamo invece lo stesso oggetto che si muove nello spazio, i soli valori del monosource-fragment non bastano a caratterizzare la dinamicità della nuova situazione, infatti il formato prevede la creazione di una nuova entità di nome \textbf{Object-Fragment} che fa rifermento al monosource-fragment ma che ha in aggiunta il restante dei metadati sopra descritti per rendere l'oggetto posizionabile nel tempo.
+
+Normalmente per far si che ci sia una variazione di provenienza dell'oggetto, all'interno del object-fragment i valori dei matadati sono funzione del tempo della timeline.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.50]{figures/object-fragment.png}
+	\caption {Object-fragment}
+	\label{fig:of}
+	\end{figure}
+	 
+Per quanto riguarda la parte la sincronizzazione di tutto il formato è posto al di sopra di tutto una timeline (figura \ref{fig:time}) che ha la funzione di richiamare gli object-fragment quando servono, essa è suddivisa in segmenti temporali di durata $\dfrac{1}{f_c}$ dove $f_c$ è la frequenza di campionamento impostata per la totalità degli oggetti sonori\footnote{l'informazione della $f_c$ è contenuta negli header del formato} e dove a ogni segmento è associato una lista di contenenti gli ID che richiamano gli object-fragment da riprodurre, un esempio esplicativo è dato dallo schema \ref{fig:object}
 
 \begin{figure}[htbp]
 	\centering
@@ -284,20 +313,25 @@ Sopra tutto poi c'è una timeline (figura \ref{fig:time}) che ha la funzione di 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.50]{figures/timeline2.png}
-
 	\caption {Azione di richiamo di un object-fragment}
 	\label{fig:time}
 	\end{figure}
 
-Da notare che è presente anche un LFE-Object in cui non è segnata la posizione, questo perché data la natura omnidirezionale delle basse frequenze non avrebbe senso collocarle spazialmente e anche perché solo il/i subwoofer sono in grado di riprodurre tali frequenze.
+In questo caso, in figura \ref{fig:object}, il lasso di tempo fra $T1$ e $T2$ è caratterizzato dal richiamo degli oggetti con $ID=1,2,3,4$,ognuno di questi è caratterizzato da metadati indicanti la posizione e il bitstream da riprodurre tramite l'ID, nel lasso di tempo successivo vediamo che sono in riproduzione gli stessi object-fragment con gli stessi ID ma in questo caso con posizione diversa il che fa spostare virtualmente l'oggetto sonoro nello spazio virtuale.
+
+Da notare che è presente anche un LFE-Object con $ID=4$ in cui non è segnata la posizione, questo perché data la natura omnidirezionale delle basse frequenze non avrebbe senso collocare spazialmente il monosource-object, e se per assurdo prendessimo questa affermazione com errata non avrebbe comunque utilità indicare la posizione in quanto di solito si avrà un solo subwoofer che, grazie alla sua estensione delle frequenze verso il basso, è in grado di riprodurre un oggetto contenuto nell'LFE.
+
+%da qui devo controllare
 
 \subsection{Formato MDA per riproduzione audio}
 
-Qui faccio una piccola annotazione personale, nella maggior parte dei casi quando si fa musica in studio di registrazione è abbastanza difficile che abbiamo oggetti sonori in movimento e di dimensioni che variano nel tempo, quindi si potrebbe fare una piccola modifica al formato in modo da alleggerire il successivo rendering per creare fisicamente lo spazio sonoro.
+Qui faccio una piccola annotazione personale per quanto riguarda l'MDA per soli fini musicali.
 
-Sostanzialmente abbiamo tre tipi di oggetti sonori in musica: oggetti fermi, oggetti che ''balzano'' tra due punti spaziali ed oggetti costituiti da effetti vari (il più importante per la spazializzazione è il riverbero e per questo ci occuperemo solo di questo); tutti questi oggetti possono essere pensati come oggetti statici quindi che hanno coordinate spaziali e dimensioni fisse, in questo caso si potrebbe alleggerire il formato in quanto non avrebbe più senso parlare di object-fragment (ricordiamo che se gli attributi di spazializzazione cambiano allora si avranno diversi object-fragment, uno per ogni configurazione spaziale) in quanto per l'intera esecuzione del brano si avrebbe solo un object-fragment che fissa la posizione e la grandezza dell'oggetto, quindi si possono direttamente assegnare queste due ultime all'oggetto sonoro senza passare per ulteriori sottodivisioni.
+Nella maggior parte dei casi quando si fa musica in studio di registrazione è abbastanza difficile che abbiamo oggetti sonori in movimento e di dimensioni che variano nel tempo, quindi si potrebbe fare una piccola modifica al formato che, essendo principalmente stato creato per il cinema, avrà attributi in eccesso che per la sola riproduzione musicale.
 
-Per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per il riverbero per esempio basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza e apertura; per quanto riguarda gli oggetti ''balzanti'' (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto per il fatto che l'intensità sonora $I'=\alpha \ \ (0\leq \alpha \leq 1)$ di un oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ é l'intensità totale che dovrebbe avere originariamente l'oggetto).
+Sostanzialmente abbiamo tre tipi di oggetti sonori in un programma puramente musicale: oggetti fermi, oggetti oscillanti tra due punti ed oggetti costituiti da effetti spaziali; tutti questi oggetti possono essere pensati come oggetti statici quindi con coordinate ed estensione fissa, in questo caso si potrebbe alleggerire il formato in quanto non avrebbe più senso parlare di metadati che cambiano in funzione del tempo perché per l'intera esecuzione del brano si avrebbero, all'interno di un object-fragment, solo un set di metadati fissi nel tempo, quindi si possono direttamente assegnare questi metadati fissi all'oggetto sonoro al primo istante di richiamo da parte della  timeline senza ripetere lo stesso set ad ogni $T=\frac{1}{f_c}$.
+
+Per quanto riguarda gli oggetti statici questo trucco calza alla perfezione, per gli effetti che di solito cercano di dare una sensazione di immersione, come potrebbe essere un riverbero per esempio, basterà avere come oggetto il solo contenuto del brano riverberato e assegnarli una giusta divergenza, apertura e coerenza; per quanto riguarda gli oggetti oscillanti (come potrebbe essere per esempio un tremolo fatto con un pan-pot in una tastiera) basterà creare in fase di post-produzione due oggetti diversi che hanno lo stesso contenuto sonoro e che differiscono soltanto per il fatto che l'intensità sonora $I'=\alpha \ \ (0\leq \alpha \leq 1)$ di un oggetto corrisponderà a una intensità $I''=(1-\alpha) I$ del secondo oggetto (dove $I$ é l'intensità totale che dovrebbe avere originariamente l'oggetto se fosse riprodotto interamente in un solo punto).
 
 \section{Spazializzatore 3D}
 
@@ -315,7 +349,7 @@ Questo plugin disponibile solo per Protools è di semplice comprensione, come da
 
 Inoltre si possono creare dei ''Bed Object'' che sarebbero oggetti i quali potranno essere direttamente codificati nel sistema di riproduzione scelto (esempio classico è la colonna sonora in 5.1 nei film) ai quali verranno sommati gli oggetti veri e propri del formato e l'LFE-Object per gli effetti a bassa frequenza.
 
-Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di output, quella che interessa a noi è la modalità di esportazione con mda file: questa scelta ci porta alla creazione dei file \textbf{.map, .mix} e \textbf{.mda} dove quest'ultimo è proprio il file contenente i metadati e gli oggetti sonori proposti in questo formato.
+Una volta fatto questo l'MDA creator metterà a disposizione tre scelte di output, quella che interessa a noi è la modalità di esportazione con MDA file: questa scelta ci porta alla creazione dei file \textbf{.map, .mix} e \textbf{.mda} dove quest'ultimo è proprio il file contenente i metadati e gli oggetti sonori proposti in questo formato.
 
 \begin{figure}[htbp]
 	\centering
@@ -344,7 +378,7 @@ La HRTF pone le sue basi su tre fattori diversi:
 \item \textit{frequency modification} indica come lo spettro in frequenza del segnale cambia anch'esso in base all'angolo di incidenza, a concorrere a questo fenomeno sta la presenza fisica della testa e del torso dell'ascoltatore (molta importanza ha la pinna dell'orecchio)
 \end{itemize}
 
-Per avere una ricostruzione sonora realistica (come avviene nell'ascolto binaurale) si dovrebbero usare tutti e tre questi fattori ma la tecnica vbap prevede l'utilizzo solo della IID, in quanto la tecnica prevede di riprodurre lo stesso segnale sonoro coerentemente\footnote{con ''coerentemente'' intendo il fatto che il segnale deve essere emesso da tutti i diffusori nello stesso istante, non ci devono essere quindi slittamenti di fase} da un minimo di 2 diffusori ma con intensità differente.
+Per avere una ricostruzione sonora realistica (come avviene nell'ascolto binaurale) si dovrebbero usare tutti e tre questi fattori ma la tecnica VBAP prevede l'utilizzo solo della IID, in quanto la tecnica prevede di riprodurre lo stesso segnale sonoro coerentemente\footnote{con ''coerentemente'' intendo il fatto che il segnale deve essere emesso da tutti i diffusori nello stesso istante, non ci devono essere quindi slittamenti di fase} da un minimo di 2 diffusori ma con intensità differente.
 
 Ora la cosa diventa abbastanza semplice in quanto se volgiamo ricreare una spazializzazione 2D basteranno due diffusori, se invece vogliamo fare un 3D allora serviranno un minimo di 3 diffusori posti a triangolo, configurazioni del genere esistono già e sono state ampiamente testate ed affinate, per tutta la documentazione riguardante il VBAP si faccia riferimento a \cite{vbap}.
 
@@ -498,7 +532,9 @@ Ora, come sopra, possiamo arrivare ad un numero $n$ di altoparlanti per coprire 
 Ricapitolando siamo arrivati al punto di sapere cos'è il formato MDA e che cos'è la tecnica di spazializzazione VBAP,
 il passo successivo è riuscire ad integrare il formato MDA alle configurazioni 2.0, 5.1 e 4.0 con la tecnica sopra proposta.
 
-Un concetto fondamentale da ricordare è che dentro il formato a oggetti le informazioni riguardanti la posizione relative agli oggetti sonori fanno riferimento ad uno spazio tridimensionale, quindi esse si adatteranno benissimo a una riproduzione VBAP tridimensionale, se però il tipo di riproduzione è svolto in un piano come nel nostro caso, allora bisognerà adattare le informazioni contenute nei metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.
+Un concetto fondamentale da ricordare è che dentro il formato a oggetti MDA i metadati danno informazioni principalmente sulla posizione e sull'estensione dell'oggetto, in questo caso però lo studio introduttivo del VBAP fatto nel capitolo precedente non tiene conto dei parametri di estensione quali la divergence, la aperture e la coherence, quindi nell'adattamento ai formati proposti considererò solo il posizionamento spaziale di una sorgente monofonica.
+
+Ricordiamoci anche che le informazioni riguardanti la posizione relative agli oggetti sonori fanno riferimento ad uno spazio tridimensionale, quindi esse si adatteranno benissimo a una riproduzione VBAP tridimensionale, se però il tipo di riproduzione è svolto in un piano come nel nostro caso, allora bisognerà adattare le informazioni contenute nei metadati in modo da poter essere congruenti all configurazione che andranno a pilotare, logicamente queste trasformazioni dovranno il più possibile lasciare inalterata la percezione spaziale a quella che è stato decisa in fase di post-produzione.
 
 Anche qui salta all'occhio la potenza dell'audio ad oggetti, nell'audio channel-oriented per adattare un tipo di riproduzione ad un altro dovevamo attuare trasformazioni direttamente ai segnali contenenti le informazioni sonore, nell'audio object-oriented invece dobbiamo solo fare delle trasformazioni delle coordinate degli oggetti sonori.
 
@@ -506,7 +542,7 @@ Anche qui salta all'occhio la potenza dell'audio ad oggetti, nell'audio channel-
 
 Per quanto riguarda l'adattamento alle geometrie tridimensionali non c'è bisogno di fare delle trasformazioni sulle coordinate in quante esse possono essere applicate direttamente, l'unica cosa che c'è da fare è un piccolo discorso sulle distanze e sui raggi.
 
-Introduciamo due raggi: $r_0$ che sarebbe la lunghezza del vettore congiungente l'ascoltatore con uno degli diffusori (non importa quale dato che tutti gli diffusori sono posizionati sulla superficie di una sfera quindi si avranno tutti raggi uguali) e definiamo $r_1$ come la lunghezza del vettore congiungente l'ascoltatore e il più vicino degli oggetti virtuali che si vuole riprodurre, premettendo che con la tecnica vbap posso solo creare sorgenti virtuali a partire dalla superficie della sfera verso l'esterno, allora qualsiasi di questi che avranno $r_n < r_0$ non sarò in grado di riprodurli nella maniera corretta, quindi dovrò attuare una trasformazione in modo da lasciare inalterata la distanza relativa fra le sorgenti virtuali in questo modo:
+Introduciamo due raggi: $r_0$ che sarebbe la lunghezza del vettore congiungente l'ascoltatore con uno degli diffusori (non importa quale dato che tutti gli diffusori sono posizionati sulla superficie di una sfera quindi si avranno tutti raggi uguali) e definiamo $r_1$ come la lunghezza del vettore congiungente l'ascoltatore e il più vicino degli oggetti virtuali che si vuole riprodurre, premettendo che con la tecnica VBAP posso solo creare sorgenti virtuali a partire dalla superficie della sfera verso l'esterno, allora qualsiasi di questi che avranno $r_n < r_0$ non sarò in grado di riprodurli nella maniera corretta, quindi dovrò attuare una trasformazione in modo da lasciare inalterata la distanza relativa fra le sorgenti virtuali in questo modo:
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -562,7 +598,7 @@ Per esempio, mettiamo il caso che un oggetto sia posto ad un angolo $	\theta= 90
 
 Contrariamente un oggetto posto, per esempio, a $\theta= 90°$ con un angolo $\phi=45°$ e $r$ abbastanza grande comparato con il raggio $r_0$, posso tranquillamente pensarlo come proveniente solamente da sinistra visto la sua distanza dall'ascoltatore, quindi riproducibile con un VBAP in due dimensioni.
 
-Vediamo ora come faccio a selezionare gli oggetti non posti su piano orizzontale adatti alla riproduzione con la tecnica vbap 2D: per prima cosa sposto tutti gli oggetti della semisfera inferiore sopra l'ascoltatore in questo modo:
+Vediamo ora come faccio a selezionare gli oggetti non posti su piano orizzontale adatti alla riproduzione con la tecnica VBAP 2D: per prima cosa sposto tutti gli oggetti della semisfera inferiore sopra l'ascoltatore in questo modo:
 
 \begin{equation}
 \phi_{n,top} = arctg  \left( \dfrac{\vert sen(\phi_n) \vert}{ cos(\phi_n) } \right)
@@ -610,7 +646,7 @@ Come primo approccio ho pensato semplicemente di dividere per un fattore tre gli
 
 \subsection{Esempio di integrazione con sistemi 4.0, 5.1 e 2.0}
 
-Ora praticamente l'adattamento è fatto, nel capitolo precedente si è visto come rimappare le coordinate degli oggetti in modo scalare da una configurazione tridimensionale a una planare e lineare, poi conoscendo come si usa la tecnica VBAP posso tranquillamente riprodurre nelle configurazioni 2.0, 5.1 3 4.0, rimane ora solo da impostare di volta in volta gli angoli $\theta_{0,n}$ nelle configurazioni considerate ed applicare il tipo di vbap adatto (bi o tridimensionale).
+Ora praticamente l'adattamento è fatto, nel capitolo precedente si è visto come rimappare le coordinate degli oggetti in modo scalare da una configurazione tridimensionale a una planare e lineare, poi conoscendo come si usa la tecnica VBAP posso tranquillamente riprodurre nelle configurazioni 2.0, 5.1 3 4.0, rimane ora solo da impostare di volta in volta gli angoli $\theta_{0,n}$ nelle configurazioni considerate ed applicare il tipo di VBAP adatto (bi o tridimensionale).
 
 Per tutti gli esempi che farò vorrò riprodurre tre oggetti con seguenti coordinate sferiche per far vedere ogni caso:\\
 
@@ -762,9 +798,9 @@ g_{(2,obj\ 3)} = 0,46 & g_{(2,obj\ 3)scaled} = 0,349\\
 
 \chapter*{Conclusioni}
 
-Sviluppando questa tesi quindi, è stata affrontata la filosofia di implementazione dell'audio a oggetti e si è visto la sua utilità e versatilità nel campo del audio-video e del solo audio implementandola nelle più conosciute configurazioni di riproduzione.
+Sviluppando questa tesi quindi, è stata affrontata la filosofia di implementazione dell'audio a oggetti e si è visto la sua utilità e versatilità nel campo del audio-video e del solo audio implementandola nelle configurazioni di riproduzione 2.0, 4.0 e 5.1 attraverso la tecnica di spazializzazione VBAP.
 
-Questo sviluppo però getta solo le basi per un suo impiego, si dovrò approfondire di più l'argomento per raffinarlo e renderlo anch'esso uno standard fruibile a tutti.
+Questo sviluppo però getta solo le basi del suo impiego, si dovrà approfondire di più l'argomento per raffinarlo e renderlo stabile.
 
 %Logicamente in questa scrittura ho affrontato solo alcuni adattamenti del formato MDA in alcune configurazioni attraverso il VBAP, ma per la sua malleabilità l'audio ad oggetti si presta benissimo.
 
@@ -780,6 +816,7 @@ Questo sviluppo però getta solo le basi per un suo impiego, si dovrò approfond
 \bibitem{object} \textit{http://archive.afsi.eu/download/sites/default/files/uploads/mda\_white\_paper.pdf}
 \bibitem{atmos} \textit{https://www.dolby.com/us/en/technologies/dolby-atmos/dolby-atmos-next-generation-audio-for-cinema-white-paper.pdf}
 \bibitem{mda}\textit{http://www.etsi.org/deliver/etsi\_ts/103200\_103299/103223/01.01.01\_60/ts\_103223v010101p.pdf}
+\bibitem{uri} \textit{https://www.rfc-editor.org/rfc/pdfrfc/rfc3986.txt.pdf}
 \bibitem{creator}\textit{//digitalcommons.calpoly.edu/cgi/viewcontent.cgi?article=1049}\&\textit{context=laessp}
 \bibitem{iid} \textit{https://en.wikipedia.org/wiki/Sound\_localization\#ITD\_and\_IID}
 \bibitem{vbap} \textit{http://lib.tkk.fi/Diss/2001/isbn9512255324/article1.pdf}
